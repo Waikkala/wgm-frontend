@@ -6,12 +6,12 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0 }) => {
 
   return (
     <header className="header">
-      <div className="header-pattern"></div>
+      <div className="header-background"></div>
       <div className="header-content">
-        <div className="logo">
-          <div className="logo-icon">🦌</div>
-          <span className="logo-text">WGM</span>
-        </div>
+          <div className="logo">
+              <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="logo-icon" />
+              <span className="logo-text">WGM</span>
+          </div>
         <div className="header-text">
           <h1>{title}</h1>
           {subtitle && <p>{subtitle}</p>}
