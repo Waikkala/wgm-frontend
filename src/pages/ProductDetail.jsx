@@ -72,7 +72,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                 <img src="/wgm-frontend/product.png" alt="Product view 1" />
               </div>
               <div className="thumbnail">
-                <img src="/wgm-frontend/package.png" alt="Package view" />
+                <img src="/wgm-frontend/product.png" alt="Package view" />
               </div>
             </div>
           </div>
