@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/wgm-frontend">
       <Routes>
         <Route path="/" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
