@@ -6,7 +6,7 @@ import './Checkout.css';
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
+  const currentStep = 1; // Current step indicator
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
