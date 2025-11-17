@@ -52,10 +52,10 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
         <button className="nav-btn">Contacts</button>
         <button className="nav-btn">Order Tracking</button>
         <button className="cart-icon-nav" onClick={() => navigate('/cart')}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            <circle cx="9" cy="21" r="1" fill="currentColor" stroke="none"/>
-            <circle cx="20" cy="21" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="9" cy="21" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="20" cy="21" r="1.5" fill="currentColor" stroke="none"/>
           </svg>
           {cartCount > 0 && <span className="cart-badge-nav">{cartCount}</span>}
         </button>
@@ -137,12 +137,10 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
 
             <div className="action-buttons">
               <button className="btn-add-cart" onClick={handleAddToCart}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
-                  <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z"/>
-                  <circle cx="9" cy="21" r="1"/>
-                  <circle cx="15" cy="21" r="1"/>
+                <span>ADD TO CART</span>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
-                ADD TO CART
               </button>
               <button className="btn-place-order" onClick={handlePlaceOrder}>
                 PLACE ORDER
@@ -210,6 +208,170 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                   <li>• Rich aromatic profile for an exotic experience</li>
                   <li>• 100% natural ingredients</li>
                 </ul>
+              </div>
+            )}
+
+            {activeTab === 'additional' && (
+              <div className="tab-panel">
+                <p className="description-text">
+                  Our Ceylon Raga Reserve - Masala Brew is crafted with meticulous attention to detail, ensuring the highest quality standards 
+                  in every package. Below you'll find comprehensive product specifications and important information about storage, certifications, 
+                  and packaging to help you make an informed purchase decision.
+                </p>
+                <h3 className="features-title">Product Specifications</h3>
+                <div className="info-grid">
+                  <div className="info-item">
+                    <strong>Product Type:</strong>
+                    <span>Premium Spice Blend</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Origin:</strong>
+                    <span>Sri Lanka & Kerala, India</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Shelf Life:</strong>
+                    <span>24 months from manufacturing date</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Storage:</strong>
+                    <span>Store in a cool, dry place away from direct sunlight</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Packaging:</strong>
+                    <span>Food-grade sealed pouch</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Certifications:</strong>
+                    <span>ISO 22000, HACCP Certified</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Net Weight Options:</strong>
+                    <span>100g, 250g, 500g, 1000g</span>
+                  </div>
+                  <div className="info-item">
+                    <strong>Allergen Information:</strong>
+                    <span>May contain traces of nuts</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'ingredients' && (
+              <div className="tab-panel">
+                <p className="description-text">
+                  Our Ceylon Raga Reserve - Masala Brew is crafted from the finest hand-selected spices, carefully sourced from certified organic farms 
+                  across Sri Lanka and Kerala. Each ingredient is chosen for its superior quality and aromatic properties, creating a harmonious blend 
+                  that delivers an exceptional sensory experience with every use.
+                </p>
+                <p className="description-text">
+                  We work directly with local farmers who practice sustainable agriculture, ensuring that every spice in our blend meets our rigorous 
+                  quality standards. The result is a premium product that honors traditional spice-making techniques while delivering modern excellence.
+                </p>
+                <h3 className="features-title">Premium Ingredients</h3>
+                
+                <div className="ingredients-grid">
+                  <div className="ingredient-item">
+                    <strong>Ceylon Cinnamon</strong>
+                    <p>True cinnamon from Sri Lanka, known for its delicate sweetness and warm aroma</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Cardamom</strong>
+                    <p>Premium green cardamom pods with intense, sweet-spicy flavor</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Black Pepper</strong>
+                    <p>Freshly ground Kerala black pepper for a subtle heat</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Cloves</strong>
+                    <p>Aromatic cloves adding depth and warmth to the blend</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Ginger</strong>
+                    <p>Dried ginger root providing a zesty, warming kick</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Nutmeg</strong>
+                    <p>Freshly ground nutmeg for a sweet, nutty undertone</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Star Anise</strong>
+                    <p>Adds a subtle licorice-like sweetness</p>
+                  </div>
+                  <div className="ingredient-item">
+                    <strong>Fennel Seeds</strong>
+                    <p>Sweet and aromatic, balancing the spice blend</p>
+                  </div>
+                </div>
+                
+                <p className="description-text" style={{ marginTop: '1.5rem' }}>
+                  <strong>Note:</strong> All ingredients are 100% natural with no artificial colors, flavors, or preservatives. 
+                  Our spices are ethically sourced and support sustainable farming practices.
+                </p>
+              </div>
+            )}
+
+            {activeTab === 'instructions' && (
+              <div className="tab-panel">
+                <p className="description-text">
+                  Ceylon Raga Reserve - Masala Brew is incredibly versatile and can be enjoyed in numerous ways. Whether you prefer traditional 
+                  hot beverages, refreshing cold drinks, or creative cocktails, our premium spice blend adapts beautifully to your preferences. 
+                  Follow these simple preparation methods to unlock the full potential of this exquisite blend.
+                </p>
+                <p className="description-text">
+                  Each preparation method has been carefully tested to ensure optimal flavor extraction and aroma. Feel free to experiment with 
+                  quantities and steeping times to discover your perfect cup. The beauty of Masala Brew lies in its adaptability to your personal taste.
+                </p>
+                <h3 className="features-title">How to Use Ceylon Raga Reserve</h3>
+                
+                <div className="instruction-section">
+                  <h4 className="instruction-subtitle">For Hot Beverages (Tea/Coffee)</h4>
+                  <ol className="instruction-list">
+                    <li>Add 1-2 teaspoons of Masala Brew to your cup</li>
+                    <li>Pour hot water, tea, or coffee over the blend</li>
+                    <li>Stir well and let steep for 3-5 minutes</li>
+                    <li>Add milk and sweetener to taste (optional)</li>
+                    <li>Strain and enjoy your aromatic beverage</li>
+                  </ol>
+                </div>
+
+                <div className="instruction-section">
+                  <h4 className="instruction-subtitle">For Milk Infusion (Masala Chai)</h4>
+                  <ol className="instruction-list">
+                    <li>Boil 1 cup of milk with 1 cup of water</li>
+                    <li>Add 2 teaspoons of Masala Brew</li>
+                    <li>Add 1 teaspoon of black tea leaves (optional)</li>
+                    <li>Simmer for 5-7 minutes on low heat</li>
+                    <li>Strain into cups and sweeten to taste</li>
+                  </ol>
+                </div>
+
+                <div className="instruction-section">
+                  <h4 className="instruction-subtitle">For Spirits & Cocktails</h4>
+                  <ol className="instruction-list">
+                    <li>Add 1 teaspoon of Masala Brew to your favorite spirit</li>
+                    <li>Let it infuse for 2-3 hours or overnight for stronger flavor</li>
+                    <li>Strain through a fine mesh or coffee filter</li>
+                    <li>Use in cocktails or enjoy neat/on the rocks</li>
+                    <li>Pairs excellently with whiskey, rum, or wine</li>
+                  </ol>
+                </div>
+
+                <div className="instruction-section">
+                  <h4 className="instruction-subtitle">Cold Brew Method</h4>
+                  <ol className="instruction-list">
+                    <li>Add 3 tablespoons of Masala Brew to 1 liter of cold water</li>
+                    <li>Refrigerate for 8-12 hours</li>
+                    <li>Strain and serve over ice</li>
+                    <li>Add honey or agave syrup to taste</li>
+                    <li>Garnish with fresh mint or citrus</li>
+                  </ol>
+                </div>
+
+                <p className="description-text" style={{ marginTop: '1.5rem' }}>
+                  <strong>Pro Tip:</strong> Start with smaller amounts and adjust to your taste preference. 
+                  The blend is concentrated, so a little goes a long way!
+                </p>
               </div>
             )}
           </div>
