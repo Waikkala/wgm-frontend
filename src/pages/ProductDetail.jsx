@@ -40,16 +40,14 @@ const ProductDetail = () => {
         <div className="product-container">
           <div className="product-images">
             <div className="main-image">
-              <div className="image-placeholder">
-                <span>Product Image</span>
-              </div>
+              <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve - Masala Brew" />
             </div>
             <div className="thumbnail-images">
               <div className="thumbnail active">
-                <div className="thumb-placeholder"></div>
+                <img src="/wgm-frontend/product.png" alt="Product view 1" />
               </div>
               <div className="thumbnail">
-                <div className="thumb-placeholder"></div>
+                <img src="/wgm-frontend/package.png" alt="Package view" />
               </div>
             </div>
           </div>
@@ -67,7 +65,7 @@ const ProductDetail = () => {
 
             <div className="package-weight">
               <div className="weight-label">
-                📦 Package Weight
+                <img src="/wgm-frontend/package.png" alt="Package" className="package-icon" /> Package Weight
               </div>
               <div className="weight-options">
                 {weights.map((weight) => (
@@ -76,7 +74,9 @@ const ProductDetail = () => {
                     className={`weight-btn ${selectedWeight === weight.value ? 'active' : ''}`}
                     onClick={() => setSelectedWeight(weight.value)}
                   >
-                    <div className="weight-icon">📦</div>
+                    <div className="weight-icon">
+                      <img src="/wgm-frontend/package.png" alt="Package" />
+                    </div>
                     <div className="weight-text">
                       <div className="weight-value">{weight.label}</div>
                       <div className="weight-oz">{weight.price}</div>

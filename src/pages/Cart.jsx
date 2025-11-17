@@ -39,9 +39,7 @@ const Cart = () => {
 
             <div className="cart-item">
               <div className="item-image">
-                <div className="image-placeholder">
-                  <span>🦌</span>
-                </div>
+                <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve" />
               </div>
               <div className="item-details">
                 <h3>{cartItem.name}</h3>
@@ -56,9 +54,7 @@ const Cart = () => {
             
             <div className="summary-item-card">
               <div className="summary-item-image">
-                <div className="image-placeholder-small">
-                  <span>🦌</span>
-                </div>
+                <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve" />
               </div>
               <div className="summary-item-info">
                 <h4>{cartItem.name}</h4>

@@ -205,9 +205,7 @@ const Checkout = () => {
             
             <div className="summary-product">
               <div className="product-image-small">
-                <div className="image-placeholder-small">
-                  <span>🦌</span>
-                </div>
+                <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve" />
               </div>
               <div className="product-info-small">
                 <h4>Ceylon Raga Reserve</h4>
