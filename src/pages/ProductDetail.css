@@ -352,10 +352,13 @@
   position: absolute;
   right: 1.5rem;
   flex-shrink: 0;
+  width: 28px;
+  height: 28px;
 }
 
 .btn-add-cart span {
   text-align: center;
+  flex: 1;
 }
 
 .btn-add-cart {
@@ -618,6 +621,24 @@
     height: 24px;
   }
 
+  .btn-add-cart,
+  .btn-place-order {
+    padding: 1rem;
+    font-size: 0.9rem;
+    min-height: 50px;
+    height: 50px;
+  }
+
+  .btn-add-cart svg {
+    right: 1rem;
+    width: 22px;
+    height: 22px;
+  }
+
+  .btn-add-cart span {
+    padding-right: 30px;
+  }
+
   .action-buttons {
     flex-direction: column;
   }
@@ -650,6 +671,49 @@
 
   .instruction-list li {
     padding-left: 2.5rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .btn-add-cart,
+  .btn-place-order {
+    padding: 0.875rem 0.75rem;
+    font-size: 0.85rem;
+    min-height: 48px;
+    height: 48px;
+  }
+
+  .btn-add-cart svg {
+    right: 0.75rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  .btn-add-cart span {
+    padding-right: 28px;
+    font-size: 0.85rem;
+  }
+
+  .action-buttons {
+    gap: 0.75rem;
+  }
+
+  .cart-icon-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cart-icon-nav svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cart-badge-nav {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    top: 0;
+    right: 0;
   }
 
   .product-title {
