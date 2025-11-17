@@ -19,7 +19,7 @@
   padding: 1rem;
   display: flex;
   gap: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 0px solid var(--border-color);
 }
 
 .nav-btn {
@@ -33,6 +33,47 @@
 
 .nav-btn:hover {
   background: var(--light-bg);
+}
+
+.cart-icon-nav {
+  margin-left: auto;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.cart-icon-nav svg {
+  width: 32px;
+  height: 32px;
+  color: #d4af37;
+}
+
+.cart-icon-nav:hover {
+  transform: scale(1.1);
+}
+
+.cart-badge-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #dc3545;
+  color: white;
+  font-size: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border: 2px solid white;
 }
 
 .product-detail {
@@ -143,62 +184,80 @@
 }
 
 .package-weight {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border: 3px solid #d4edda;
+  border-radius: 12px;
   padding: 1.5rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #fefaf0 100%);
 }
 
 .weight-label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--text-dark);
 }
 
 .package-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
 .weight-options {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .weight-btn {
-  padding: 1rem;
+  padding: 0.75rem;
   background: var(--white);
-  border: 2px solid var(--border-color);
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
 }
 
 .weight-btn:hover {
-  border-color: var(--primary-green);
+  border-color: #d4af37;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(212, 175, 55, 0.2);
 }
 
 .weight-btn.active {
-  border-color: var(--primary-green);
-  background: rgba(26, 77, 58, 0.05);
+  border-color: #d4af37;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
+  animation: goldenPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
 }
 
-.weight-icon {
-  width: 32px;
-  height: 32px;
+@keyframes goldenPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3), 0 0 20px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.4);
+  }
+}
+
+.weight-package-image {
+  width: 80px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.5rem;
 }
 
-.weight-icon img {
+.weight-package-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -209,12 +268,13 @@
 }
 
 .weight-value {
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-dark);
 }
 
 .weight-oz {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: var(--text-light);
 }
 
@@ -262,18 +322,27 @@
 }
 
 .action-buttons {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
 .btn-add-cart,
 .btn-place-order {
-  flex: 1;
   padding: 1rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 8px;
   transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 56px;
+  height: 56px;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .btn-add-cart {
@@ -283,6 +352,8 @@
 
 .btn-add-cart:hover {
   background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
 }
 
 .btn-place-order {
@@ -292,6 +363,8 @@
 
 .btn-place-order:hover {
   background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
 }
 
 .delivery-info {
@@ -380,6 +453,21 @@
 
   .weight-options {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .weight-package-image {
+    width: 60px;
+    height: 80px;
+  }
+
+  .cart-icon-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cart-icon-nav svg {
+    width: 24px;
+    height: 24px;
   }
 
   .action-buttons {

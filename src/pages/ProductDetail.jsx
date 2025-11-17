@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './ProductDetail.css';
 
-const ProductDetail = () => {
+const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [selectedWeight, setSelectedWeight] = useState('100g');
@@ -18,11 +18,28 @@ const ProductDetail = () => {
   ];
 
   const handleAddToCart = () => {
-    navigate('/cart');
+    const item = {
+      name: 'Ceylon Raga Reserve',
+      subtitle: 'Masala Brew',
+      weight: selectedWeight,
+      quantity: quantity,
+      price: 1500
+    };
+    addToCart(item);
+    // Reset quantity after adding
+    setQuantity(1);
   };
 
   const handlePlaceOrder = () => {
-    navigate('/checkout');
+    const item = {
+      name: 'Ceylon Raga Reserve',
+      subtitle: 'Masala Brew',
+      weight: selectedWeight,
+      quantity: quantity,
+      price: 1500
+    };
+    addToCart(item);
+    navigate('/cart');
   };
 
   return (
@@ -34,6 +51,14 @@ const ProductDetail = () => {
       <div className="nav-bar">
         <button className="nav-btn">Contacts</button>
         <button className="nav-btn">Order Tracking</button>
+        <button className="cart-icon-nav" onClick={() => navigate('/cart')}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            <circle cx="9" cy="21" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="20" cy="21" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          {cartCount > 0 && <span className="cart-badge-nav">{cartCount}</span>}
+        </button>
       </div>
 
       <main className="product-detail">
@@ -74,8 +99,8 @@ const ProductDetail = () => {
                     className={`weight-btn ${selectedWeight === weight.value ? 'active' : ''}`}
                     onClick={() => setSelectedWeight(weight.value)}
                   >
-                    <div className="weight-icon">
-                      <img src="/wgm-frontend/package.png" alt="Package" />
+                    <div className="weight-package-image">
+                      <img src="/wgm-frontend/package.png" alt={`Package ${weight.label}`} />
                     </div>
                     <div className="weight-text">
                       <div className="weight-value">{weight.label}</div>
@@ -112,7 +137,12 @@ const ProductDetail = () => {
 
             <div className="action-buttons">
               <button className="btn-add-cart" onClick={handleAddToCart}>
-                🛒 ADD TO CART
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                  <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z"/>
+                  <circle cx="9" cy="21" r="1"/>
+                  <circle cx="15" cy="21" r="1"/>
+                </svg>
+                ADD TO CART
               </button>
               <button className="btn-place-order" onClick={handlePlaceOrder}>
                 PLACE ORDER
