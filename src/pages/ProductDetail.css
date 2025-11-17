@@ -340,24 +340,22 @@
   transition: all 0.3s;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
   min-height: 56px;
   height: 56px;
   width: 100%;
   white-space: nowrap;
-  text-align: left;
+  position: relative;
 }
 
-.btn-add-cart svg,
-.btn-place-order svg {
+.btn-add-cart svg {
+  position: absolute;
+  right: 1.5rem;
   flex-shrink: 0;
-  margin-left: auto;
 }
 
 .btn-add-cart span {
-  flex: 1;
-  text-align: left;
+  text-align: center;
 }
 
 .btn-add-cart {
