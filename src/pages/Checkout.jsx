@@ -20,16 +20,82 @@ const Checkout = () => {
     couponCode: ''
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    // Accepts formats like: +94771234567, 0771234567, 077-123-4567, etc.
+    const phoneRegex = /^(\+94|0)?[0-9]{9,10}$/;
+    const cleanPhone = phone.replace(/[\s-]/g, '');
+    return phoneRegex.test(cleanPhone);
+  };
+
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Check required fields
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+    if (!formData.streetAddress.trim()) {
+      newErrors.streetAddress = 'Street address is required';
+    }
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+    if (!formData.province) {
+      newErrors.province = 'Province is required';
+    }
+    if (!formData.postalCode.trim()) {
+      newErrors.postalCode = 'Postal code is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Order placed successfully!');
+    
+    if (validateForm()) {
+      alert('Order placed successfully!');
+      // Here you would typically send the order to your backend
+    } else {
+      alert('Please fill in all required fields correctly.');
+    }
   };
 
   const subtotal = 1500.00;
@@ -81,8 +147,9 @@ const Checkout = () => {
                     placeholder="John"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    required
+                    className={errors.firstName ? 'error' : ''}
                   />
+                  {errors.firstName && <span className="error-message">{errors.firstName}</span>}
                 </div>
                 <div className="form-group">
                   <label>Last Name *</label>
@@ -92,8 +159,9 @@ const Checkout = () => {
                     placeholder="Doe"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    required
+                    className={errors.lastName ? 'error' : ''}
                   />
+                  {errors.lastName && <span className="error-message">{errors.lastName}</span>}
                 </div>
               </div>
 
@@ -105,8 +173,9 @@ const Checkout = () => {
                   placeholder="john.doe@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
-                  required
+                  className={errors.email ? 'error' : ''}
                 />
+                {errors.email && <span className="error-message">{errors.email}</span>}
               </div>
 
               <div className="form-group">
@@ -117,8 +186,9 @@ const Checkout = () => {
                   placeholder="+94 77 123 4567"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  required
+                  className={errors.phone ? 'error' : ''}
                 />
+                {errors.phone && <span className="error-message">{errors.phone}</span>}
               </div>
 
               <div className="form-group">
@@ -129,8 +199,9 @@ const Checkout = () => {
                   placeholder="House number and street name"
                   value={formData.streetAddress}
                   onChange={handleInputChange}
-                  required
+                  className={errors.streetAddress ? 'error' : ''}
                 />
+                {errors.streetAddress && <span className="error-message">{errors.streetAddress}</span>}
               </div>
 
               <div className="form-group">
@@ -141,8 +212,9 @@ const Checkout = () => {
                   placeholder="Colombo"
                   value={formData.city}
                   onChange={handleInputChange}
-                  required
+                  className={errors.city ? 'error' : ''}
                 />
+                {errors.city && <span className="error-message">{errors.city}</span>}
               </div>
 
               <div className="form-row">
@@ -152,7 +224,7 @@ const Checkout = () => {
                     name="province"
                     value={formData.province}
                     onChange={handleInputChange}
-                    required
+                    className={errors.province ? 'error' : ''}
                   >
                     <option value="">Select Province</option>
                     <option value="western">Western</option>
@@ -165,6 +237,7 @@ const Checkout = () => {
                     <option value="uva">Uva</option>
                     <option value="sabaragamuwa">Sabaragamuwa</option>
                   </select>
+                  {errors.province && <span className="error-message">{errors.province}</span>}
                 </div>
                 <div className="form-group">
                   <label>Postal Code *</label>
@@ -174,11 +247,12 @@ const Checkout = () => {
                     placeholder="10100"
                     value={formData.postalCode}
                     onChange={handleInputChange}
-                    required
+                    className={errors.postalCode ? 'error' : ''}
                   />
-                  {formData.postalCode && (
+                  {formData.postalCode && !errors.postalCode && (
                     <span className="input-check">✓</span>
                   )}
+                  {errors.postalCode && <span className="error-message">{errors.postalCode}</span>}
                 </div>
               </div>
 
