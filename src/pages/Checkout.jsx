@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Checkout.css';
 
+const API_BASE_URL = 'https://wgm-backend.onrender.com';
+
 const Checkout = () => {
   const navigate = useNavigate();
   const currentStep = 1; // Current step indicator
@@ -20,23 +22,174 @@ const Checkout = () => {
     couponCode: ''
   });
 
+  const [errors, setErrors] = useState({});
+  const [couponStatus, setCouponStatus] = useState({
+    isValidating: false,
+    isValid: false,
+    isApplied: false,
+    discountPercent: 0,
+    message: '',
+    description: ''
+  });
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    // Accepts formats like: +94771234567, 0771234567, 077-123-4567, etc.
+    const phoneRegex = /^(\+94|0)?[0-9]{9,10}$/;
+    const cleanPhone = phone.replace(/[\s-]/g, '');
+    return phoneRegex.test(cleanPhone);
+  };
+
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
+
+    // Reset coupon status when user modifies the coupon code
+    if (name === 'couponCode' && couponStatus.isApplied) {
+      setCouponStatus({
+        isValidating: false,
+        isValid: false,
+        isApplied: false,
+        discountPercent: 0,
+        message: '',
+        description: ''
+      });
+    }
+  };
+
+  const handleApplyCoupon = async () => {
+    const code = formData.couponCode.trim();
+    
+    if (!code) {
+      setCouponStatus({
+        isValidating: false,
+        isValid: false,
+        isApplied: false,
+        discountPercent: 0,
+        message: 'Please enter a coupon code',
+        description: ''
+      });
+      return;
+    }
+
+    setCouponStatus(prev => ({ ...prev, isValidating: true, message: '' }));
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/promos/validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.valid) {
+        setCouponStatus({
+          isValidating: false,
+          isValid: true,
+          isApplied: true,
+          discountPercent: data.discountPercent || 0,
+          message: data.message || 'Coupon applied successfully!',
+          description: data.description || ''
+        });
+      } else {
+        setCouponStatus({
+          isValidating: false,
+          isValid: false,
+          isApplied: false,
+          discountPercent: 0,
+          message: data.message || 'Invalid coupon code',
+          description: ''
+        });
+      }
+    } catch (error) {
+      setCouponStatus({
+        isValidating: false,
+        isValid: false,
+        isApplied: false,
+        discountPercent: 0,
+        message: 'Failed to validate coupon. Please try again.',
+        description: ''
+      });
+      console.error('Coupon validation error:', error);
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Check required fields
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+    if (!formData.streetAddress.trim()) {
+      newErrors.streetAddress = 'Street address is required';
+    }
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+    if (!formData.province) {
+      newErrors.province = 'Province is required';
+    }
+    if (!formData.postalCode.trim()) {
+      newErrors.postalCode = 'Postal code is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Order placed successfully!');
+    
+    if (validateForm()) {
+      alert('Order placed successfully!');
+      // Here you would typically send the order to your backend
+    } else {
+      alert('Please fill in all required fields correctly.');
+    }
   };
 
   const subtotal = 1500.00;
   const shipping = 250.00;
   const tax = 87.50;
-  const discount = 25.0;
-  const total = 1812.50;
+  
+  // Calculate discount based on coupon
+  const discount = couponStatus.isApplied 
+    ? (subtotal * couponStatus.discountPercent / 100) 
+    : 0;
+  
+  const total = subtotal + shipping + tax - discount;
 
   return (
     <div className="page-container">
@@ -81,8 +234,9 @@ const Checkout = () => {
                     placeholder="John"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    required
+                    className={errors.firstName ? 'error' : ''}
                   />
+                  {errors.firstName && <span className="error-message">{errors.firstName}</span>}
                 </div>
                 <div className="form-group">
                   <label>Last Name *</label>
@@ -92,8 +246,9 @@ const Checkout = () => {
                     placeholder="Doe"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    required
+                    className={errors.lastName ? 'error' : ''}
                   />
+                  {errors.lastName && <span className="error-message">{errors.lastName}</span>}
                 </div>
               </div>
 
@@ -105,8 +260,9 @@ const Checkout = () => {
                   placeholder="john.doe@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
-                  required
+                  className={errors.email ? 'error' : ''}
                 />
+                {errors.email && <span className="error-message">{errors.email}</span>}
               </div>
 
               <div className="form-group">
@@ -117,8 +273,9 @@ const Checkout = () => {
                   placeholder="+94 77 123 4567"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  required
+                  className={errors.phone ? 'error' : ''}
                 />
+                {errors.phone && <span className="error-message">{errors.phone}</span>}
               </div>
 
               <div className="form-group">
@@ -129,8 +286,9 @@ const Checkout = () => {
                   placeholder="House number and street name"
                   value={formData.streetAddress}
                   onChange={handleInputChange}
-                  required
+                  className={errors.streetAddress ? 'error' : ''}
                 />
+                {errors.streetAddress && <span className="error-message">{errors.streetAddress}</span>}
               </div>
 
               <div className="form-group">
@@ -141,8 +299,9 @@ const Checkout = () => {
                   placeholder="Colombo"
                   value={formData.city}
                   onChange={handleInputChange}
-                  required
+                  className={errors.city ? 'error' : ''}
                 />
+                {errors.city && <span className="error-message">{errors.city}</span>}
               </div>
 
               <div className="form-row">
@@ -152,7 +311,7 @@ const Checkout = () => {
                     name="province"
                     value={formData.province}
                     onChange={handleInputChange}
-                    required
+                    className={errors.province ? 'error' : ''}
                   >
                     <option value="">Select Province</option>
                     <option value="western">Western</option>
@@ -165,6 +324,7 @@ const Checkout = () => {
                     <option value="uva">Uva</option>
                     <option value="sabaragamuwa">Sabaragamuwa</option>
                   </select>
+                  {errors.province && <span className="error-message">{errors.province}</span>}
                 </div>
                 <div className="form-group">
                   <label>Postal Code *</label>
@@ -174,11 +334,12 @@ const Checkout = () => {
                     placeholder="10100"
                     value={formData.postalCode}
                     onChange={handleInputChange}
-                    required
+                    className={errors.postalCode ? 'error' : ''}
                   />
-                  {formData.postalCode && (
+                  {formData.postalCode && !errors.postalCode && (
                     <span className="input-check">✓</span>
                   )}
+                  {errors.postalCode && <span className="error-message">{errors.postalCode}</span>}
                 </div>
               </div>
 
@@ -226,11 +387,26 @@ const Checkout = () => {
                   placeholder="Enter Coupon code"
                   value={formData.couponCode}
                   onChange={handleInputChange}
+                  disabled={couponStatus.isValidating}
+                  className={couponStatus.isApplied ? 'coupon-applied' : ''}
                 />
-                <button type="button" className="btn-apply-coupon">
-                  APPLY COUPON
+                <button 
+                  type="button" 
+                  className="btn-apply-coupon"
+                  onClick={handleApplyCoupon}
+                  disabled={couponStatus.isValidating || !formData.couponCode.trim()}
+                >
+                  {couponStatus.isValidating ? 'VALIDATING...' : 'APPLY COUPON'}
                 </button>
               </div>
+              {couponStatus.message && (
+                <div className={`coupon-message ${couponStatus.isValid ? 'success' : 'error'}`}>
+                  {couponStatus.message}
+                  {couponStatus.description && (
+                    <span className="coupon-description"> - {couponStatus.description}</span>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="summary-breakdown">
@@ -246,10 +422,12 @@ const Checkout = () => {
                 <span>Tax (Estimated)</span>
                 <span>LKR {tax.toFixed(2)}</span>
               </div>
-              <div className="summary-row discount">
-                <span>Discount</span>
-                <span>- LKR {discount.toFixed(2)}</span>
-              </div>
+              {discount > 0 && (
+                <div className="summary-row discount">
+                  <span>Discount ({couponStatus.discountPercent}%)</span>
+                  <span>- LKR {discount.toFixed(2)}</span>
+                </div>
+              )}
             </div>
 
             <div className="summary-total-checkout">
