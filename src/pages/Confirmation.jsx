@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -9,6 +9,7 @@ const Confirmation = () => {
   const location = useLocation();
   const { orderData } = location.state || {};
   const currentStep = 3;
+  const [orderNumber] = useState(() => Math.floor(Math.random() * 1000000));
 
   useEffect(() => {
     // If no order data, redirect to home
@@ -72,7 +73,7 @@ const Confirmation = () => {
                   Your order has been confirmed and will be delivered within 3-4 business days.
                 </p>
                 <p className="order-number">
-                  Order Number: <strong>#{Math.floor(Math.random() * 1000000)}</strong>
+                  Order Number: <strong>#{orderNumber}</strong>
                 </p>
                 <p className="confirmation-email">
                   A confirmation email has been sent to your registered email address.
