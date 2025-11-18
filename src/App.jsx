@@ -3,6 +3,8 @@ import { useState } from 'react';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Payment from './pages/Payment';
+import Confirmation from './pages/Confirmation';
 import './App.css';
 
 function App() {
@@ -63,6 +65,14 @@ function App() {
         <Route
           path="/checkout"
           element={<Checkout cartItems={cartItems} />}
+        />
+        <Route
+          path="/payment"
+          element={<Payment />}
+        />
+        <Route
+          path="/confirmation"
+          element={<Confirmation />}
         />
       </Routes>
     </Router>
