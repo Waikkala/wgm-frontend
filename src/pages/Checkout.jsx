@@ -173,8 +173,23 @@ const Checkout = () => {
     e.preventDefault();
     
     if (validateForm()) {
-      alert('Order placed successfully!');
-      // Here you would typically send the order to your backend
+      // Navigate to payment page with order data
+      navigate('/payment', {
+        state: {
+          orderData: {
+            billingInfo: formData,
+            subtotal,
+            shipping,
+            tax,
+            discount,
+            total,
+            coupon: couponStatus.isApplied ? {
+              code: formData.couponCode,
+              discountPercent: couponStatus.discountPercent
+            } : null
+          }
+        }
+      });
     } else {
       alert('Please fill in all required fields correctly.');
     }

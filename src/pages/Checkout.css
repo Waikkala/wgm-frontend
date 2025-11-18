@@ -59,6 +59,12 @@
   border-color: var(--primary-green);
 }
 
+.step.completed .step-number {
+  background: #d0d0d0;
+  color: #666;
+  border-color: #d0d0d0;
+}
+
 .step-label {
   font-size: 0.875rem;
   color: var(--text-light);
@@ -67,6 +73,10 @@
 
 .step.active .step-label {
   color: var(--text-dark);
+}
+
+.step.completed .step-label {
+  color: #888;
 }
 
 .step-line {
