@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Checkout.css';
 
+const API_BASE_URL = 'https://wgm-backend.onrender.com';
+
 const Checkout = () => {
   const navigate = useNavigate();
   const currentStep = 1; // Current step indicator
@@ -21,6 +23,14 @@ const Checkout = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [couponStatus, setCouponStatus] = useState({
+    isValidating: false,
+    isValid: false,
+    isApplied: false,
+    discountPercent: 0,
+    message: '',
+    description: ''
+  });
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,6 +57,78 @@ const Checkout = () => {
         ...errors,
         [name]: ''
       });
+    }
+
+    // Reset coupon status when user modifies the coupon code
+    if (name === 'couponCode' && couponStatus.isApplied) {
+      setCouponStatus({
+        isValidating: false,
+        isValid: false,
+        isApplied: false,
+        discountPercent: 0,
+        message: '',
+        description: ''
+      });
+    }
+  };
+
+  const handleApplyCoupon = async () => {
+    const code = formData.couponCode.trim();
+    
+    if (!code) {
+      setCouponStatus({
+        isValidating: false,
+        isValid: false,
+        isApplied: false,
+        discountPercent: 0,
+        message: 'Please enter a coupon code',
+        description: ''
+      });
+      return;
+    }
+
+    setCouponStatus(prev => ({ ...prev, isValidating: true, message: '' }));
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/promos/validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.valid) {
+        setCouponStatus({
+          isValidating: false,
+          isValid: true,
+          isApplied: true,
+          discountPercent: data.discountPercent || 0,
+          message: data.message || 'Coupon applied successfully!',
+          description: data.description || ''
+        });
+      } else {
+        setCouponStatus({
+          isValidating: false,
+          isValid: false,
+          isApplied: false,
+          discountPercent: 0,
+          message: data.message || 'Invalid coupon code',
+          description: ''
+        });
+      }
+    } catch (error) {
+      setCouponStatus({
+        isValidating: false,
+        isValid: false,
+        isApplied: false,
+        discountPercent: 0,
+        message: 'Failed to validate coupon. Please try again.',
+        description: ''
+      });
+      console.error('Coupon validation error:', error);
     }
   };
 
@@ -101,8 +183,13 @@ const Checkout = () => {
   const subtotal = 1500.00;
   const shipping = 250.00;
   const tax = 87.50;
-  const discount = 25.0;
-  const total = 1812.50;
+  
+  // Calculate discount based on coupon
+  const discount = couponStatus.isApplied 
+    ? (subtotal * couponStatus.discountPercent / 100) 
+    : 0;
+  
+  const total = subtotal + shipping + tax - discount;
 
   return (
     <div className="page-container">
@@ -300,11 +387,26 @@ const Checkout = () => {
                   placeholder="Enter Coupon code"
                   value={formData.couponCode}
                   onChange={handleInputChange}
+                  disabled={couponStatus.isValidating}
+                  className={couponStatus.isApplied ? 'coupon-applied' : ''}
                 />
-                <button type="button" className="btn-apply-coupon">
-                  APPLY COUPON
+                <button 
+                  type="button" 
+                  className="btn-apply-coupon"
+                  onClick={handleApplyCoupon}
+                  disabled={couponStatus.isValidating || !formData.couponCode.trim()}
+                >
+                  {couponStatus.isValidating ? 'VALIDATING...' : 'APPLY COUPON'}
                 </button>
               </div>
+              {couponStatus.message && (
+                <div className={`coupon-message ${couponStatus.isValid ? 'success' : 'error'}`}>
+                  {couponStatus.message}
+                  {couponStatus.description && (
+                    <span className="coupon-description"> - {couponStatus.description}</span>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="summary-breakdown">
@@ -320,10 +422,12 @@ const Checkout = () => {
                 <span>Tax (Estimated)</span>
                 <span>LKR {tax.toFixed(2)}</span>
               </div>
-              <div className="summary-row discount">
-                <span>Discount</span>
-                <span>- LKR {discount.toFixed(2)}</span>
-              </div>
+              {discount > 0 && (
+                <div className="summary-row discount">
+                  <span>Discount ({couponStatus.discountPercent}%)</span>
+                  <span>- LKR {discount.toFixed(2)}</span>
+                </div>
+              )}
             </div>
 
             <div className="summary-total-checkout">
