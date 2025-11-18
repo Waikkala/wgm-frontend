@@ -383,6 +383,17 @@
   box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
 }
 
+.btn-place-order.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-place-order:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .delivery-info {
   display: flex;
   gap: 2rem;
