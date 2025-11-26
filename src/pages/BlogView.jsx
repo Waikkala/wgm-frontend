@@ -1,11 +1,10 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './BlogView.css';
 
 const BlogView = ({ cartCount = 0 }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   // Sample blog data - in real app, fetch based on id
   const blogPost = {

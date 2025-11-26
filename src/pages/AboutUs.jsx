@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './AboutUs.css';
 
 const AboutUs = ({ cartCount = 0 }) => {
-  const navigate = useNavigate();
 
   return (
     <div className="about-us-page">
