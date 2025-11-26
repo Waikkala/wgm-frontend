@@ -17,7 +17,7 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
                 <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
               </div>
               <div className="header-actions">
-                <button className="shop-now-btn" onClick={() => navigate('/product')}>
+                <button className="shop-now-btn" onClick={() => navigate('/products')}>
                   Shop Now 🛒
                 </button>
                 <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
@@ -28,7 +28,7 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
             <div className="header-nav-bar">
               <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
                 <Link to="/" className="nav-link">HOME</Link>
-                <Link to="/product" className="nav-link">PRODUCTS</Link>
+                <Link to="/products" className="nav-link">PRODUCTS</Link>
                 <Link to="/about" className="nav-link">ABOUT US</Link>
                 <Link to="/blog" className="nav-link">BLOG</Link>
               </nav>

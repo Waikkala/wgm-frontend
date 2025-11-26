@@ -34,11 +34,11 @@ function Home({ cartCount }) {
           <div className="showcase-content">
             <h2 className="showcase-title">Ceylon Raga Reserve</h2>
             <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
-            <Link to="/product" className="btn-buy-now-corner">BUY NOW</Link>
+            <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
           </div>
         </div>
         <div className="showcase-explore-btn">
-          <Link to="/product" className="btn-explore">EXPLORE RAGA RESERVE</Link>
+          <Link to="/products" className="btn-explore">EXPLORE RAGA RESERVE</Link>
         </div>
       </section>
 
@@ -112,7 +112,7 @@ function Home({ cartCount }) {
               <li>🌾 Supporting Sri Lankan local farmers.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
-            <Link to="/product" className="btn-buy-now">BUY NOW</Link>
+            <Link to="/products" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
             <img src="/wgm-frontend/product1.png" alt="Raga Reserve Package" />
