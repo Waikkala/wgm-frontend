@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SimpleFooter from '../components/SimpleFooter';
 import './ProductDetail.css';
 
 const ProductDetail = ({ addToCart, cartCount = 0 }) => {
@@ -374,7 +374,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
         </div>
       </main>
 
-      <Footer />
+      <SimpleFooter />
     </div>
   );
 };

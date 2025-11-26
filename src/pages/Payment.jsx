@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SimpleFooter from '../components/SimpleFooter';
 import './Payment.css';
 
 const Payment = () => {
@@ -243,7 +243,7 @@ const Payment = () => {
         </div>
       </main>
 
-      <Footer />
+      <SimpleFooter />
     </div>
   );
 };

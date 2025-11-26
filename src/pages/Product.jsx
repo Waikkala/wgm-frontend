@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Product.css';
 
 const Product = ({ cartCount }) => {
+  const [activeBrewTab, setActiveBrewTab] = useState('hot');
+
   return (
     <div className="product-page">
       <Header cartCount={cartCount} isLanding={true} />
@@ -45,55 +48,133 @@ const Product = ({ cartCount }) => {
       <section className="brew-section">
         <h2 className="brew-title">The Art of the Brew: Versatile Inspirations</h2>
         <div className="brew-tabs">
-          <button className="brew-tab active">☕ HOT BEVERAGES</button>
-          <button className="brew-tab">❄️ COLD BEVERAGES</button>
-          <button className="brew-tab">🍷 ALCOHOLIC BEVERAGES</button>
+          <button 
+            className={`brew-tab ${activeBrewTab === 'hot' ? 'active' : ''}`}
+            onClick={() => setActiveBrewTab('hot')}
+          >
+            ☕ HOT BEVERAGES
+          </button>
+          <button 
+            className={`brew-tab ${activeBrewTab === 'cold' ? 'active' : ''}`}
+            onClick={() => setActiveBrewTab('cold')}
+          >
+            ❄️ COLD BEVERAGES
+          </button>
+          <button 
+            className={`brew-tab ${activeBrewTab === 'alcoholic' ? 'active' : ''}`}
+            onClick={() => setActiveBrewTab('alcoholic')}
+          >
+            🍷 ALCOHOLIC BEVERAGES
+          </button>
         </div>
         <div className="brew-content">
           <div className="brew-recipes">
-            <div className="recipe-item">
-              <span className="recipe-icon">☕</span>
-              <div className="recipe-details">
-                <h4>Milk Tea – 250 ml cup</h4>
-                <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
-                <p className="recipe-note">✨ Adjust according to taste & individual mood.</p>
-              </div>
-            </div>
-            <div className="recipe-item">
-              <span className="recipe-icon">☕</span>
-              <div className="recipe-details">
-                <h4>Plain Tea (Black Tea) – 250 ml cup</h4>
-                <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
-                <p className="recipe-note">✨ Ideal for a warm, aromatic, mildly stimulating effect.</p>
-              </div>
-            </div>
-            <div className="recipe-item">
-              <span className="recipe-icon">☕</span>
-              <div className="recipe-details">
-                <h4>Coffee – 200-250 ml mug</h4>
-                <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
-                <p className="recipe-note">✨ Helps balance the bitterness of coffee and enhances focus.</p>
-              </div>
-            </div>
-            <div className="recipe-item">
-              <span className="recipe-icon">☕</span>
-              <div className="recipe-details">
-                <h4>Milk Coffee – 250 ml cup</h4>
-                <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
-                <p className="recipe-note">✨ Creates a creamy, aromatic masala profile.</p>
-              </div>
-            </div>
-            <div className="recipe-item">
-              <span className="recipe-icon">🥛</span>
-              <div className="recipe-details">
-                <h4>Fresh Milk – 250 ml glass</h4>
-                <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
-                <p className="recipe-note">✨ Perfect for a calming, comforting drink.</p>
-              </div>
-            </div>
+            {activeBrewTab === 'hot' && (
+              <>
+                <div className="recipe-item">
+                  <span className="recipe-icon">☕</span>
+                  <div className="recipe-details">
+                    <h4>Milk Tea – 250 ml cup</h4>
+                    <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Adjust according to taste & individual mood.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">☕</span>
+                  <div className="recipe-details">
+                    <h4>Plain Tea (Black Tea) – 250 ml cup</h4>
+                    <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Ideal for a warm, aromatic, mildly stimulating effect.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">☕</span>
+                  <div className="recipe-details">
+                    <h4>Coffee – 200-250 ml mug</h4>
+                    <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Helps balance the bitterness of coffee and enhances focus.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">☕</span>
+                  <div className="recipe-details">
+                    <h4>Milk Coffee – 250 ml cup</h4>
+                    <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Creates a creamy, aromatic masala profile.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">🥛</span>
+                  <div className="recipe-details">
+                    <h4>Fresh Milk – 250 ml glass</h4>
+                    <p className="recipe-amount">Use 1/4 to 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Perfect for a calming, comforting drink.</p>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeBrewTab === 'cold' && (
+              <>
+                <div className="recipe-item">
+                  <span className="recipe-icon">🥤</span>
+                  <div className="recipe-details">
+                    <h4>Fruit Juice – 300 ml glass</h4>
+                    <p className="recipe-amount">Use 1 to 1 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Adjust depending on sweetness, fruit acidity & mood.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">🥤</span>
+                  <div className="recipe-details">
+                    <h4>Smoothies – 300-350 ml cup</h4>
+                    <p className="recipe-amount">Use 1 to 1 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Ideal for thicker drinks, enhances warmth, aroma & metabolic benefits.</p>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeBrewTab === 'alcoholic' && (
+              <>
+                <div className="recipe-item">
+                  <span className="recipe-icon">🥃</span>
+                  <div className="recipe-details">
+                    <h4>Whiskey – 45-60 ml serving (standard shot)</h4>
+                    <p className="recipe-amount">Use 1/2 teaspoons</p>
+                    <p className="recipe-note">✨ Enhances spice warmth and aroma.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">🥃</span>
+                  <div className="recipe-details">
+                    <h4>Brandy – 45-60 ml serving</h4>
+                    <p className="recipe-amount">Use 1/2 to 3/4 teaspoons</p>
+                    <p className="recipe-note">✨ Adds depth and smoothness to the drink.</p>
+                  </div>
+                </div>
+                <div className="recipe-item">
+                  <span className="recipe-icon">🍷</span>
+                  <div className="recipe-details">
+                    <h4>Wine – 150 ml glass</h4>
+                    <p className="recipe-amount">Use 1/2 to 3/4 teaspoons</p>
+                    <p className="recipe-note">✨ Balances sweetness and boosts the aromatic profile.</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <div className="brew-image">
-            <img src="/wgm-frontend/product1.png" alt="Raga Reserve Brew" />
+            <img 
+              src={
+                activeBrewTab === 'hot' 
+                  ? '/wgm-frontend/product1.png' 
+                  : activeBrewTab === 'cold'
+                  ? '/wgm-frontend/product1.png'
+                  : '/wgm-frontend/product1.png'
+              } 
+              alt="Raga Reserve Brew" 
+            />
           </div>
         </div>
       </section>

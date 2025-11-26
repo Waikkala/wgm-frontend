@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SimpleFooter from '../components/SimpleFooter';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -97,7 +97,7 @@ const Confirmation = () => {
         </div>
       </main>
 
-      <Footer />
+      <SimpleFooter />
     </div>
   );
 };
