@@ -1,7 +1,7 @@
 .footer {
-  background: var(--primary-green);
+  background: #1a4d2e;
   color: var(--white);
-  padding: 3rem 1rem 1.5rem;
+  padding: 3rem 2rem 1.5rem;
   margin-top: auto;
   position: relative;
   overflow: hidden;
@@ -16,134 +16,145 @@
   background-image: url('/wgm-frontend/background.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.15;
+  opacity: 0.1;
+  pointer-events: none;
 }
 
 .footer-content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
   position: relative;
   z-index: 1;
 }
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand {
+  max-width: 400px;
+}
+
 .footer-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  background: #2d6b45;
+  padding: 1.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
 }
 
 .footer-logo .logo-icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: auto;
   object-fit: contain;
-}
-
-.footer-logo .logo-text {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.footer-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
+  display: block;
 }
 
 .footer-description {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  opacity: 0.9;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.footer-tagline {
-  font-size: 0.875rem;
-  font-weight: 500;
+.footer-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 1.5rem;
-  opacity: 0.95;
+  color: #d4a574;
 }
 
-.footer-social {
+.footer-nav {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
-.social-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid var(--white);
+.footer-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #d4a574;
+}
+
+.contact-info {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  padding: 10px;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.social-icon svg {
-  width: 100%;
-  height: 100%;
+.contact-info p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
 }
 
-.social-icon:hover {
-  background: var(--white);
-  color: var(--primary-green);
-  transform: translateY(-2px);
-}
-
-.social-icon.facebook:hover {
-  background: #1877f2;
-  border-color: #1877f2;
-  color: var(--white);
-}
-
-.social-icon.instagram:hover {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  border-color: #bc1888;
-  color: var(--white);
-}
-
-.social-icon.email:hover {
-  background: #ea4335;
-  border-color: #ea4335;
-  color: var(--white);
-}
-
-.social-icon.phone:hover {
-  background: #25d366;
-  border-color: #25d366;
-  color: var(--white);
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
 }
 
 .footer-copyright {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
   .footer {
     padding: 2rem 1rem 1rem;
   }
 
-  .footer-title {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: 1;
+  }
+
+  .footer-logo {
+    padding: 1rem;
+  }
+
+  .footer-logo .logo-icon {
+    width: 60px;
+  }
+
+  .footer-description {
+    font-size: 0.85rem;
+  }
+
+  .footer-heading {
     font-size: 1rem;
   }
 
-  .footer-description,
-  .footer-tagline {
-    font-size: 0.8rem;
+  .footer-link,
+  .contact-info p {
+    font-size: 0.85rem;
   }
 
-  .social-icon {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+  .footer-copyright {
+    font-size: 0.8rem;
   }
 }

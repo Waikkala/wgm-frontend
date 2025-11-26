@@ -10,29 +10,35 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
     <header className={`header ${isLanding ? 'header-landing' : ''}`}>
       <div className="header-background"></div>
       <div className="header-content">
-        <div className="logo" onClick={() => navigate('/')}>
-          <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
-        </div>
-        
         {isLanding ? (
           <>
-            <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
-              <Link to="/" className="nav-link">HOME</Link>
-              <Link to="/product" className="nav-link">PRODUCTS</Link>
-              <Link to="/about" className="nav-link">ABOUT US</Link>
-              <Link to="/blog" className="nav-link">BLOG</Link>
-            </nav>
-            <div className="header-actions">
-              <button className="shop-now-btn" onClick={() => navigate('/product')}>
-                Shop Now 🛒
-              </button>
-              <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-                {menuOpen ? '✕' : '☰'}
-              </button>
+            <div className="header-top">
+              <div className="logo" onClick={() => navigate('/')}>
+                <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+              </div>
+              <div className="header-actions">
+                <button className="shop-now-btn" onClick={() => navigate('/product')}>
+                  Shop Now 🛒
+                </button>
+                <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                  {menuOpen ? '✕' : '☰'}
+                </button>
+              </div>
+            </div>
+            <div className="header-nav-bar">
+              <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
+                <Link to="/" className="nav-link">HOME</Link>
+                <Link to="/product" className="nav-link">PRODUCTS</Link>
+                <Link to="/about" className="nav-link">ABOUT US</Link>
+                <Link to="/blog" className="nav-link">BLOG</Link>
+              </nav>
             </div>
           </>
         ) : (
           <>
+            <div className="logo" onClick={() => navigate('/')}>
+              <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+            </div>
             <div className="header-text">
               <h1>{title}</h1>
               {subtitle && <p>{subtitle}</p>}
