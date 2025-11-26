@@ -106,6 +106,7 @@
   right: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: visible;
 }
 
 .header-landing .header-background {
@@ -117,27 +118,31 @@
   padding: 0;
   max-width: 100%;
   position: relative;
+  overflow: visible;
 }
 
 .header-landing .header-top {
   background: white;
-  padding: 0.75rem 2rem 0;
+  padding: 1.5rem 2rem 0;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
+  min-height: 100px;
+  overflow: visible;
 }
 
 .header-landing .logo {
   cursor: pointer;
   transition: transform 0.3s ease;
   background: #1a4d2e;
-  padding: 1.5rem 2rem;
-  border-radius: 0;
+  padding: 2.5rem 3rem;
+  border-radius: 8px;
   position: absolute;
-  left: 2rem;
-  top: 0;
+  left: 3rem;
+  top: 1.5rem;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .header-landing .logo:hover {
@@ -145,18 +150,19 @@
 }
 
 .header-landing .logo-icon {
-  width: 90px;
+  width: 130px;
   height: auto;
   display: block;
 }
 
 .header-landing .header-nav-bar {
   background: #d9d9d9;
-  padding: 1rem 2rem;
+  padding: 1.2rem 2rem 1.2rem 18rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0;
+  overflow: visible;
 }
 
 .nav-menu {
@@ -263,20 +269,24 @@
 
   /* Landing Header Mobile */
   .header-landing .header-top {
-    padding: 0.5rem 1rem 0;
+    padding: 1rem 1rem 0;
+    min-height: 70px;
+    overflow: visible;
   }
 
   .header-landing .logo {
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 2rem;
     left: 1rem;
+    top: 1rem;
   }
 
   .header-landing .logo-icon {
-    width: 70px;
+    width: 80px;
   }
 
   .header-landing .header-nav-bar {
     padding: 0.75rem 1rem;
+    padding-left: 1rem;
   }
 
   .menu-toggle {
