@@ -24,8 +24,8 @@ const Confirmation = () => {
 
   return (
     <div className="page-container">
-      <Header 
-        title="Complete Your Raga Order" 
+      <Header
+        title="Complete Your Raga Order"
         subtitle=""
       />
 
@@ -80,7 +80,7 @@ const Confirmation = () => {
                 </p>
               </div>
 
-              <button 
+              <button
                 className="btn-continue-shopping"
                 onClick={handleContinueShopping}
               >

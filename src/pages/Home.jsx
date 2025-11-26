@@ -42,39 +42,6 @@ function Home({ cartCount }) {
         </div>
       </section>
 
-      {/* Ceylon Raga Reserve Detail Section */}
-      <section className="raga-detail-section">
-        <div className="raga-detail-container">
-          <div className="raga-detail-content">
-            <h2 className="raga-detail-title">Ceylon Raga Reserve</h2>
-            <p className="raga-detail-subtitle">Masala Brew - Anytime Energy. Everyday Luxury.</p>
-            <p className="raga-detail-description">
-              An exclusive creation by Waikkala Grinding Mills, reimagining Sri Lankan spice
-              heritage for the modern world. Where Sri Lanka's finest spices meet Kerala's
-              timeless traditions.
-            </p>
-            <div className="spice-tags">
-              <span className="spice-tag">Clove</span>
-              <span className="spice-tag">Cardamom</span>
-              <span className="spice-tag">Cinnamon</span>
-              <span className="spice-tag">Ginger</span>
-              <span className="spice-tag">Nutmeg</span>
-              <span className="spice-tag">Star Anise</span>
-            </div>
-            <ul className="raga-features">
-              <li>✨ No preservatives. No artificial ingredients.</li>
-              <li>☀️ Solar-powered production.</li>
-              <li>🌾 Supporting Sri Lankan local farmers.</li>
-              <li>💼 Fostering female entrepreneurship.</li>
-            </ul>
-            <Link to="/product" className="btn-buy-now">BUY NOW</Link>
-          </div>
-          <div className="raga-detail-image">
-            <img src="/wgm-frontend/product1.png" alt="Raga Reserve Package" />
-          </div>
-        </div>
-      </section>
-
       {/* Innovation Section */}
       <section className="innovation-section">
         <h2 className="section-title">Innovation Drives Everything We Do</h2>
@@ -116,6 +83,39 @@ function Home({ cartCount }) {
               GMP-Compliant facilities with ISO and HACCP certification underway, ensuring
               world-class hygiene and safety.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Ceylon Raga Reserve Detail Section */}
+      <section className="raga-detail-section">
+        <div className="raga-detail-container">
+          <div className="raga-detail-content">
+            <h2 className="raga-detail-title">Ceylon Raga Reserve</h2>
+            <p className="raga-detail-subtitle">Masala Brew - Anytime Energy. Everyday Luxury.</p>
+            <p className="raga-detail-description">
+              An exclusive creation by Waikkala Grinding Mills, reimagining Sri Lankan spice
+              heritage for the modern world. Where Sri Lanka's finest spices meet Kerala's
+              timeless traditions.
+            </p>
+            <div className="spice-tags">
+              <span className="spice-tag">Clove</span>
+              <span className="spice-tag">Cardamom</span>
+              <span className="spice-tag">Cinnamon</span>
+              <span className="spice-tag">Ginger</span>
+              <span className="spice-tag">Nutmeg</span>
+              <span className="spice-tag">Star Anise</span>
+            </div>
+            <ul className="raga-features">
+              <li>✨ No preservatives. No artificial ingredients.</li>
+              <li>☀️ Solar-powered production.</li>
+              <li>🌾 Supporting Sri Lankan local farmers.</li>
+              <li>💼 Fostering female entrepreneurship.</li>
+            </ul>
+            <Link to="/product" className="btn-buy-now">BUY NOW</Link>
+          </div>
+          <div className="raga-detail-image">
+            <img src="/wgm-frontend/product1.png" alt="Raga Reserve Package" />
           </div>
         </div>
       </section>
@@ -189,14 +189,38 @@ function Home({ cartCount }) {
               <label>Phone Number</label>
               <input type="tel" placeholder="+94 77 123 4567" />
             </div>
+            
+            {activeTab === 'wholesale' && (
+              <>
+                <div className="form-group">
+                  <label>Shop/Company Name</label>
+                  <input type="text" placeholder="Udawatta Tea Shop" />
+                </div>
+                <div className="form-group">
+                  <label>Expected Monthly Volume (Kg)</label>
+                  <input type="number" placeholder="100" />
+                </div>
+              </>
+            )}
+            
             <div className="form-group">
               <label>Your Message</label>
               <textarea placeholder="Please type your message here" rows="4"></textarea>
               <div className="faq-section">
                 <p className="faq-title">Frequently Asked Questions:</p>
-                <p className="faq-item">✓ Where are your Reserve teas sourced?</p>
-                <p className="faq-item">✓ What is the best way to brew my Raga Reserve tea?</p>
-                <p className="faq-item">✓ Do you ship Raga Reserve internationally?</p>
+                {activeTab === 'private' ? (
+                  <>
+                    <p className="faq-item">✓ Where are your Reserve teas sourced?</p>
+                    <p className="faq-item">✓ What is the best way to brew my Raga Reserve tea?</p>
+                    <p className="faq-item">✓ Do you ship Raga Reserve internationally?</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="faq-item">✓ What are the minimum volume requirements for an initial wholesale order?</p>
+                    <p className="faq-item">✓ Do you offer exclusive distribution territories or regions?</p>
+                    <p className="faq-item">✓ What is the typical lead time for a large-scale Reserve shipment?</p>
+                  </>
+                )}
               </div>
             </div>
             <button type="submit" className="btn-submit">SUBMIT</button>
