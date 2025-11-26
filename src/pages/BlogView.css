@@ -1,0 +1,135 @@
+.blog-view-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.blog-view-main {
+  flex: 1;
+  padding: 140px 20px 60px;
+}
+
+.blog-view-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.blog-view-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.blog-view-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.blog-view-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.author-avatar-large {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6b9bd1 0%, #4a7ba7 100%);
+}
+
+.blog-view-date {
+  font-size: 0.95rem;
+  color: #999;
+}
+
+.blog-view-image {
+  width: 100%;
+  height: 450px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+}
+
+.blog-view-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-view-content {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #333;
+}
+
+.blog-view-content p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.blog-view-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blog-view-main {
+    padding: 120px 15px 40px;
+  }
+
+  .blog-view-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .blog-view-title {
+    font-size: 1.8rem;
+  }
+
+  .blog-view-image {
+    height: 300px;
+  }
+
+  .blog-view-content {
+    font-size: 1rem;
+  }
+
+  .blog-view-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-view-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .blog-view-title {
+    font-size: 1.5rem;
+  }
+
+  .blog-view-image {
+    height: 220px;
+  }
+
+  .blog-view-content {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+}

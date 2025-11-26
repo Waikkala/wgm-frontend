@@ -1,26 +1,55 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 import './Header.css';
 
-const Header = ({ title, subtitle, showCart = false, cartCount = 0 }) => {
+const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = false }) => {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="header">
+    <header className={`header ${isLanding ? 'header-landing' : ''}`}>
       <div className="header-background"></div>
       <div className="header-content">
-          <div className="logo">
-              <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="logo-icon" />
-              <span className="logo-text">WGM</span>
-          </div>
-        <div className="header-text">
-          <h1>{title}</h1>
-          {subtitle && <p>{subtitle}</p>}
-        </div>
-        {showCart && (
-          <button className="cart-icon" onClick={() => navigate('/cart')}>
-            🛒
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </button>
+        {isLanding ? (
+          <>
+            <div className="header-top">
+              <div className="logo" onClick={() => navigate('/')}>
+                <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+              </div>
+              <div className="header-actions">
+                <button className="shop-now-btn" onClick={() => navigate('/products')}>
+                  Shop Now 🛒
+                </button>
+                <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                  {menuOpen ? '✕' : '☰'}
+                </button>
+              </div>
+            </div>
+            <div className="header-nav-bar">
+              <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
+                <Link to="/" className="nav-link">HOME</Link>
+                <Link to="/products" className="nav-link">PRODUCTS</Link>
+                <Link to="/about" className="nav-link">ABOUT US</Link>
+                <Link to="/blog" className="nav-link">BLOG</Link>
+              </nav>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="logo" onClick={() => navigate('/')}>
+              <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+            </div>
+            <div className="header-text">
+              <h1>{title}</h1>
+              {subtitle && <p>{subtitle}</p>}
+            </div>
+            {showCart && (
+              <button className="cart-icon" onClick={() => navigate('/cart')}>
+                🛒
+                {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+              </button>
+            )}
+          </>
         )}
       </div>
     </header>

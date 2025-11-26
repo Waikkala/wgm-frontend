@@ -1,5 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
+import Blog from './pages/Blog';
+import BlogView from './pages/BlogView';
+import Product from './pages/Product';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
@@ -45,6 +50,46 @@ function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            <Home
+              cartCount={getTotalQuantity()}
+            />
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <AboutUs
+              cartCount={getTotalQuantity()}
+            />
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <Blog
+              cartCount={getTotalQuantity()}
+            />
+          }
+        />
+        <Route
+          path="/blog/:id"
+          element={
+            <BlogView
+              cartCount={getTotalQuantity()}
+            />
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <Product
+              cartCount={getTotalQuantity()}
+            />
+          }
+        />
+        <Route
+          path="/product"
           element={
             <ProductDetail
               addToCart={addToCart}

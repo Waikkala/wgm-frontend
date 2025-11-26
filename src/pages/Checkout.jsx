@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
 
 const API_BASE_URL = 'https://wgm-backend.onrender.com';
@@ -465,7 +465,7 @@ const Checkout = () => {
         </div>
       </main>
 
-      <Footer />
+      <SimpleFooter />
     </div>
   );
 };

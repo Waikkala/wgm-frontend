@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SimpleFooter from '../components/SimpleFooter';
 import './Cart.css';
 
 const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
@@ -166,7 +166,7 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
         )}
       </main>
 
-      <Footer />
+      <SimpleFooter />
     </div>
   );
 };
