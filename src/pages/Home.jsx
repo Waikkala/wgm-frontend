@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -6,6 +6,20 @@ import './Home.css';
 
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    '/wgm-frontend/bg_land.png',
+    '/wgm-frontend/bg_land1.png'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="home">
@@ -13,6 +27,15 @@ function Home({ cartCount }) {
       
       {/* Hero Section */}
       <section className="hero-section">
+        <div className="hero-slider">
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+              style={{ backgroundImage: `url(${slide})` }}
+            />
+          ))}
+        </div>
         <div className="hero-content">
           <h1 className="hero-title">Where Tradition Meets Technology</h1>
           <h2 className="hero-subtitle">WAIKKALA GRINDING MILLS</h2>
@@ -21,6 +44,16 @@ function Home({ cartCount }) {
             Our products are crafted from handpicked local ingredients — processed under stringent
             quality controls to preserve freshness, aroma, and authenticity.
           </p>
+        </div>
+        <div className="hero-indicators">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              className={`indicator ${index === currentSlide ? 'active' : ''}`}
+              onClick={() => setCurrentSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
