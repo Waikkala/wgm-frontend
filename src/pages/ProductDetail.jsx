@@ -36,13 +36,22 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
 
   return (
     <div className="page-container">
-      <div className="top-banner">
-        ⭐ Free Shipping on EVERY ORDER! | Premium Quality Guaranteed
+      <div className="header-wrapper">
+        <div className="logo-section" onClick={() => navigate('/')}>
+          <img src="/wgm-frontend/logo.png" alt="Waikkala Grinding Mills" className="nav-logo" />
+        </div>
+        
+        <div className="top-banner">
+          ⭐ Premium Quality Guaranteed
+        </div>
       </div>
       
       <div className="nav-bar">
-        <button className="nav-btn">Contacts</button>
-        <button className="nav-btn">Order Tracking</button>
+        <div className="nav-buttons">
+          <button className="nav-btn" onClick={() => window.location.href = 'mailto:contact@waikkala.com'}>Contacts</button>
+          <button className="nav-btn" onClick={() => alert('Order tracking feature coming soon!')}>Order Tracking</button>
+          <button className="nav-btn" onClick={() => navigate('/')}>Home</button>
+        </div>
         <button className="cart-icon-nav" onClick={() => navigate('/cart')}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -165,22 +174,16 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
               Description
             </button>
             <button 
+              className={`tab ${activeTab === 'guidance' ? 'active' : ''}`}
+              onClick={() => setActiveTab('guidance')}
+            >
+              General Guidance
+            </button>
+            <button 
               className={`tab ${activeTab === 'additional' ? 'active' : ''}`}
               onClick={() => setActiveTab('additional')}
             >
               Additional Information
-            </button>
-            <button 
-              className={`tab ${activeTab === 'ingredients' ? 'active' : ''}`}
-              onClick={() => setActiveTab('ingredients')}
-            >
-              Ingredients
-            </button>
-            <button 
-              className={`tab ${activeTab === 'instructions' ? 'active' : ''}`}
-              onClick={() => setActiveTab('instructions')}
-            >
-              Instructions
             </button>
           </div>
 
@@ -198,7 +201,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                 
                 <h3 className="features-title">Key Features:</h3>
                 <ul className="features-list">
-                  <li>• Premium blend of Sri Lankan and Kerala spices</li>
+                  <li>• Premium blend of Sri Lankan spices and Kerala recipe</li>
                   <li>• Versatile preparation methods - hot or cold beverages</li>
                   <li>• Perfect for mixing with spirits and wines</li>
                   <li>• Rich aromatic profile for an exotic experience</li>
@@ -207,167 +210,60 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
               </div>
             )}
 
+            {activeTab === 'guidance' && (
+              <div className="tab-panel">
+                <div className="guidance-content">
+                  <div className="guidance-item">
+                    <span className="guidance-bullet">•</span>
+                    <span>Start with the lower amount for a mild, smooth flavor.</span>
+                  </div>
+                  <div className="guidance-item">
+                    <span className="guidance-bullet">•</span>
+                    <div>
+                      <p>Increase based on:</p>
+                      <div className="sub-items">
+                        <div className="sub-item">✓ personal taste</div>
+                        <div className="sub-item">✓ desired aroma strength</div>
+                        <div className="sub-item">✓ mood (calming → lower dose | stimulating → higher dose)</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="guidance-item">
+                    <span className="guidance-bullet">•</span>
+                    <span>Mix thoroughly for best flavor release.</span>
+                  </div>
+                  <div className="guidance-item">
+                    <span className="guidance-bullet">•</span>
+                    <span>Works equally well in hot or cold beverages.</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {activeTab === 'additional' && (
               <div className="tab-panel">
-                <p className="description-text">
-                  Our Ceylon Raga Reserve - Masala Brew is crafted with meticulous attention to detail, ensuring the highest quality standards 
-                  in every package. Below you'll find comprehensive product specifications and important information about storage, certifications, 
-                  and packaging to help you make an informed purchase decision.
-                </p>
-                <h3 className="features-title">Product Specifications</h3>
-                <div className="info-grid">
-                  <div className="info-item">
-                    <strong>Product Type:</strong>
-                    <span>Premium Spice Blend</span>
+                <div className="info-list">
+                  <div className="info-row">
+                    <strong>Weight</strong>
+                    <span>100g | 3.4oz</span>
                   </div>
-                  <div className="info-item">
-                    <strong>Origin:</strong>
-                    <span>Sri Lanka & Kerala, India</span>
+                  <div className="info-row">
+                    <strong>Origin</strong>
+                    <span>Sri Lanka</span>
                   </div>
-                  <div className="info-item">
-                    <strong>Shelf Life:</strong>
-                    <span>24 months from manufacturing date</span>
+                  <div className="info-row">
+                    <strong>Storage</strong>
+                    <span>Store in a cool, dry place</span>
                   </div>
-                  <div className="info-item">
-                    <strong>Storage:</strong>
-                    <span>Store in a cool, dry place away from direct sunlight</span>
+                  <div className="info-row">
+                    <strong>Shelf Life</strong>
+                    <span>12 months from date of manufacture</span>
                   </div>
-                  <div className="info-item">
-                    <strong>Packaging:</strong>
-                    <span>Food-grade sealed pouch</span>
-                  </div>
-                  <div className="info-item">
-                    <strong>Certifications:</strong>
-                    <span>ISO 22000, HACCP Certified</span>
-                  </div>
-                  <div className="info-item">
-                    <strong>Net Weight Options:</strong>
-                    <span>100g, 250g, 500g, 1000g</span>
-                  </div>
-                  <div className="info-item">
-                    <strong>Allergen Information:</strong>
-                    <span>May contain traces of nuts</span>
+                  <div className="info-row">
+                    <strong>Product Type</strong>
+                    <span>Masala Brew / Spice Blend</span>
                   </div>
                 </div>
-              </div>
-            )}
-
-            {activeTab === 'ingredients' && (
-              <div className="tab-panel">
-                <p className="description-text">
-                  Our Ceylon Raga Reserve - Masala Brew is crafted from the finest hand-selected spices, carefully sourced from certified organic farms 
-                  across Sri Lanka and Kerala. Each ingredient is chosen for its superior quality and aromatic properties, creating a harmonious blend 
-                  that delivers an exceptional sensory experience with every use.
-                </p>
-                <p className="description-text">
-                  We work directly with local farmers who practice sustainable agriculture, ensuring that every spice in our blend meets our rigorous 
-                  quality standards. The result is a premium product that honors traditional spice-making techniques while delivering modern excellence.
-                </p>
-                <h3 className="features-title">Premium Ingredients</h3>
-                
-                <div className="ingredients-grid">
-                  <div className="ingredient-item">
-                    <strong>Ceylon Cinnamon</strong>
-                    <p>True cinnamon from Sri Lanka, known for its delicate sweetness and warm aroma</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Cardamom</strong>
-                    <p>Premium green cardamom pods with intense, sweet-spicy flavor</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Black Pepper</strong>
-                    <p>Freshly ground Kerala black pepper for a subtle heat</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Cloves</strong>
-                    <p>Aromatic cloves adding depth and warmth to the blend</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Ginger</strong>
-                    <p>Dried ginger root providing a zesty, warming kick</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Nutmeg</strong>
-                    <p>Freshly ground nutmeg for a sweet, nutty undertone</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Star Anise</strong>
-                    <p>Adds a subtle licorice-like sweetness</p>
-                  </div>
-                  <div className="ingredient-item">
-                    <strong>Fennel Seeds</strong>
-                    <p>Sweet and aromatic, balancing the spice blend</p>
-                  </div>
-                </div>
-                
-                <p className="description-text" style={{ marginTop: '1.5rem' }}>
-                  <strong>Note:</strong> All ingredients are 100% natural with no artificial colors, flavors, or preservatives. 
-                  Our spices are ethically sourced and support sustainable farming practices.
-                </p>
-              </div>
-            )}
-
-            {activeTab === 'instructions' && (
-              <div className="tab-panel">
-                <p className="description-text">
-                  Ceylon Raga Reserve - Masala Brew is incredibly versatile and can be enjoyed in numerous ways. Whether you prefer traditional 
-                  hot beverages, refreshing cold drinks, or creative cocktails, our premium spice blend adapts beautifully to your preferences. 
-                  Follow these simple preparation methods to unlock the full potential of this exquisite blend.
-                </p>
-                <p className="description-text">
-                  Each preparation method has been carefully tested to ensure optimal flavor extraction and aroma. Feel free to experiment with 
-                  quantities and steeping times to discover your perfect cup. The beauty of Masala Brew lies in its adaptability to your personal taste.
-                </p>
-                <h3 className="features-title">How to Use Ceylon Raga Reserve</h3>
-                
-                <div className="instruction-section">
-                  <h4 className="instruction-subtitle">For Hot Beverages (Tea/Coffee)</h4>
-                  <ol className="instruction-list">
-                    <li>Add 1-2 teaspoons of Masala Brew to your cup</li>
-                    <li>Pour hot water, tea, or coffee over the blend</li>
-                    <li>Stir well and let steep for 3-5 minutes</li>
-                    <li>Add milk and sweetener to taste (optional)</li>
-                    <li>Strain and enjoy your aromatic beverage</li>
-                  </ol>
-                </div>
-
-                <div className="instruction-section">
-                  <h4 className="instruction-subtitle">For Milk Infusion (Masala Chai)</h4>
-                  <ol className="instruction-list">
-                    <li>Boil 1 cup of milk with 1 cup of water</li>
-                    <li>Add 2 teaspoons of Masala Brew</li>
-                    <li>Add 1 teaspoon of black tea leaves (optional)</li>
-                    <li>Simmer for 5-7 minutes on low heat</li>
-                    <li>Strain into cups and sweeten to taste</li>
-                  </ol>
-                </div>
-
-                <div className="instruction-section">
-                  <h4 className="instruction-subtitle">For Spirits & Cocktails</h4>
-                  <ol className="instruction-list">
-                    <li>Add 1 teaspoon of Masala Brew to your favorite spirit</li>
-                    <li>Let it infuse for 2-3 hours or overnight for stronger flavor</li>
-                    <li>Strain through a fine mesh or coffee filter</li>
-                    <li>Use in cocktails or enjoy neat/on the rocks</li>
-                    <li>Pairs excellently with whiskey, rum, or wine</li>
-                  </ol>
-                </div>
-
-                <div className="instruction-section">
-                  <h4 className="instruction-subtitle">Cold Brew Method</h4>
-                  <ol className="instruction-list">
-                    <li>Add 3 tablespoons of Masala Brew to 1 liter of cold water</li>
-                    <li>Refrigerate for 8-12 hours</li>
-                    <li>Strain and serve over ice</li>
-                    <li>Add honey or agave syrup to taste</li>
-                    <li>Garnish with fresh mint or citrus</li>
-                  </ol>
-                </div>
-
-                <p className="description-text" style={{ marginTop: '1.5rem' }}>
-                  <strong>Pro Tip:</strong> Start with smaller amounts and adjust to your taste preference. 
-                  The blend is concentrated, so a little goes a long way!
-                </p>
               </div>
             )}
           </div>
