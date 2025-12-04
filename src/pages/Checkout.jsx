@@ -42,6 +42,9 @@ const Checkout = () => {
   const [loadingDistricts, setLoadingDistricts] = useState(false);
   const [loadingCities, setLoadingCities] = useState(false);
 
+  // State for order submission
+  const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -118,7 +121,7 @@ const Checkout = () => {
     setCouponStatus(prev => ({ ...prev, isValidating: true, message: '' }));
 
     try {
-      const response = await fetch(`${API_BASE_URL} /api/v1 / promos / validate`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/promos/validate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -244,29 +247,127 @@ const Checkout = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      // Navigate to payment page with order data
-      navigate('/payment', {
-        state: {
-          orderData: {
-            billingInfo: formData,
-            subtotal,
-            shipping,
-            tax,
-            discount,
-            total,
-            coupon: couponStatus.isApplied ? {
-              code: formData.couponCode,
-              discountPercent: couponStatus.discountPercent
-            } : null
-          }
-        }
-      });
-    } else {
+    if (!validateForm()) {
       alert('Please fill in all required fields correctly.');
+      return;
+    }
+
+    setIsSubmittingOrder(true);
+
+    try {
+      // Check if cart has items
+      if (!cartItems || cartItems.length === 0) {
+        alert('Your cart is empty. Please add items before checkout.');
+        setIsSubmittingOrder(false);
+        return;
+      }
+
+      // Prepare order items - map cart items to API format
+      const orderItems = cartItems.map(item => ({
+        productId: item.productId || 1, // Default to 1 if productId not available
+        quantity: item.quantity
+      }));
+
+      // Prepare request body
+      const orderData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        customerPhone: formData.phone,
+        customerAddress: formData.streetAddress,
+        city: formData.city,
+        province: formData.province,
+        postalCode: parseInt(formData.postalCode) || 0,
+        notes: formData.orderNotes || '',
+        paymentMethod: 'COD', // Cash on Delivery - will be updated after payment
+        paymentStatus: 'UNPAID',
+        promoCode: couponStatus.isApplied ? formData.couponCode : '',
+        deliveryTown: formData.district, // Using district as delivery town
+        deliveryFee: shipping,
+        items: orderItems
+      };
+
+      // Debug: Log the request body
+      console.log('=== ORDER SUBMISSION DEBUG ===');
+      console.log('Request Body:', JSON.stringify(orderData, null, 2));
+      console.log('Cart Items:', cartItems);
+      console.log('Order Items:', orderItems);
+      console.log('============================');
+
+      // Make API call
+      const response = await fetch(`${API_BASE_URL}/api/v1/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      // Debug: Log the response status
+      console.log('=== API RESPONSE ===');
+      console.log('Status:', response.status);
+      console.log('Status Text:', response.statusText);
+
+      // Check if response has content before parsing
+      const contentType = response.headers.get('content-type');
+      let data = null;
+
+      if (contentType && contentType.includes('application/json')) {
+        const text = await response.text();
+        console.log('Response Text:', text);
+        if (text) {
+          try {
+            data = JSON.parse(text);
+            console.log('Parsed Response Data:', data);
+          } catch (e) {
+            console.error('Failed to parse JSON:', e);
+            data = { message: 'Invalid JSON response from server' };
+          }
+        } else {
+          console.warn('Empty response body');
+          data = { message: 'Server returned empty response' };
+        }
+      } else {
+        console.warn('Response is not JSON');
+        const text = await response.text();
+        console.log('Non-JSON Response:', text);
+        data = { message: text || 'Server returned non-JSON response' };
+      }
+      console.log('===================');
+
+      if (response.ok) {
+        // Order created successfully, navigate to payment/confirmation
+        navigate('/payment', {
+          state: {
+            orderData: {
+              orderUid: data.orderUid,
+              totalAmount: data.totalAmount,
+              discountAmount: data.discountAmount,
+              deliveryFee: data.deliveryFee,
+              finalTotal: data.finalTotal,
+              paymentStatus: data.paymentStatus,
+              promoCode: data.promoCode,
+              message: data.message,
+              billingInfo: formData,
+              cartItems: cartItems
+            }
+          }
+        });
+      } else {
+        // Handle error response
+        const errorMessage = data?.message || `Server error: ${response.status} ${response.statusText}`;
+        console.error('Order creation failed. Status:', response.status);
+        console.error('Error data:', data);
+        alert(`Order Error (${response.status}): ${errorMessage}\n\nPlease check the console for details.`);
+      }
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      alert('An error occurred while placing your order. Please try again.');
+    } finally {
+      setIsSubmittingOrder(false);
     }
   };
 
@@ -594,8 +695,9 @@ const Checkout = () => {
                   type="submit"
                   className="btn-checkout"
                   onClick={handleSubmit}
+                  disabled={isSubmittingOrder}
                 >
-                  CHECKOUT
+                  {isSubmittingOrder ? 'PLACING ORDER...' : 'CHECKOUT'}
                 </button>
 
                 <p className="refund-policy">
