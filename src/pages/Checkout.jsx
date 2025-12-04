@@ -491,7 +491,7 @@ const Checkout = () => {
                 </button>
 
                 <p className="refund-policy">
-                  By placing your order, you agree to our <a href="#" onClick={(e) => { e.preventDefault(); window.open('/wgm-frontend/refund-policy', '_blank'); }} style={{ cursor: 'pointer' }}>Refund & Return Policy</a>
+                  By placing your order, you agree to our <a href="/wgm-frontend/refund-policy" target="_blank" rel="noopener noreferrer">Refund & Return Policy</a>
                 </p>
 
                 <div className="payment-methods">
