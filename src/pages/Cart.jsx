@@ -17,7 +17,15 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
 
   const handlePlaceOrder = () => {
     if (cartItems.length > 0) {
-      navigate('/checkout');
+      navigate('/checkout', {
+        state: {
+          cartItems: cartItems,
+          subtotal: subtotal,
+          shipping: shipping,
+          tax: tax,
+          total: total
+        }
+      });
     }
   };
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
@@ -8,6 +8,8 @@ const API_BASE_URL = 'https://wgm-backend.onrender.com';
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { cartItems = [], subtotal: cartSubtotal = 0, shipping: cartShipping = 0, tax: cartTax = 0, total: cartTotal = 0 } = location.state || {};
   const currentStep = 1; // Current step indicator
   const [formData, setFormData] = useState({
     firstName: '',
@@ -90,7 +92,7 @@ const Checkout = () => {
     setCouponStatus(prev => ({ ...prev, isValidating: true, message: '' }));
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/promos/validate`, {
+      const response = await fetch(`${API_BASE_URL} /api/v1 / promos / validate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -195,9 +197,10 @@ const Checkout = () => {
     }
   };
 
-  const subtotal = 1500.00;
-  const shipping = 250.00;
-  const tax = 87.50;
+  // Use cart data from navigation state or fallback to default values
+  const subtotal = cartSubtotal || 1500.00;
+  const shipping = cartShipping || 250.00;
+  const tax = cartTax || 87.50;
 
   // Calculate discount based on coupon
   const discount = couponStatus.isApplied
@@ -230,17 +233,17 @@ const Checkout = () => {
             </button>
 
             <div className="checkout-steps">
-              <div className={`step ${currentStep >= 1 ? 'active' : ''}`}>
+              <div className={`step ${currentStep >= 1 ? 'active' : ''} `}>
                 <div className="step-number">1</div>
                 <div className="step-label">Billing Info</div>
               </div>
               <div className="step-line"></div>
-              <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+              <div className={`step ${currentStep >= 2 ? 'active' : ''} `}>
                 <div className="step-number">2</div>
                 <div className="step-label">Payment</div>
               </div>
               <div className="step-line"></div>
-              <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
+              <div className={`step ${currentStep >= 3 ? 'active' : ''} `}>
                 <div className="step-number">3</div>
                 <div className="step-label">Confirmation</div>
               </div>
@@ -390,19 +393,37 @@ const Checkout = () => {
               <div className="order-summary-checkout">
                 <h2>Order Summary</h2>
 
-                <div className="summary-product">
-                  <div className="product-image-small">
-                    <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve" />
+                {cartItems && cartItems.length > 0 ? (
+                  cartItems.map((item, index) => (
+                    <div key={index} className="summary-product">
+                      <div className="product-image-small">
+                        <img src="/wgm-frontend/product.png" alt={item.name || 'Product'} />
+                      </div>
+                      <div className="product-info-small">
+                        <h4>{item.name || 'Ceylon Raga Reserve'}</h4>
+                        <p className="product-subtitle-small">{item.subtitle || 'Masala Brew'}</p>
+                        <p className="product-meta-small">Quantity: {item.quantity} • {item.weight}</p>
+                      </div>
+                      <div className="product-price-small">
+                        LKR {(item.price * item.quantity).toLocaleString('en-LK', { minimumFractionDigits: 0 })}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="summary-product">
+                    <div className="product-image-small">
+                      <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve" />
+                    </div>
+                    <div className="product-info-small">
+                      <h4>Ceylon Raga Reserve</h4>
+                      <p className="product-subtitle-small">Masala Brew</p>
+                      <p className="product-meta-small">Quantity: 1 • 100g</p>
+                    </div>
+                    <div className="product-price-small">
+                      LKR 1,500
+                    </div>
                   </div>
-                  <div className="product-info-small">
-                    <h4>Ceylon Raga Reserve</h4>
-                    <p className="product-subtitle-small">Masala Brew</p>
-                    <p className="product-meta-small">Quantity: 1 • 100g</p>
-                  </div>
-                  <div className="product-price-small">
-                    LKR 1,500
-                  </div>
-                </div>
+                )}
 
                 <div className="coupon-section">
                   <h3>Coupon Code</h3>
@@ -426,7 +447,7 @@ const Checkout = () => {
                     </button>
                   </div>
                   {couponStatus.message && (
-                    <div className={`coupon-message ${couponStatus.isValid ? 'success' : 'error'}`}>
+                    <div className={`coupon - message ${couponStatus.isValid ? 'success' : 'error'} `}>
                       {couponStatus.message}
                       {couponStatus.description && (
                         <span className="coupon-description"> - {couponStatus.description}</span>
