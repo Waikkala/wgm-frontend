@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
@@ -491,7 +491,7 @@ const Checkout = () => {
                 </button>
 
                 <p className="refund-policy">
-                  By placing your order, you agree to our <a href="/wgm-frontend/refund-policy" target="_blank" rel="noopener noreferrer">Refund & Return Policy</a>
+                  By placing your order, you agree to our <Link to="/refund-policy" target="_blank" rel="noopener noreferrer">Refund & Return Policy</Link>
                 </p>
 
                 <div className="payment-methods">
