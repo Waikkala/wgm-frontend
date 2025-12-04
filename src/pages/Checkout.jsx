@@ -17,6 +17,8 @@ const Checkout = () => {
     email: '',
     phone: '',
     streetAddress: '',
+    district: '',
+    districtId: '',
     city: '',
     province: '',
     postalCode: '',
@@ -34,6 +36,12 @@ const Checkout = () => {
     description: ''
   });
 
+  // State for districts and cities data
+  const [districts, setDistricts] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [loadingDistricts, setLoadingDistricts] = useState(false);
+  const [loadingCities, setLoadingCities] = useState(false);
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -48,10 +56,28 @@ const Checkout = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+
+    // If district changes, clear city selection and cities list
+    if (name === 'district') {
+      const selectedDistrict = districts.find(d => d.district_name === value);
+      setFormData({
+        ...formData,
+        district: value,
+        districtId: selectedDistrict ? selectedDistrict.district_id : '',
+        city: '' // Clear city when district changes
+      });
+      setCities([]); // Clear cities list
+
+      // Fetch cities for the selected district
+      if (selectedDistrict) {
+        fetchCities(selectedDistrict.district_id);
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
 
     // Clear error for this field when user starts typing
     if (errors[name]) {
@@ -134,6 +160,50 @@ const Checkout = () => {
     }
   };
 
+  // Fetch districts from API
+  const fetchDistricts = async () => {
+    if (districts.length > 0) return; // Already loaded
+
+    setLoadingDistricts(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/delivery/districts`);
+      const data = await response.json();
+
+      if (response.ok && Array.isArray(data)) {
+        setDistricts(data);
+      } else {
+        console.error('Failed to fetch districts:', data);
+      }
+    } catch (error) {
+      console.error('Error fetching districts:', error);
+    } finally {
+      setLoadingDistricts(false);
+    }
+  };
+
+  // Fetch cities from API based on selected district
+  const fetchCities = async (districtId) => {
+    if (!districtId) return;
+
+    setLoadingCities(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/delivery/cities?districtId=${districtId}`);
+      const data = await response.json();
+
+      if (response.ok && Array.isArray(data)) {
+        setCities(data);
+      } else {
+        console.error('Failed to fetch cities:', data);
+        setCities([]);
+      }
+    } catch (error) {
+      console.error('Error fetching cities:', error);
+      setCities([]);
+    } finally {
+      setLoadingCities(false);
+    }
+  };
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -156,6 +226,9 @@ const Checkout = () => {
     }
     if (!formData.streetAddress.trim()) {
       newErrors.streetAddress = 'Street address is required';
+    }
+    if (!formData.district.trim()) {
+      newErrors.district = 'District is required';
     }
     if (!formData.city.trim()) {
       newErrors.city = 'City is required';
@@ -320,17 +393,52 @@ const Checkout = () => {
                     {errors.streetAddress && <span className="error-message">{errors.streetAddress}</span>}
                   </div>
 
-                  <div className="form-group">
-                    <label>City *</label>
-                    <input
-                      type="text"
-                      name="city"
-                      placeholder="Colombo"
-                      value={formData.city}
-                      onChange={handleInputChange}
-                      className={errors.city ? 'error' : ''}
-                    />
-                    {errors.city && <span className="error-message">{errors.city}</span>}
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>District *</label>
+                      <select
+                        name="district"
+                        value={formData.district}
+                        onChange={handleInputChange}
+                        onFocus={fetchDistricts}
+                        className={errors.district ? 'error' : ''}
+                        disabled={loadingDistricts}
+                      >
+                        <option value="">
+                          {loadingDistricts ? 'Loading districts...' : 'Select District'}
+                        </option>
+                        {districts.map((district) => (
+                          <option key={district.district_id} value={district.district_name}>
+                            {district.district_name}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.district && <span className="error-message">{errors.district}</span>}
+                    </div>
+                    <div className="form-group">
+                      <label>City *</label>
+                      <select
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        className={errors.city ? 'error' : ''}
+                        disabled={!formData.district || loadingCities}
+                      >
+                        <option value="">
+                          {!formData.district
+                            ? 'Select district first'
+                            : loadingCities
+                              ? 'Loading cities...'
+                              : 'Select City'}
+                        </option>
+                        {cities.map((city) => (
+                          <option key={city.city_id} value={city.city_name}>
+                            {city.city_name}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.city && <span className="error-message">{errors.city}</span>}
+                    </div>
                   </div>
 
                   <div className="form-row">
