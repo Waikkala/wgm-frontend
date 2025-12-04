@@ -19,7 +19,7 @@ function Home({ cartCount }) {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="home">

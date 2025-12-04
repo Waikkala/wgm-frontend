@@ -9,7 +9,6 @@ const Confirmation = () => {
   const location = useLocation();
   const { orderData } = location.state || {};
   const currentStep = 3;
-  const [orderNumber] = useState(() => Math.floor(Math.random() * 1000000));
 
   useEffect(() => {
     // If no order data, redirect to home

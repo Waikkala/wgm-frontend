@@ -9,7 +9,7 @@ const API_BASE_URL = 'https://wgm-backend.onrender.com';
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cartItems = [], subtotal: cartSubtotal = 0, shipping: cartShipping = 0, tax: cartTax = 0, total: cartTotal = 0 } = location.state || {};
+  const { cartItems = [], subtotal: cartSubtotal = 0, shipping: cartShipping = 0, tax: cartTax = 0 } = location.state || {};
   const currentStep = 1; // Current step indicator
   const [formData, setFormData] = useState({
     firstName: '',
