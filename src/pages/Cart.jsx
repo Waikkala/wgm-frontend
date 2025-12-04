@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Cart.css';
 
@@ -17,7 +17,15 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
 
   const handlePlaceOrder = () => {
     if (cartItems.length > 0) {
-      navigate('/checkout');
+      navigate('/checkout', {
+        state: {
+          cartItems: cartItems,
+          subtotal: subtotal,
+          shipping: shipping,
+          tax: tax,
+          total: total
+        }
+      });
     }
   };
 
@@ -33,15 +41,7 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
 
   return (
     <div className="page-container">
-      {/* Simple Header Wrapper */}
-      <div className="cart-header-wrapper">
-        <div className="cart-logo" onClick={() => navigate('/')}>
-          <img src="/wgm-frontend/logo1.png" alt="WGM Logo" />
-        </div>
-        <div className="cart-header-text">
-          <p>Premium Quality Guaranteed</p>
-        </div>
-      </div>
+      <SimpleHeader />
 
       {/* White Gap Container */}
       <div className="cart-page-wrapper">

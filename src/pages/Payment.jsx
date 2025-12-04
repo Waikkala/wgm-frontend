@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Header from '../components/Header';
+import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Payment.css';
 
@@ -85,11 +85,11 @@ const Payment = () => {
       const [month, year] = cardData.expiryDate.split('/');
       const currentYear = new Date().getFullYear() % 100;
       const currentMonth = new Date().getMonth() + 1;
-      
+
       if (parseInt(month) < 1 || parseInt(month) > 12) {
         newErrors.expiryDate = 'Invalid month';
-      } else if (parseInt(year) < currentYear || 
-                (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
+      } else if (parseInt(year) < currentYear ||
+        (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
         newErrors.expiryDate = 'Card has expired';
       }
     }
@@ -123,125 +123,137 @@ const Payment = () => {
 
   return (
     <div className="page-container">
-      <Header 
-        title="Complete Your Raga Order" 
-        subtitle=""
-      />
+      <SimpleHeader />
 
-      <main className="payment-page">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ← Back
-        </button>
-
-        <div className="checkout-steps">
-          <div className={`step ${currentStep >= 1 ? 'completed' : ''}`}>
-            <div className="step-number">1</div>
-            <div className="step-label">Billing Info</div>
+      {/* White Space Wrapper */}
+      <div className="payment-page-wrapper">
+        {/* Payment Banner Card */}
+        <section className="payment-banner-card">
+          <div className="payment-banner-content">
+            <h1 className="payment-banner-title">Complete Your Raga Reserve Order</h1>
           </div>
-          <div className="step-line"></div>
-          <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
-            <div className="step-number">2</div>
-            <div className="step-label">Payment</div>
-          </div>
-          <div className="step-line"></div>
-          <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
-            <div className="step-number">3</div>
-            <div className="step-label">Confirmation</div>
-          </div>
-        </div>
+        </section>
 
-        <div className="payment-container">
-          <div className="payment-card">
-            <div className="card-header">
-              <img src="/wgm-frontend/2.png" alt="Card Background" className="card-bg" />
-              <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="card-logo" />
-            </div>
+        <main className="payment-page">
+          <div className="payment-main-card">
+            <button className="back-btn-payment" onClick={() => navigate(-1)}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8l-4 4 4 4M16 12H8" />
+              </svg>
+            </button>
 
-            <div className="card-form">
-              <div className="card-type-header">
-                <span className="back-arrow">←</span>
-                <span className="card-type-title">CREDIT/DEBIT CARD</span>
+            <div className="checkout-steps">
+              <div className={`step ${currentStep >= 1 ? 'completed' : ''}`}>
+                <div className="step-number">1</div>
+                <div className="step-label">Billing Info</div>
               </div>
-
-              <form onSubmit={handlePayment}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="nameOnCard"
-                    placeholder="Name on Card"
-                    value={cardData.nameOnCard}
-                    onChange={handleInputChange}
-                    className={errors.nameOnCard ? 'error' : ''}
-                  />
-                  {errors.nameOnCard && <span className="error-message">{errors.nameOnCard}</span>}
-                </div>
-
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    placeholder="Credit Card Number"
-                    value={cardData.cardNumber}
-                    onChange={handleInputChange}
-                    className={errors.cardNumber ? 'error' : ''}
-                  />
-                  {errors.cardNumber && <span className="error-message">{errors.cardNumber}</span>}
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group cvv-group">
-                    <input
-                      type="text"
-                      name="cvv"
-                      placeholder="CVV"
-                      value={cardData.cvv}
-                      onChange={handleInputChange}
-                      className={errors.cvv ? 'error' : ''}
-                    />
-                    <span className="cvv-icon">?</span>
-                    {errors.cvv && <span className="error-message">{errors.cvv}</span>}
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name="expiryDate"
-                      placeholder="Expiry MM/YY"
-                      value={cardData.expiryDate}
-                      onChange={handleInputChange}
-                      className={errors.expiryDate ? 'error' : ''}
-                    />
-                    {errors.expiryDate && <span className="error-message">{errors.expiryDate}</span>}
-                  </div>
-                </div>
-
-                <button 
-                  type="submit" 
-                  className="btn-pay"
-                  disabled={isProcessing}
-                >
-                  {isProcessing ? 'PROCESSING...' : `Pay LKR ${total.toFixed(2)}`}
-                </button>
-              </form>
-
-              <div className="payment-footer">
-                <div className="secured-by">
-                  <span className="lock-icon">🔒</span>
-                  <span>Secured by</span>
-                </div>
-                <div className="payhere-logo-container">
-                  <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="120" height="40" rx="4" fill="#FF6B00"/>
-                    <text x="60" y="25" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="bold" fill="white" textAnchor="middle">PayHere</text>
-                  </svg>
-                </div>
-                <p className="payment-disclaimer">
-                  Central Bank approved Secure Payment Gateway Service
-                </p>
+              <div className="step-line"></div>
+              <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+                <div className="step-number">2</div>
+                <div className="step-label">Payment</div>
+              </div>
+              <div className="step-line"></div>
+              <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
+                <div className="step-number">3</div>
+                <div className="step-label">Confirmation</div>
               </div>
             </div>
+
+            <div className="payment-container">
+              <div className="payment-card">
+                <div className="card-header">
+                  <img src="/wgm-frontend/2.png" alt="Card Background" className="card-bg" />
+                  <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="card-logo" />
+                </div>
+
+                <div className="card-form">
+                  <div className="card-type-header">
+                    <span className="back-arrow">←</span>
+                    <span className="card-type-title">CREDIT/DEBIT CARD</span>
+                  </div>
+
+                  <form onSubmit={handlePayment}>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="nameOnCard"
+                        placeholder="Name on Card"
+                        value={cardData.nameOnCard}
+                        onChange={handleInputChange}
+                        className={errors.nameOnCard ? 'error' : ''}
+                      />
+                      {errors.nameOnCard && <span className="error-message">{errors.nameOnCard}</span>}
+                    </div>
+
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        placeholder="Credit Card Number"
+                        value={cardData.cardNumber}
+                        onChange={handleInputChange}
+                        className={errors.cardNumber ? 'error' : ''}
+                      />
+                      {errors.cardNumber && <span className="error-message">{errors.cardNumber}</span>}
+                    </div>
+
+                    <div className="form-row">
+                      <div className="form-group cvv-group">
+                        <input
+                          type="text"
+                          name="cvv"
+                          placeholder="CVV"
+                          value={cardData.cvv}
+                          onChange={handleInputChange}
+                          className={errors.cvv ? 'error' : ''}
+                        />
+                        <span className="cvv-icon">?</span>
+                        {errors.cvv && <span className="error-message">{errors.cvv}</span>}
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="expiryDate"
+                          placeholder="Expiry MM/YY"
+                          value={cardData.expiryDate}
+                          onChange={handleInputChange}
+                          className={errors.expiryDate ? 'error' : ''}
+                        />
+                        {errors.expiryDate && <span className="error-message">{errors.expiryDate}</span>}
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn-pay"
+                      disabled={isProcessing}
+                    >
+                      {isProcessing ? 'PROCESSING...' : `Pay ${total.toFixed(2)}`}
+                    </button>
+                  </form>
+
+                  <div className="payment-footer">
+                    <div className="secured-by">
+                      <span className="lock-icon">🔒</span>
+                      <span>Secured by</span>
+                    </div>
+                    <div className="payhere-logo-container">
+                      <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="120" height="40" rx="4" fill="#FF6B00" />
+                        <text x="60" y="25" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="bold" fill="white" textAnchor="middle">PayHere</text>
+                      </svg>
+                    </div>
+                    <p className="payment-disclaimer">
+                      Central Bank approved Secure Payment Gateway Service
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
 
       <SimpleFooter />
     </div>
