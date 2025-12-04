@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Header from '../components/Header';
+import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Payment.css';
 
@@ -123,10 +123,7 @@ const Payment = () => {
 
   return (
     <div className="page-container">
-      <Header 
-        title="Complete Your Raga Order" 
-        subtitle=""
-      />
+      <SimpleHeader />
 
       <main className="payment-page">
         <button className="back-btn" onClick={() => navigate(-1)}>

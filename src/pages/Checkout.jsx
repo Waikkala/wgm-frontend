@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
 
@@ -208,10 +208,7 @@ const Checkout = () => {
 
   return (
     <div className="page-container">
-      <Header 
-        title="Billing & Dispatch Details" 
-        subtitle="Complete Your Order for Ceylon Raga Reserve"
-      />
+      <SimpleHeader />
 
       <main className="checkout-page">
         <button className="back-btn" onClick={() => navigate(-1)}>
