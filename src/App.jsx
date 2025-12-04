@@ -10,6 +10,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import Confirmation from './pages/Confirmation';
+import RefundPolicy from './pages/RefundPolicy';
 import './App.css';
 
 function App() {
@@ -118,6 +119,10 @@ function App() {
         <Route
           path="/confirmation"
           element={<Confirmation />}
+        />
+        <Route
+          path="/refund-policy"
+          element={<RefundPolicy />}
         />
       </Routes>
     </Router>

@@ -1,0 +1,220 @@
+/* Page Wrapper */
+.refund-policy-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Refund Policy Page */
+.refund-policy-page {
+    background: var(--white);
+    flex: 1;
+}
+
+/* Header Section - Grey bar with logo */
+.refund-header {
+    background: #e8e8e8;
+    padding: 0;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.refund-header-content {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+}
+
+.refund-logo-box {
+    background: var(--primary-green);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.refund-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.refund-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #c9885e;
+    margin: 0;
+    flex: 1;
+}
+
+/* Content Section */
+.refund-content {
+    padding: 3rem 1rem 4rem;
+    background: var(--white);
+}
+
+.refund-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.refund-subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.refund-intro {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 2.5rem;
+    text-align: justify;
+}
+
+/* Policy Sections */
+.policy-section {
+    margin-bottom: 2.5rem;
+}
+
+.policy-section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-green);
+}
+
+.policy-section p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+}
+
+.policy-section ul,
+.policy-section ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.policy-section li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.note {
+    font-style: italic;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+
+/* Contact Information */
+.policy-contact-info,
+.policy-contact-info-final {
+    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.policy-contact-info p,
+.policy-contact-info-final p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.policy-contact-info strong {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+.contact-note {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .refund-header-content {
+        padding: 1rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .refund-logo-box {
+        padding: 0.875rem;
+    }
+
+    .refund-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .refund-title {
+        font-size: 1.2rem;
+    }
+
+    .refund-content {
+        padding: 2rem 1rem 3rem;
+    }
+
+    .refund-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .refund-intro {
+        font-size: 0.9rem;
+    }
+
+    .policy-section h3 {
+        font-size: 1rem;
+    }
+
+    .policy-section p,
+    .policy-section li {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .refund-header-content {
+        padding: 0.875rem 1rem;
+        gap: 1rem;
+    }
+
+    .refund-title {
+        font-size: 1rem;
+    }
+
+    .refund-logo-box {
+        padding: 0.75rem;
+    }
+
+    .refund-logo {
+        width: 45px;
+        height: 45px;
+    }
+}
