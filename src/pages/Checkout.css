@@ -1,9 +1,74 @@
-.checkout-page {
-  flex: 1;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+/* Checkout Page Wrapper - White Space Container */
+.checkout-page-wrapper {
+  background: var(--white);
   padding: 2rem 1rem;
+}
+
+/* Checkout Banner Card */
+.checkout-banner-card {
+  background: var(--primary-green);
+  color: var(--white);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  border-radius: 12px;
+}
+
+.checkout-banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.checkout-banner-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.checkout-banner-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* Checkout Page Container */
+.checkout-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.checkout-main-card {
+  width: 100%;
+  position: relative;
+}
+
+.back-btn-checkout {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.back-btn-checkout:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  border-color: var(--primary-green);
+}
+
+.back-btn-checkout svg {
+  width: 24px;
+  height: 24px;
 }
 
 .back-btn {
@@ -94,15 +159,18 @@
 
 .billing-form {
   background: var(--white);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 2rem;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .billing-form h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--text-dark);
+  padding-bottom: 0.75rem;
 }
 
 .form-row {
@@ -128,18 +196,19 @@
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.875rem;
   border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 0.875rem;
   transition: border-color 0.3s;
+  background: var(--white);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-green);
+  border-color: var(--text-dark);
 }
 
 .form-group input.error,
@@ -158,11 +227,17 @@
 .form-group select {
   background: var(--white);
   cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
 }
 
 .form-group textarea {
   resize: vertical;
   font-family: inherit;
+  min-height: 100px;
 }
 
 .input-check {
@@ -171,12 +246,13 @@
   top: 2.25rem;
   color: var(--primary-green);
   font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .delivery-banner {
-  background: var(--success-bg);
-  color: var(--success-text);
-  padding: 1rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.875rem 1rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -189,13 +265,14 @@
 .delivery-banner span {
   margin-left: auto;
   font-weight: 400;
+  opacity: 0.9;
 }
 
 .order-summary-checkout {
   background: var(--white);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   position: sticky;
   top: 2rem;
 }
@@ -204,25 +281,28 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--text-dark);
+  padding-bottom: 0.75rem;
 }
 
 .summary-product {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  background: var(--light-bg);
+  background: var(--primary-green);
   border-radius: 8px;
   margin-bottom: 1.5rem;
   align-items: center;
 }
 
 .product-image-small {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
-  background: var(--light-bg);
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,25 +319,29 @@
 }
 
 .product-info-small h4 {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  color: var(--white);
 }
 
 .product-subtitle-small {
   font-size: 0.75rem;
-  color: var(--accent-orange);
+  color: var(--white);
+  opacity: 0.9;
   margin-bottom: 0.25rem;
 }
 
 .product-meta-small {
   font-size: 0.75rem;
-  color: var(--text-light);
+  color: var(--white);
+  opacity: 0.8;
 }
 
 .product-price-small {
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  color: var(--white);
 }
 
 .coupon-section {
@@ -375,7 +459,7 @@
   font-size: 1.25rem;
 }
 
-.btn-place-order-checkout {
+.btn-checkout {
   width: 100%;
   padding: 1rem;
   background: var(--primary-green);
@@ -385,20 +469,57 @@
   border-radius: 4px;
   transition: background 0.3s;
   margin-bottom: 1rem;
+  border: none;
+  cursor: pointer;
 }
 
-.btn-place-order-checkout:hover {
+.btn-checkout:hover {
   background: var(--secondary-green);
 }
 
-.secure-payment {
+.refund-policy {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.refund-policy a {
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+.refund-policy a:hover {
+  text-decoration: underline;
+}
+
+.payment-methods {
   text-align: center;
   font-size: 0.75rem;
   color: var(--text-light);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.payment-icons {
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.payment-icon {
+  font-size: 1.5rem;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.payment-icon:hover {
+  opacity: 1;
 }
 
 @media (max-width: 968px) {
@@ -416,6 +537,24 @@
 }
 
 @media (max-width: 768px) {
+  .checkout-page-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .checkout-banner-card {
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .checkout-banner-title {
+    font-size: 1.5rem;
+  }
+
+  .checkout-banner-subtitle {
+    font-size: 0.85rem;
+  }
+
   .checkout-steps {
     gap: 0.5rem;
   }
