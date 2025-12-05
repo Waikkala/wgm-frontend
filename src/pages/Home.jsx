@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Home.css';
 
+const ragaReserveImg = '/wgm-frontend/product1.png';
+
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -24,7 +26,7 @@ function Home({ cartCount }) {
   return (
     <div className="home">
       <Header cartCount={cartCount} isLanding={true} />
-      
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-slider">
@@ -58,19 +60,20 @@ function Home({ cartCount }) {
       </section>
 
       {/* Product Showcase Section */}
-      <section className="product-showcase">
-        <div className="showcase-container">
-          <div className="showcase-image-wrapper">
-            <img src="/wgm-frontend/product1.png" alt="Ceylon Raga Reserve Product" className="product-front" />
-            <img src="/wgm-frontend/Card.png" alt="Ceylon Raga Reserve Card" className="product-card" />
-          </div>
-          <div className="showcase-content">
-            <h2 className="showcase-title">Ceylon Raga Reserve</h2>
-            <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
-            <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+      <section className="product-showcase-wrapper">
+        <div className="product-showcase">
+          <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+          <div className="showcase-container">
+            <div className="showcase-image-wrapper">
+              <img src={ragaReserveImg} alt="Ceylon Raga Reserve Product" className="showcase-product-image" />
+            </div>
+            <div className="showcase-content">
+              <h2 className="showcase-title">Ceylon Raga Reserve</h2>
+              <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
+            </div>
           </div>
         </div>
-        <div className="showcase-explore-btn">
+        <div className="showcase-explore-section">
           <Link to="/products" className="btn-explore">EXPLORE RAGA RESERVE</Link>
         </div>
       </section>
@@ -222,7 +225,7 @@ function Home({ cartCount }) {
               <label>Phone Number</label>
               <input type="tel" placeholder="+94 77 123 4567" />
             </div>
-            
+
             {activeTab === 'wholesale' && (
               <>
                 <div className="form-group">
@@ -235,7 +238,7 @@ function Home({ cartCount }) {
                 </div>
               </>
             )}
-            
+
             <div className="form-group">
               <label>Your Message</label>
               <textarea placeholder="Please type your message here" rows="4"></textarea>
