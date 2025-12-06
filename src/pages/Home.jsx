@@ -227,35 +227,36 @@ function Home({ cartCount }) {
             </button>
           </div>
           <form className="inquiry-form">
-            <div className="form-group">
-              <label>Name</label>
-              <input type="text" placeholder="John Doe" />
+            <div className="inquiry-form-group">
+              <label className="inquiry-form-label">Name</label>
+              <input className="inquiry-form-input" type="text" placeholder="John Doe" />
             </div>
-            <div className="form-group">
-              <label>Email Address</label>
-              <input type="email" placeholder="john.doe@example.com" />
+            <div className="inquiry-form-group">
+              <label className="inquiry-form-label">Email Address</label>
+              <input className="inquiry-form-input" type="email" placeholder="john.doe@example.com" />
             </div>
-            <div className="form-group">
-              <label>Phone Number</label>
-              <input type="tel" placeholder="+94 77 123 4567" />
+            <div className="inquiry-form-group">
+              <label className="inquiry-form-label">Phone Number</label>
+              <input className="inquiry-form-input" type="tel" placeholder="+94 77 123 4567" />
             </div>
 
             {activeTab === 'wholesale' && (
               <>
-                <div className="form-group">
-                  <label>Shop/Company Name</label>
-                  <input type="text" placeholder="Udawatta Tea Shop" />
+                <div className="inquiry-form-group">
+                  <label className="inquiry-form-label">Shop/Company Name</label>
+                  <input className="inquiry-form-input" type="text" placeholder="Udawatta Tea Shop" />
                 </div>
-                <div className="form-group">
-                  <label>Expected Monthly Volume (Kg)</label>
-                  <input type="number" placeholder="100" />
+                <div className="inquiry-form-group">
+                  <label className="inquiry-form-label">Expected Monthly Volume (Kg)</label>
+                  <input className="inquiry-form-input" type="number" placeholder="100" />
                 </div>
               </>
             )}
 
-            <div className="form-group">
-              <label>Your Message *</label>
+            <div className="inquiry-form-group">
+              <label className="inquiry-form-label">Your Message *</label>
               <textarea 
+                className="inquiry-form-textarea"
                 placeholder="Please type your message here" 
                 rows="4"
                 value={message}
