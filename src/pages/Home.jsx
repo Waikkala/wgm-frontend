@@ -150,13 +150,13 @@ function Home({ cartCount }) {
             <ul className="raga-features">
               <li>✨ No preservatives. No artificial ingredients.</li>
               <li>☀️ Solar-powered production.</li>
-              <li>🌾 Supporting Sri Lankan local farmers.</li>
+              <li>🌾 Supporting Sri Lankan rural farmers.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
             <Link to="/products" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
-            <img src="/wgm-frontend/product1.png" alt="Raga Reserve Package" />
+            <img src="/wgm-frontend/src/assets/blogSA (4).png" alt="Raga Reserve Package" />
           </div>
         </div>
       </section>
