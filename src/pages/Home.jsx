@@ -89,7 +89,7 @@ function Home({ cartCount }) {
         <div className="innovation-cards">
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              {/* Placeholder for handpicked quality illustration */}
+              <img src="/wgm-frontend/src/assets/hansdpicked.png" alt="Handpicked Quality" />
             </div>
             <div className="card-icon">🌱</div>
             <h3>Handpicked Quality</h3>
@@ -100,7 +100,7 @@ function Home({ cartCount }) {
           </div>
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              {/* Placeholder for advanced processing illustration */}
+              <img src="/wgm-frontend/src/assets/advanced process.png" alt="Advanced Processing" />
             </div>
             <div className="card-icon">🔬</div>
             <h3>Advanced Processing</h3>
@@ -111,7 +111,7 @@ function Home({ cartCount }) {
           </div>
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              {/* Placeholder for global standards illustration */}
+              <img src="/wgm-frontend/src/assets/Gloabal standard.png" alt="Global Standards" />
             </div>
             <div className="card-icon">🌍</div>
             <h3>Global Standards</h3>
