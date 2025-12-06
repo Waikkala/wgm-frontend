@@ -9,11 +9,16 @@ const ragaReserveImg = '/wgm-frontend/product1.png';
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [message, setMessage] = useState('');
 
   const slides = [
     '/wgm-frontend/bg_land.png',
     '/wgm-frontend/bg_land1.png'
   ];
+
+  const handleFaqClick = (question) => {
+    setMessage(question);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -249,30 +254,72 @@ function Home({ cartCount }) {
             )}
 
             <div className="form-group">
-              <label>Your Message</label>
-              <textarea placeholder="Please type your message here" rows="4"></textarea>
+              <label>Your Message *</label>
+              <textarea 
+                placeholder="Please type your message here" 
+                rows="4"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              ></textarea>
               <div className="faq-section">
-                <p className="faq-title">Frequently Asked Questions:</p>
+                <p className="faq-title">Frequently Asked Questions</p>
                 {activeTab === 'private' ? (
                   <>
-                    <p className="faq-item">✓ Where are your Reserve teas sourced?</p>
-                    <p className="faq-item">✓ What is the best way to brew my Raga Reserve tea?</p>
-                    <p className="faq-item">✓ Do you ship Raga Reserve internationally?</p>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('Where are your Reserve teas sourced?')}
+                    >
+                      ✓ Where are your Reserve teas sourced?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What is the best way to brew my Raga Reserve tea?')}
+                    >
+                      ✓ What is the best way to brew my Raga Reserve tea?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What other products, beyond the Masala Brew, does WGM offer for export?')}
+                    >
+                      ✓ What other products, beyond the Masala Brew, does WGM offer for export?
+                    </button>
                   </>
                 ) : (
                   <>
-                    <p className="faq-item">✓ What are the minimum volume requirements for an initial wholesale order?</p>
-                    <p className="faq-item">✓ Do you offer exclusive distribution territories or regions?</p>
-                    <p className="faq-item">✓ What is the typical lead time for a large-scale Reserve shipment?</p>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What are the minimum volume requirements for an initial wholesale order?')}
+                    >
+                      ✓ What are the minimum volume requirements for an initial wholesale order?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('Do you offer exclusive distribution territories or regions?')}
+                    >
+                      ✓ Do you offer exclusive distribution territories or regions?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What is the typical lead time for a large-scale Reserve shipment?')}
+                    >
+                      ✓ What is the typical lead time for a large-scale Reserve shipment?
+                    </button>
                   </>
                 )}
               </div>
             </div>
             <button type="submit" className="btn-submit">SUBMIT</button>
-            <div className="whatsapp-link">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" />
-              <span>Need an immediate answer? Chat with us on Whatsapp</span>
-            </div>
+          </form>
+          <div className="whatsapp-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" />
+            <span>Need an immediate answer?<br />Chat with us on Whatsapp</span>
+          </div>
           </form>
         </div>
       </section>
