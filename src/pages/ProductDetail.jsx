@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import SimpleFooter from '../components/SimpleFooter';
 import './ProductDetail.css';
 import PackImage from '../assets/Pack.png';
+import ProductImage from '../assets/blogSA (4).png';
 
 const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const navigate = useNavigate();
@@ -67,14 +68,14 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
         <div className="product-container">
           <div className="product-images">
             <div className="main-image">
-              <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve - Masala Brew" />
+              <img src={ProductImage} alt="Ceylon Raga Reserve - Masala Brew" />
             </div>
             <div className="thumbnail-images">
               <div className="thumbnail active">
-                <img src="/wgm-frontend/product.png" alt="Product view 1" />
+                <img src={ProductImage} alt="Product view 1" />
               </div>
               <div className="thumbnail">
-                <img src="/wgm-frontend/product.png" alt="Package view" />
+                <img src={ProductImage} alt="Package view" />
               </div>
             </div>
           </div>
