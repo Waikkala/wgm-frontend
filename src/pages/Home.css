@@ -286,7 +286,7 @@
   position: relative;
   z-index: 1;
   height: 700px;
-  max-height: 80vh;
+  max-height: 100vh;
 }
 
 .raga-detail-content {
