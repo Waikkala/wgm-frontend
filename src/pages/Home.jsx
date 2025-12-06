@@ -158,38 +158,47 @@ function Home({ cartCount }) {
 
       {/* Four Pillars Section */}
       <section className="pillars-section">
-        <h2 className="section-title">Our Four Pillars</h2>
-        <p className="section-description">
+        <h2 className="pillars-title">Our Four Pillars</h2>
+        <div className="pillars-divider"></div>
+        <p className="pillars-description">
           The foundation of everything we do at Waikkala Grinding Mills
         </p>
         <div className="pillars-grid">
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Quality badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/quality.png" alt="Quality" />
             </div>
-            <div className="pillar-icon">⚖️</div>
-            <h3>Quality</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">👨‍🍳</span>
+              <h3>Quality</h3>
+            </div>
           </div>
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Sustainability badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/sustainability.png" alt="Sustainability" />
             </div>
-            <div className="pillar-icon">🌿</div>
-            <h3>Sustainability</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">🌱</span>
+              <h3>Sustainability</h3>
+            </div>
           </div>
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Accountability badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/Accountability.png" alt="Accountability" />
             </div>
-            <div className="pillar-icon">📋</div>
-            <h3>Accountability</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">👥</span>
+              <h3>Accountability</h3>
+            </div>
           </div>
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Trust badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/trust.png" alt="Trust" />
             </div>
-            <div className="pillar-icon">🤝</div>
-            <h3>Trust</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">🛡️</span>
+              <h3>Trust</h3>
+            </div>
           </div>
         </div>
       </section>

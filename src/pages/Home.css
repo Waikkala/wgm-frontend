@@ -438,9 +438,52 @@
 
 /* Four Pillars Section */
 .pillars-section {
-  background: white;
+  background: #f5f5f5;
   padding: 5rem 2rem;
   text-align: center;
+  position: relative;
+}
+
+.pillars-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/wgm-frontend/background.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.pillars-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: #1a4d3e;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+
+.pillars-divider {
+  width: 80px;
+  height: 3px;
+  background: #d4a574;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.pillars-description {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  line-height: 1.8;
+  color: #666;
+  position: relative;
+  z-index: 1;
 }
 
 .pillars-grid {
@@ -449,49 +492,65 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .pillar-card {
   background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .pillar-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
-.pillar-image-placeholder {
+.pillar-image {
   width: 100%;
-  height: 200px;
-  background: linear-gradient(135deg, #1a4d3e 0%, #0d2e24 100%);
-  border-radius: 50%;
-  margin: 0 auto 1.5rem;
-  max-width: 200px;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+  background: #1a4d3e;
+}
+
+.pillar-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.pillar-card:hover .pillar-image img {
+  transform: scale(1.05);
+}
+
+.pillar-label {
+  padding: 1.5rem;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 4px solid #d4a574;
-  overflow: hidden;
-}
-
-.pillar-image-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  gap: 0.8rem;
 }
 
 .pillar-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #d4a574;
 }
 
 .pillar-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #1a4d3e;
   font-weight: 500;
+  margin: 0;
 }
 
 /* Inquiry Section */
