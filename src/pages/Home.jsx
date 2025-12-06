@@ -4,14 +4,21 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Home.css';
 
+const ragaReserveImg = '/wgm-frontend/product1.png';
+
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [message, setMessage] = useState('');
 
   const slides = [
     '/wgm-frontend/bg_land.png',
     '/wgm-frontend/bg_land1.png'
   ];
+
+  const handleFaqClick = (question) => {
+    setMessage(question);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +31,7 @@ function Home({ cartCount }) {
   return (
     <div className="home">
       <Header cartCount={cartCount} isLanding={true} />
-      
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-slider">
@@ -58,19 +65,20 @@ function Home({ cartCount }) {
       </section>
 
       {/* Product Showcase Section */}
-      <section className="product-showcase">
-        <div className="showcase-container">
-          <div className="showcase-image-wrapper">
-            <img src="/wgm-frontend/product1.png" alt="Ceylon Raga Reserve Product" className="product-front" />
-            <img src="/wgm-frontend/Card.png" alt="Ceylon Raga Reserve Card" className="product-card" />
-          </div>
-          <div className="showcase-content">
-            <h2 className="showcase-title">Ceylon Raga Reserve</h2>
-            <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
-            <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+      <section className="product-showcase-wrapper">
+        <div className="product-showcase">
+          <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+          <div className="showcase-container">
+            <div className="showcase-image-wrapper">
+              <img src={ragaReserveImg} alt="Ceylon Raga Reserve Product" className="showcase-product-image" />
+            </div>
+            <div className="showcase-content">
+              <h2 className="showcase-title">Ceylon Raga Reserve</h2>
+              <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
+            </div>
           </div>
         </div>
-        <div className="showcase-explore-btn">
+        <div className="showcase-explore-section">
           <Link to="/products" className="btn-explore">EXPLORE RAGA RESERVE</Link>
         </div>
       </section>
@@ -86,7 +94,7 @@ function Home({ cartCount }) {
         <div className="innovation-cards">
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              {/* Placeholder for handpicked quality illustration */}
+              <img src="/wgm-frontend/src/assets/hansdpicked.png" alt="Handpicked Quality" />
             </div>
             <div className="card-icon">🌱</div>
             <h3>Handpicked Quality</h3>
@@ -97,7 +105,7 @@ function Home({ cartCount }) {
           </div>
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              {/* Placeholder for advanced processing illustration */}
+              <img src="/wgm-frontend/src/assets/advanced process.png" alt="Advanced Processing" />
             </div>
             <div className="card-icon">🔬</div>
             <h3>Advanced Processing</h3>
@@ -108,7 +116,7 @@ function Home({ cartCount }) {
           </div>
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              {/* Placeholder for global standards illustration */}
+              <img src="/wgm-frontend/src/assets/Gloabal standard.png" alt="Global Standards" />
             </div>
             <div className="card-icon">🌍</div>
             <h3>Global Standards</h3>
@@ -142,51 +150,60 @@ function Home({ cartCount }) {
             <ul className="raga-features">
               <li>✨ No preservatives. No artificial ingredients.</li>
               <li>☀️ Solar-powered production.</li>
-              <li>🌾 Supporting Sri Lankan local farmers.</li>
+              <li>🌾 Supporting Sri Lankan rural farmers.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
             <Link to="/products" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
-            <img src="/wgm-frontend/product1.png" alt="Raga Reserve Package" />
+            <img src="/wgm-frontend/src/assets/blogSA (4).png" alt="Raga Reserve Package" />
           </div>
         </div>
       </section>
 
       {/* Four Pillars Section */}
       <section className="pillars-section">
-        <h2 className="section-title">Our Four Pillars</h2>
-        <p className="section-description">
+        <h2 className="pillars-title">Our Four Pillars</h2>
+        <div className="pillars-divider"></div>
+        <p className="pillars-description">
           The foundation of everything we do at Waikkala Grinding Mills
         </p>
         <div className="pillars-grid">
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Quality badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/quality.png" alt="Quality" />
             </div>
-            <div className="pillar-icon">⚖️</div>
-            <h3>Quality</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">👨‍🍳</span>
+              <h3>Quality</h3>
+            </div>
           </div>
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Sustainability badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/sustainability.png" alt="Sustainability" />
             </div>
-            <div className="pillar-icon">🌿</div>
-            <h3>Sustainability</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">🌱</span>
+              <h3>Sustainability</h3>
+            </div>
           </div>
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Accountability badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/Accountability.png" alt="Accountability" />
             </div>
-            <div className="pillar-icon">📋</div>
-            <h3>Accountability</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">👥</span>
+              <h3>Accountability</h3>
+            </div>
           </div>
           <div className="pillar-card">
-            <div className="pillar-image-placeholder">
-              {/* Placeholder for Trust badge */}
+            <div className="pillar-image">
+              <img src="/wgm-frontend/src/assets/trust.png" alt="Trust" />
             </div>
-            <div className="pillar-icon">🤝</div>
-            <h3>Trust</h3>
+            <div className="pillar-label">
+              <span className="pillar-icon">🛡️</span>
+              <h3>Trust</h3>
+            </div>
           </div>
         </div>
       </section>
@@ -222,7 +239,7 @@ function Home({ cartCount }) {
               <label>Phone Number</label>
               <input type="tel" placeholder="+94 77 123 4567" />
             </div>
-            
+
             {activeTab === 'wholesale' && (
               <>
                 <div className="form-group">
@@ -235,33 +252,78 @@ function Home({ cartCount }) {
                 </div>
               </>
             )}
-            
+
             <div className="form-group">
-              <label>Your Message</label>
-              <textarea placeholder="Please type your message here" rows="4"></textarea>
+              <label>Your Message *</label>
+              <textarea 
+                placeholder="Please type your message here" 
+                rows="4"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              ></textarea>
               <div className="faq-section">
-                <p className="faq-title">Frequently Asked Questions:</p>
+                <p className="faq-title">Frequently Asked Questions</p>
                 {activeTab === 'private' ? (
                   <>
-                    <p className="faq-item">✓ Where are your Reserve teas sourced?</p>
-                    <p className="faq-item">✓ What is the best way to brew my Raga Reserve tea?</p>
-                    <p className="faq-item">✓ Do you ship Raga Reserve internationally?</p>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('Where are your Reserve teas sourced?')}
+                    >
+                      ✓ Where are your Reserve teas sourced?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What is the best way to brew my Raga Reserve tea?')}
+                    >
+                      ✓ What is the best way to brew my Raga Reserve tea?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What other products, beyond the Masala Brew, does WGM offer for export?')}
+                    >
+                      ✓ What other products, beyond the Masala Brew, does WGM offer for export?
+                    </button>
                   </>
                 ) : (
                   <>
-                    <p className="faq-item">✓ What are the minimum volume requirements for an initial wholesale order?</p>
-                    <p className="faq-item">✓ Do you offer exclusive distribution territories or regions?</p>
-                    <p className="faq-item">✓ What is the typical lead time for a large-scale Reserve shipment?</p>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What are the minimum volume requirements for an initial wholesale order?')}
+                    >
+                      ✓ What are the minimum volume requirements for an initial wholesale order?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('Do you offer exclusive distribution territories or regions?')}
+                    >
+                      ✓ Do you offer exclusive distribution territories or regions?
+                    </button>
+                    <button 
+                      type="button"
+                      className="faq-item"
+                      onClick={() => handleFaqClick('What is the typical lead time for a large-scale Reserve shipment?')}
+                    >
+                      ✓ What is the typical lead time for a large-scale Reserve shipment?
+                    </button>
                   </>
                 )}
               </div>
             </div>
             <button type="submit" className="btn-submit">SUBMIT</button>
-            <div className="whatsapp-link">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" />
-              <span>Need an immediate answer? Chat with us on Whatsapp</span>
-            </div>
           </form>
+          <a href="https://wa.me/94761926066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
+            <div className="whatsapp-text">
+              <span className="whatsapp-main">Need an immediate answer?</span>
+              <span className="whatsapp-sub">Chat with us on Whatsapp</span>
+              <span className="whatsapp-number">+94 76 192 6066</span>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+          </a>
         </div>
       </section>
 

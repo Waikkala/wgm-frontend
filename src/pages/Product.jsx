@@ -11,35 +11,35 @@ const Product = ({ cartCount }) => {
     <div className="product-page">
       <Header cartCount={cartCount} isLanding={true} />
       
-      {/* Hero Section */}
-      <section className="product-hero">
-        <div className="product-hero-container">
-          <div className="product-hero-content">
-            <h1 className="product-hero-title">Ceylon Raga Reserve</h1>
-            <p className="product-hero-subtitle">Masala Brew - Anytime Energy. Everyday Luxury.</p>
-            <p className="product-hero-description">
+      {/* Ceylon Raga Reserve Detail Section */}
+      <section className="raga-detail-section">
+        <div className="raga-detail-container">
+          <div className="raga-detail-content">
+            <h2 className="raga-detail-title">Ceylon Raga Reserve</h2>
+            <p className="raga-detail-subtitle">Masala Brew - Anytime Energy. Everyday Luxury.</p>
+            <p className="raga-detail-description">
               An exclusive creation by Waikkala Grinding Mills, reimagining Sri Lankan spice
               heritage for the modern world. Where Sri Lanka's finest spices meet Kerala's
               timeless traditions.
             </p>
-            <div className="spice-tags-hero">
-              <span className="spice-tag-hero">Clove</span>
-              <span className="spice-tag-hero">Cardamom</span>
-              <span className="spice-tag-hero">Cinnamon</span>
-              <span className="spice-tag-hero">Ginger</span>
-              <span className="spice-tag-hero">Nutmeg</span>
-              <span className="spice-tag-hero">Star Anise</span>
+            <div className="spice-tags">
+              <span className="spice-tag">Clove</span>
+              <span className="spice-tag">Cardamom</span>
+              <span className="spice-tag">Cinnamon</span>
+              <span className="spice-tag">Ginger</span>
+              <span className="spice-tag">Nutmeg</span>
+              <span className="spice-tag">Star Anise</span>
             </div>
-            <ul className="product-hero-features">
+            <ul className="raga-features">
               <li>✨ No preservatives. No artificial ingredients.</li>
               <li>☀️ Solar-powered production.</li>
               <li>🌾 Supporting Sri Lankan rural farmers.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
-            <Link to="/product" className="btn-buy-now-hero">BUY NOW</Link>
+            <Link to="/product" className="btn-buy-now">BUY NOW</Link>
           </div>
-          <div className="product-hero-image">
-            <img src="/wgm-frontend/product1.png" alt="Ceylon Raga Reserve" />
+          <div className="raga-detail-image">
+            <img src="/wgm-frontend/src/assets/blogSA (4).png" alt="Raga Reserve Package" />
           </div>
         </div>
       </section>
