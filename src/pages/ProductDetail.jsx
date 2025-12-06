@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SimpleFooter from '../components/SimpleFooter';
 import './ProductDetail.css';
+import PackImage from '../assets/Pack.png';
 
 const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
 
             <div className="package-weight">
               <div className="weight-label">
-                <img src="/wgm-frontend/package.png" alt="Package" className="package-icon" /> Package Weight
+                <img src={PackImage} alt="Package" className="package-icon" /> Package Weight
               </div>
               <div className="weight-options">
                 {weights.map((weight) => (
@@ -101,7 +102,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                     onClick={() => setSelectedWeight(weight.value)}
                   >
                     <div className="weight-package-image">
-                      <img src="/wgm-frontend/package.png" alt={`Package ${weight.label}`} />
+                      <img src={PackImage} alt={`Package ${weight.label}`} />
                     </div>
                     <div className="weight-text">
                       <div className="weight-value">{weight.label}</div>

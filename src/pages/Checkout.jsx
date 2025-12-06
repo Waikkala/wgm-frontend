@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
+import PackImage from '../assets/Pack.png';
 
 const API_BASE_URL = 'https://wgm-backend.onrender.com';
 
@@ -606,7 +607,7 @@ const Checkout = () => {
                   cartItems.map((item, index) => (
                     <div key={index} className="summary-product">
                       <div className="product-image-small">
-                        <img src="/wgm-frontend/product.png" alt={item.name || 'Product'} />
+                        <img src={PackImage} alt={item.name || 'Product'} />
                       </div>
                       <div className="product-info-small">
                         <h4>{item.name || 'Ceylon Raga Reserve'}</h4>
@@ -621,7 +622,7 @@ const Checkout = () => {
                 ) : (
                   <div className="summary-product">
                     <div className="product-image-small">
-                      <img src="/wgm-frontend/product.png" alt="Ceylon Raga Reserve" />
+                      <img src={PackImage} alt="Ceylon Raga Reserve" />
                     </div>
                     <div className="product-info-small">
                       <h4>Ceylon Raga Reserve</h4>
