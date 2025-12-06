@@ -316,11 +316,14 @@ function Home({ cartCount }) {
             </div>
             <button type="submit" className="btn-submit">SUBMIT</button>
           </form>
-          <div className="whatsapp-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" />
-            <span>Need an immediate answer?<br />Chat with us on Whatsapp</span>
-          </div>
-          </form>
+          <a href="https://wa.me/94761926066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+            <div className="whatsapp-text">
+              <span className="whatsapp-main">Need an immediate answer?</span>
+              <span className="whatsapp-sub">Chat with us on Whatsapp</span>
+              <span className="whatsapp-number">+94 76 192 6066</span>
+            </div>
+          </a>
         </div>
       </section>
 
