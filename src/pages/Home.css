@@ -855,6 +855,17 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .raga-detail-content {
+    padding: 3rem 3rem;
+  }
+
+  .raga-detail-container {
+    height: auto;
+    min-height: 500px;
+  }
+}
+
 @media (max-width: 768px) {
 
   .showcase-container,
@@ -866,6 +877,7 @@
   .raga-detail-container {
     grid-template-columns: 1fr;
     height: auto;
+    max-height: none;
   }
 
   .raga-detail-content {
@@ -875,7 +887,40 @@
 
   .raga-detail-image {
     order: 2;
-    height: 400px;
+    min-height: 400px;
+    height: 50vh;
+  }
+
+  .raga-detail-title {
+    font-size: 2rem;
+  }
+
+  .raga-detail-subtitle {
+    font-size: 1rem;
+  }
+
+  .raga-detail-description {
+    font-size: 0.95rem;
+  }
+
+  .spice-tags {
+    gap: 0.5rem;
+  }
+
+  .spice-tag {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .raga-features li {
+    font-size: 0.9rem;
+  }
+
+  .btn-buy-now {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
   }
 
   .innovation-cards {
