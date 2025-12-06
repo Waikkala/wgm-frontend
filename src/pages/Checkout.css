@@ -202,6 +202,7 @@
   font-size: 0.875rem;
   transition: border-color 0.3s;
   background: var(--white);
+  color: #333;
 }
 
 .form-group input:focus,
@@ -365,6 +366,7 @@
   border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 0.875rem;
+  color: #333;
 }
 
 .btn-apply-coupon {
@@ -437,6 +439,7 @@
   justify-content: space-between;
   padding: 0.5rem 0;
   font-size: 0.875rem;
+  color: #333;
 }
 
 .summary-row.discount {
