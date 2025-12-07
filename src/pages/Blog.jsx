@@ -2,6 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Blog.css';
+import blogSA1 from '../assets/blogSA1.jpg';
+import blogSA1Png from '../assets/blogSA (1).png';
+import blogSA2 from '../assets/blogSA (2).png';
+import blogSA3 from '../assets/blogSA (3).png';
+import blogSA4 from '../assets/blogSA (4).png';
+import blogSA5 from '../assets/blogSA (5).png';
+import blogSA6 from '../assets/blogSA (6).png';
 
 const Blog = ({ cartCount = 0 }) => {
   const navigate = useNavigate();
@@ -9,7 +16,7 @@ const Blog = ({ cartCount = 0 }) => {
   const featuredPost = {
     title: "Unveiling the Essence: The Raga Reserve Journey",
     description: "Discover the secrets behind our signature blend. A comforting guide to this soulful ritual.",
-    image: "/blog-featured.jpg",
+    image: blogSA3,
     category: "Featured"
   };
 
@@ -20,7 +27,7 @@ const Blog = ({ cartCount = 0 }) => {
       category: "New",
       author: "Treeny Wilson",
       date: "November 30, 2025",
-      image: "/blog1.jpg"
+      image: blogSA1
     },
     {
       id: 2,
@@ -28,7 +35,7 @@ const Blog = ({ cartCount = 0 }) => {
       category: "New",
       author: "Jason Francisco",
       date: "September 30, 2025",
-      image: "/blog2.jpg"
+      image: blogSA2
     },
     {
       id: 3,
@@ -36,7 +43,7 @@ const Blog = ({ cartCount = 0 }) => {
       category: "New",
       author: "Elizabeth Sloan",
       date: "August 20, 2025",
-      image: "/blog3.jpg"
+      image: blogSA1Png
     },
     {
       id: 4,
@@ -44,7 +51,7 @@ const Blog = ({ cartCount = 0 }) => {
       category: "Earlier",
       author: "Treeny Wilson",
       date: "August 20, 2024",
-      image: "/blog4.jpg"
+      image: blogSA4
     },
     {
       id: 5,
@@ -52,7 +59,7 @@ const Blog = ({ cartCount = 0 }) => {
       category: "Earlier",
       author: "Kate Smith",
       date: "August 20, 2023",
-      image: "/blog5.jpg"
+      image: blogSA5
     },
     {
       id: 6,
@@ -60,7 +67,7 @@ const Blog = ({ cartCount = 0 }) => {
       category: "Earlier",
       author: "Treeny Wilson",
       date: "August 20, 2022",
-      image: "/blog6.jpg"
+      image: blogSA6
     }
   ];
 
