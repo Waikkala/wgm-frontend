@@ -9,6 +9,7 @@ import blogSA3 from '../assets/blogSA (3).png';
 import blogSA4 from '../assets/blogSA (4).png';
 import blogSA5 from '../assets/blogSA (5).png';
 import blogSA6 from '../assets/blogSA (6).png';
+import blogSA7 from '../assets/blogSA (7).png';
 
 const BlogView = ({ cartCount = 0 }) => {
   const { id } = useParams();
@@ -90,6 +91,39 @@ const BlogView = ({ cartCount = 0 }) => {
       content: [
         "The tea trails of Ceylon are legendary, winding through misty mountains and lush valleys where some of the world's finest tea is grown. These trails are more than just paths through plantations—they're journeys through history, culture, and the art of tea making. Walking these trails, you can almost hear the echoes of generations past, the voices of tea pluckers and estate managers who have dedicated their lives to perfecting their craft.",
         "At Raga Reserve, we draw inspiration from these legendary trails, sourcing our tea from estates that have been cultivating excellence for over a century. Each estate has its own story, its own unique terroir that imparts distinct characteristics to the tea. By honoring these traditions and working closely with our partners in Ceylon, we ensure that every cup of Raga Reserve Masala Brew carries with it the essence of these legendary tea trails—a taste of history, a celebration of craftsmanship, and a connection to the land that makes it all possible."
+      ]
+    },
+    '7': {
+      id: '7',
+      title: "The Art of Tea Pairing: Elevating Your Culinary Experience",
+      author: "Jason Francisco",
+      date: "June 15, 2022",
+      image: blogSA7,
+      content: [
+        "Just as wine has its sommelier-approved pairings, tea offers an equally sophisticated world of culinary combinations. Raga Reserve's Masala Brew, with its complex spice profile and robust Ceylon tea base, opens up endless possibilities for pairing with food. The key is understanding how the tea's flavors—cardamom, cinnamon, ginger, and black pepper—interact with different dishes to create harmonious or contrasting taste experiences.",
+        "Consider pairing our Masala Brew with rich, creamy desserts like cheesecake or crème brûlée. The spices cut through the richness, cleansing the palate while adding warmth and depth. For savory dishes, try it alongside Indian cuisine, where the chai's spices echo and enhance the flavors of curries and biryanis. Even simple breakfast pastries like croissants or scones become elevated when enjoyed with a perfectly brewed cup of Masala Brew. The art of tea pairing is about experimentation and discovery—finding those magical combinations that transform both the food and the tea into something greater than the sum of their parts."
+      ]
+    },
+    '8': {
+      id: '8',
+      title: "Masala Brew Traditions: Stories from Ceylon",
+      author: "Elizabeth Sloan",
+      date: "April 10, 2022",
+      image: blogSA1,
+      content: [
+        "In the heart of Ceylon's tea country, stories are passed down through generations—tales of master blenders, family recipes, and the perfect balance of spices that define authentic Masala Brew. These traditions are not written in books but lived and breathed by the people who have dedicated their lives to the craft of tea making. At Raga Reserve, we've had the privilege of learning from these masters, understanding the nuances that make each blend unique.",
+        "One such story comes from a fourth-generation tea estate owner who shared his family's secret: the importance of timing. Not just in the brewing, but in the harvesting, the drying, and even the blending of spices. Each step must be performed at precisely the right moment to capture the essence of the ingredients. This attention to detail, this reverence for tradition, is what sets authentic Masala Brew apart. When you sip Raga Reserve, you're not just tasting tea—you're experiencing centuries of wisdom, passion, and dedication distilled into every cup."
+      ]
+    },
+    '9': {
+      id: '9',
+      title: "The Perfect Morning Ritual: Starting Your Day Right",
+      author: "Kate Smith",
+      date: "February 5, 2022",
+      image: blogSA2,
+      content: [
+        "How you start your morning sets the tone for the entire day. For many, that perfect start begins with a cup of Raga Reserve Masala Brew. There's something transformative about the ritual of brewing tea—the gentle whistle of the kettle, the aromatic steam rising as hot water meets tea and spices, the first warming sip that awakens the senses. It's more than caffeine; it's a moment of intention, a pause before the day's demands take over.",
+        "Creating your perfect morning ritual with Masala Brew is simple yet profound. Begin by setting aside time—even just ten minutes—to be fully present. As you prepare your tea, focus on each step: measuring the tea, heating the water to the right temperature, watching the color deepen as it steeps. Add milk and sweetener to your preference, then find a comfortable spot to sit. As you sip, let the warmth spread through you, the spices energizing your body and mind. This daily ritual becomes an anchor, a consistent moment of peace and pleasure that grounds you, no matter what the day may bring."
       ]
     }
   };
