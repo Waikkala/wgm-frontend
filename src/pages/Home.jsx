@@ -4,17 +4,25 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Home.css';
 
-const ragaReserveImg = '/wgm-frontend/product1.png';
+// Import all images
+import ragaReserveImg from '/product1.png';
+import bgLand from '/bg_land.png';
+import bgLand1 from '/bg_land1.png';
+import handpickedImg from '../assets/hansdpicked.png';
+import advancedProcessImg from '../assets/advanced process.png';
+import globalStandardImg from '../assets/Gloabal standard.png';
+import blogSA4 from '../assets/blogSA (4).png';
+import qualityImg from '../assets/quality.png';
+import sustainabilityImg from '../assets/sustainability.png';
+import accountabilityImg from '../assets/Accountability.png';
+import trustImg from '../assets/trust.png';
 
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [message, setMessage] = useState('');
 
-  const slides = [
-    '/wgm-frontend/bg_land.png',
-    '/wgm-frontend/bg_land1.png'
-  ];
+  const slides = [bgLand, bgLand1];
 
   const handleFaqClick = (question) => {
     setMessage(question);
@@ -94,7 +102,7 @@ function Home({ cartCount }) {
         <div className="innovation-cards">
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              <img src="/wgm-frontend/src/assets/hansdpicked.png" alt="Handpicked Quality" />
+              <img src={handpickedImg} alt="Handpicked Quality" />
             </div>
             <div className="card-icon">🌱</div>
             <h3>Handpicked Quality</h3>
@@ -105,7 +113,7 @@ function Home({ cartCount }) {
           </div>
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              <img src="/wgm-frontend/src/assets/advanced process.png" alt="Advanced Processing" />
+              <img src={advancedProcessImg} alt="Advanced Processing" />
             </div>
             <div className="card-icon">🔬</div>
             <h3>Advanced Processing</h3>
@@ -116,7 +124,7 @@ function Home({ cartCount }) {
           </div>
           <div className="innovation-card">
             <div className="card-image-placeholder">
-              <img src="/wgm-frontend/src/assets/Gloabal standard.png" alt="Global Standards" />
+              <img src={globalStandardImg} alt="Global Standards" />
             </div>
             <div className="card-icon">🌍</div>
             <h3>Global Standards</h3>
@@ -156,7 +164,7 @@ function Home({ cartCount }) {
             <Link to="/products" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
-            <img src="/wgm-frontend/src/assets/blogSA (4).png" alt="Raga Reserve Package" />
+            <img src={blogSA4} alt="Raga Reserve Package" />
           </div>
         </div>
       </section>
@@ -171,7 +179,7 @@ function Home({ cartCount }) {
         <div className="pillars-grid">
           <div className="pillar-card">
             <div className="pillar-image">
-              <img src="/wgm-frontend/src/assets/quality.png" alt="Quality" />
+              <img src={qualityImg} alt="Quality" />
             </div>
             <div className="pillar-label">
               <span className="pillar-icon">👨‍🍳</span>
@@ -180,7 +188,7 @@ function Home({ cartCount }) {
           </div>
           <div className="pillar-card">
             <div className="pillar-image">
-              <img src="/wgm-frontend/src/assets/sustainability.png" alt="Sustainability" />
+              <img src={sustainabilityImg} alt="Sustainability" />
             </div>
             <div className="pillar-label">
               <span className="pillar-icon">🌱</span>
@@ -189,7 +197,7 @@ function Home({ cartCount }) {
           </div>
           <div className="pillar-card">
             <div className="pillar-image">
-              <img src="/wgm-frontend/src/assets/Accountability.png" alt="Accountability" />
+              <img src={accountabilityImg} alt="Accountability" />
             </div>
             <div className="pillar-label">
               <span className="pillar-icon">👥</span>
@@ -198,7 +206,7 @@ function Home({ cartCount }) {
           </div>
           <div className="pillar-card">
             <div className="pillar-image">
-              <img src="/wgm-frontend/src/assets/trust.png" alt="Trust" />
+              <img src={trustImg} alt="Trust" />
             </div>
             <div className="pillar-label">
               <span className="pillar-icon">🛡️</span>

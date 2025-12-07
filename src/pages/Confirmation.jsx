@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Confirmation.css';
+import logo from '/logo.png';
+import img1 from '/1.png';
 
 const Confirmation = () => {
   const navigate = useNavigate();
@@ -69,13 +71,13 @@ const Confirmation = () => {
                 <div className="confirmation-visual">
                   {/* Top section with logo */}
                   <div className="confirmation-top">
-                    <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="confirmation-logo-top" />
+                    <img src={logo} alt="WGM Logo" className="confirmation-logo-top" />
                     <p className="imperial-text">IMPERIAL HARVEST</p>
                   </div>
 
                   {/* Main deer character image */}
                   <div className="deer-character-section">
-                    <img src="/wgm-frontend/1.png" alt="Success Character" className="deer-character" />
+                    <img src={img1} alt="Success Character" className="deer-character" />
                   </div>
 
                   {/* Success badge with checkmark */}

@@ -1,5 +1,6 @@
 import Footer from '../components/Footer';
 import './RefundPolicy.css';
+import logo from '/logo.png';
 
 const RefundPolicy = () => {
     return (
@@ -8,7 +9,7 @@ const RefundPolicy = () => {
                 <div className="refund-header">
                     <div className="refund-header-content">
                         <div className="refund-logo-box">
-                            <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="refund-logo" />
+                            <img src={logo} alt="WGM Logo" className="refund-logo" />
                         </div>
                         <h1 className="refund-title">Refund & Return Policy of Waikkala Grinding Mills Pvt Ltd</h1>
                     </div>

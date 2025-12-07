@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Footer.css';
+import logo1 from '/logo1.png';
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+              <img src={logo1} alt="WGM Logo" className="logo-icon" />
             </div>
             <p className="footer-description">
               Waikkala Grinding Mills Pvt Ltd - Delivering safe, high-quality, 

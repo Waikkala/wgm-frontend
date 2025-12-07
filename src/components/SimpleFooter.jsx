@@ -1,4 +1,5 @@
 import './SimpleFooter.css';
+import logo1 from '/logo1.png';
 
 const SimpleFooter = () => {
   return (
@@ -6,7 +7,7 @@ const SimpleFooter = () => {
       <div className="simple-footer-background"></div>
       <div className="simple-footer-content">
         <div className="simple-footer-logo">
-          <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="simple-logo-icon" />
+          <img src={logo1} alt="WGM Logo" className="simple-logo-icon" />
         </div>
         <h3 className="simple-footer-title">WAIKKALA GRINDING MILLS PVT LTD</h3>
         <p className="simple-footer-description">

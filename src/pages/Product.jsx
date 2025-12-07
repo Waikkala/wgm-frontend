@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Product.css';
+import blogSA4 from '../assets/blogSA (4).png';
+import product1 from '/product1.png';
+import img1 from '/1.png';
+import img2 from '/2.png';
+import img3 from '/3.png';
 
 const Product = ({ cartCount }) => {
   const [activeBrewTab, setActiveBrewTab] = useState('hot');
@@ -39,7 +44,7 @@ const Product = ({ cartCount }) => {
             <Link to="/product" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
-            <img src="/wgm-frontend/src/assets/blogSA (4).png" alt="Raga Reserve Package" />
+            <img src={blogSA4} alt="Raga Reserve Package" />
           </div>
         </div>
       </section>
@@ -165,16 +170,7 @@ const Product = ({ cartCount }) => {
             )}
           </div>
           <div className="brew-image">
-            <img 
-              src={
-                activeBrewTab === 'hot' 
-                  ? '/wgm-frontend/product1.png' 
-                  : activeBrewTab === 'cold'
-                  ? '/wgm-frontend/product1.png'
-                  : '/wgm-frontend/product1.png'
-              } 
-              alt="Raga Reserve Brew" 
-            />
+            <img src={product1} alt="Raga Reserve Brew" />
           </div>
         </div>
       </section>
@@ -198,7 +194,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-image-center">
-              <img src="/wgm-frontend/1.png" alt="Digestive Health" />
+              <img src={img1} alt="Digestive Health" />
             </div>
 
             <div className="wellness-card wellness-card-right">
@@ -219,7 +215,7 @@ const Product = ({ cartCount }) => {
 
             {/* Row 2: Image (left) - O3 (center) - Image (right) */}
             <div className="wellness-image-side">
-              <img src="/wgm-frontend/2.png" alt="Antioxidant Protection" />
+              <img src={img2} alt="Antioxidant Protection" />
             </div>
 
             <div className="wellness-card wellness-card-center">
@@ -239,7 +235,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-image-side">
-              <img src="/wgm-frontend/3.png" alt="Mental Clarity" />
+              <img src={img3} alt="Mental Clarity" />
             </div>
 
             {/* Row 3: O4 (left) - Image (center) - O5 (right) */}
@@ -261,7 +257,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-image-center">
-              <img src="/wgm-frontend/1.png" alt="Mood Balance" />
+              <img src={img1} alt="Mood Balance" />
             </div>
 
             <div className="wellness-card wellness-card-right">

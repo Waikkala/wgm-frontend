@@ -5,6 +5,7 @@ import SimpleFooter from '../components/SimpleFooter';
 import './ProductDetail.css';
 import PackImage from '../assets/Pack.png';
 import ProductImage from '../assets/blogSA (4).png';
+import logo from '/logo.png';
 
 const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
     <div className="page-container">
       <div className="header-wrapper">
         <div className="logo-section" onClick={() => navigate('/')}>
-          <img src="/wgm-frontend/logo.png" alt="Waikkala Grinding Mills" className="nav-logo" />
+          <img src={logo} alt="Waikkala Grinding Mills" className="nav-logo" />
         </div>
         
         <div className="top-banner">
