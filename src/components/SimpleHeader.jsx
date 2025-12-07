@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './SimpleHeader.css';
-import logo1 from '/logo1.png';
+import logo1 from '../assets/Logo.png';
 
 const SimpleHeader = () => {
   const navigate = useNavigate();
