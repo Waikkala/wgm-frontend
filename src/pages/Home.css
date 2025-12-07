@@ -122,6 +122,17 @@
   text-align: left;
 }
 
+/* Decorative Separator Bar */
+.decorative-separator {
+  height: 40px;
+  background-image: url('../assets/Headr_Bar (1440 x 60).png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
 /* Product Showcase Section */
 .product-showcase-wrapper {
   background: white;
@@ -209,9 +220,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%);
   width: calc(100% + 80px);
-  height: calc(100% + 80px);
+  height: calc(100% + 150px);
   background-image: url('/src/assets/ForumBg.png');
   background-size: cover;
   background-position: center;
@@ -219,7 +230,7 @@
   z-index: 1;
   opacity: 1;
   pointer-events: none;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .showcase-product-image {
@@ -334,6 +345,7 @@
 }
 
 .raga-detail-title {
+  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   color: #d4a574;
   margin-bottom: 0.6rem;
@@ -391,6 +403,10 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.raga-features li::first-letter {
+  filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
 }
 
 .btn-buy-now {
@@ -510,8 +526,30 @@
 }
 
 .card-icon {
-  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
   margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.card-icon path,
+.card-icon circle,
+.card-icon ellipse,
+.card-icon rect {
+  transition: all 0.3s ease;
+}
+
+.innovation-card:hover .card-icon path[fill="#d4a574"],
+.innovation-card:hover .card-icon circle[fill="#d4a574"],
+.innovation-card:hover .card-icon rect[fill="#d4a574"] {
+  fill: #c49563;
+}
+
+.innovation-card:hover .card-icon path[stroke="#d4a574"],
+.innovation-card:hover .card-icon circle[stroke="#d4a574"],
+.innovation-card:hover .card-icon ellipse[stroke="#d4a574"],
+.innovation-card:hover .card-icon rect[stroke="#d4a574"] {
+  stroke: #c49563;
 }
 
 .innovation-card h3 {
@@ -632,8 +670,18 @@
 }
 
 .pillar-icon {
-  font-size: 1.8rem;
-  color: #d4a574;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.pillar-icon path {
+  fill: #d4a574;
+  transition: fill 0.3s ease;
+}
+
+.pillar-card:hover .pillar-icon path {
+  fill: #c49563;
 }
 
 .pillar-card h3 {
