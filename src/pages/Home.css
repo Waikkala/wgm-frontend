@@ -857,10 +857,36 @@
   display: block;
 }
 
-.btn-submit:hover {
+.btn-submit:hover:not(:disabled) {
   background: #c49563;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(212, 165, 116, 0.5);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-status {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.submit-status.success {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.submit-status.error {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border: 1px solid #f44336;
 }
 
 .whatsapp-link {
