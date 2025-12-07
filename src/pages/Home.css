@@ -107,7 +107,7 @@
 .hero-subtitle {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 700;
-  color: #d4a574;
+  color: #EA993F;
   margin-bottom: 2rem;
   letter-spacing: 2px;
   text-align: left;
@@ -165,7 +165,7 @@
 }
 
 .btn-buy-now-corner {
-  background: #d4a574;
+  background: #C28F34;
   color: #1a4d3e;
   padding: 0.85rem 2.5rem;
   font-weight: 700;

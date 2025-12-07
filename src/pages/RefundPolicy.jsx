@@ -1,12 +1,14 @@
 import Footer from '../components/Footer';
 import './RefundPolicy.css';
 import logo from '../assets/Logo.png';
+import headerBar from '../assets/Headr_Bar (1440 x 60).png';
 
 const RefundPolicy = () => {
     return (
         <div className="refund-policy-wrapper">
             <div className="refund-policy-page">
                 <div className="refund-header">
+                    <img src={headerBar} alt="Header Bar" className="header-bar-bg" />
                     <div className="refund-header-content">
                         <div className="refund-logo-box">
                             <img src={logo} alt="WGM Logo" className="refund-logo" />

@@ -11,43 +11,63 @@
     flex: 1;
 }
 
-/* Header Section - Grey bar with logo */
+/* Header Section - With background bar image */
 .refund-header {
-    background: #e8e8e8;
+    position: relative;
     padding: 0;
-    border-bottom: 1px solid #d0d0d0;
+    overflow: visible;
+    margin-top: 3rem;
+}
+
+.header-bar-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
 }
 
 .refund-header-content {
-    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 2rem;
-    padding: 1rem 2rem;
+    padding: 0 2rem;
 }
 
 .refund-logo-box {
+    position: absolute;
+    left: 2rem;
+    top: -45px;
     background: var(--primary-green);
-    padding: 1rem;
+    padding: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
 .refund-logo {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
 
 .refund-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #c9885e;
+    color: #C28F34;
     margin: 0;
     flex: 1;
+    text-align: left;
+    padding-left: 10rem;
 }
 
 /* Content Section */
@@ -159,22 +179,29 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .refund-header {
+        margin-top: 2rem;
+    }
+
     .refund-header-content {
-        padding: 1rem 1.5rem;
+        padding: 0 1.5rem;
         gap: 1.5rem;
     }
 
     .refund-logo-box {
-        padding: 0.875rem;
+        left: 1.5rem;
+        top: -50px;
+        padding: 1rem;
     }
 
     .refund-logo {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
 
     .refund-title {
         font-size: 1.2rem;
+        padding-left: 7rem;
     }
 
     .refund-content {
@@ -200,25 +227,30 @@
 }
 
 @media (max-width: 480px) {
+    .refund-header {
+        margin-top: 1.5rem;
+    }
+
     .refund-header-content {
-        padding: 0.875rem 1rem;
+        padding: 0 1rem;
         gap: 1rem;
-        flex-direction: column;
-        align-items: center;
     }
 
     .refund-title {
         font-size: 0.95rem;
-        text-align: center;
+        text-align: left;
+        padding-left: 5rem;
     }
 
     .refund-logo-box {
+        left: 1rem;
+        top: -40px;
         padding: 0.75rem;
     }
 
     .refund-logo {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
     }
 
     .refund-content {
