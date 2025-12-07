@@ -27,7 +27,12 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
                 </button>
               </div>
             </div>
-            <div className="header-nav-bar" style={{ backgroundImage: `url(${headerBarImg})` }}>
+            <div 
+              className="header-nav-bar" 
+              style={{ 
+                backgroundImage: `url(${headerBarImg}), url(/header-bar.png)` 
+              }}
+            >
               <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
                 <Link to="/" className="nav-link">HOME</Link>
                 <Link to="/products" className="nav-link">PRODUCTS</Link>

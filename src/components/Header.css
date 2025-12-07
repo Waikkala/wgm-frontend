@@ -156,6 +156,7 @@
 }
 
 .header-landing .header-nav-bar {
+  background-color: #d9d9d9;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -175,7 +176,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(217, 217, 217, 0.3);
+  background: rgba(217, 217, 217, 0.2);
   pointer-events: none;
 }
 
