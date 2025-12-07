@@ -268,7 +268,8 @@
 
 .showcase-title {
   font-size: clamp(2rem, 4vw, 3.2rem);
-  color: #d4a574;
+    font-family: 'Cormorant Garamond', serif;
+  color: #EA993F;
   margin-bottom: 0;
   font-weight: 400;
   letter-spacing: 1px;
@@ -307,7 +308,7 @@
 }
 
 .btn-explore:hover {
-  background: #d4a574;
+  background: #EA993F;
   color: #1a4d3e;
   border-color: #d4a574;
   transform: translateY(-2px);
@@ -411,7 +412,7 @@
 
 .btn-buy-now {
   display: inline-block;
-  background: #d4a574;
+  background: #C28F34;
   color: #0d2e24;
   padding: 1rem 3rem;
   font-weight: 700;
@@ -760,7 +761,7 @@
 }
 
 .tab-btn.active {
-  background: #d4a574;
+  background: #EA993F;
   color: white;
   border-color: #d4a574;
 }
@@ -905,7 +906,7 @@
 
 .btn-submit {
   padding: 1rem 3rem;
-  background: #d4a574;
+  background: #EA993F;
   color: white;
   border: none;
   border-radius: 6px;
