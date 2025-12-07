@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './AboutUs.css';
+import founderImg from '../assets/man.png';
 
 const AboutUs = ({ cartCount = 0 }) => {
 
@@ -23,12 +24,9 @@ const AboutUs = ({ cartCount = 0 }) => {
             <div className="founder-card">
               <div className="founder-image-wrapper">
                 <img 
-                  src="/founder.jpg" 
+                  src={founderImg} 
                   alt="Founder Mr. Kalpana Rodrigo" 
                   className="founder-image"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
                 />
               </div>
               
