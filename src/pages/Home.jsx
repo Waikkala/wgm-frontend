@@ -22,7 +22,6 @@ const API_BASE_URL = 'https://wgm-backend.onrender.com';
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     emailAddress: '',
@@ -37,16 +36,12 @@ function Home({ cartCount }) {
   const slides = [bgLand, bgLand1];
 
   const handleFaqClick = (question) => {
-    setMessage(question);
     setFormData(prev => ({ ...prev, message: question }));
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    if (name === 'message') {
-      setMessage(value);
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -94,7 +89,6 @@ function Home({ cartCount }) {
           expectedMonthlyVolume: '',
           message: ''
         });
-        setMessage('');
         
         // Auto-hide success message after 5 seconds
         setTimeout(() => {
@@ -112,7 +106,7 @@ function Home({ cartCount }) {
           setSubmitStatus(null);
         }, 7000);
       }
-    } catch (error) {
+    } catch (_error) {
       setSubmitStatus({ 
         type: 'error', 
         message: 'Network error. Please check your connection and try again.' 
