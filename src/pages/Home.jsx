@@ -17,15 +17,114 @@ import sustainabilityImg from '../assets/sustainability.png';
 import accountabilityImg from '../assets/Accountability.png';
 import trustImg from '../assets/trust.png';
 
+const API_BASE_URL = 'https://wgm-backend.onrender.com';
+
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [message, setMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    emailAddress: '',
+    phoneNumber: '',
+    companyName: '',
+    expectedMonthlyVolume: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const slides = [bgLand, bgLand1];
 
   const handleFaqClick = (question) => {
     setMessage(question);
+    setFormData(prev => ({ ...prev, message: question }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'message') {
+      setMessage(value);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const endpoint = activeTab === 'private' 
+        ? `${API_BASE_URL}/api/v1/inquiries/general`
+        : `${API_BASE_URL}/api/v1/inquiries/wholesale`;
+
+      const payload = activeTab === 'private'
+        ? {
+            name: formData.name,
+            emailAddress: formData.emailAddress,
+            phoneNumber: formData.phoneNumber,
+            message: formData.message
+          }
+        : {
+            name: formData.name,
+            emailAddress: formData.emailAddress,
+            phoneNumber: formData.phoneNumber,
+            companyName: formData.companyName,
+            expectedMonthlyVolume: parseInt(formData.expectedMonthlyVolume) || 0,
+            message: formData.message
+          };
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        setSubmitStatus({ type: 'success', message: 'Your inquiry has been submitted successfully!' });
+        // Reset form
+        setFormData({
+          name: '',
+          emailAddress: '',
+          phoneNumber: '',
+          companyName: '',
+          expectedMonthlyVolume: '',
+          message: ''
+        });
+        setMessage('');
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        setSubmitStatus({ 
+          type: 'error', 
+          message: errorData.message || 'Failed to submit inquiry. Please try again.' 
+        });
+        
+        // Auto-hide error message after 7 seconds
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 7000);
+      }
+    } catch (error) {
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Network error. Please check your connection and try again.' 
+      });
+      
+      // Auto-hide error message after 7 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+      }, 7000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -234,29 +333,74 @@ function Home({ cartCount }) {
               APPLY WHOLESALE
             </button>
           </div>
-          <form className="inquiry-form">
+          <form className="inquiry-form" onSubmit={handleSubmit}>
+            {submitStatus && (
+              <div className={`submit-status ${submitStatus.type}`}>
+                {submitStatus.message}
+              </div>
+            )}
             <div className="inquiry-form-group">
               <label className="inquiry-form-label">Name</label>
-              <input className="inquiry-form-input" type="text" placeholder="John Doe" />
+              <input 
+                className="inquiry-form-input" 
+                type="text" 
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className="inquiry-form-group">
               <label className="inquiry-form-label">Email Address</label>
-              <input className="inquiry-form-input" type="email" placeholder="john.doe@example.com" />
+              <input 
+                className="inquiry-form-input" 
+                type="email"
+                name="emailAddress"
+                placeholder="john.doe@example.com"
+                value={formData.emailAddress}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className="inquiry-form-group">
               <label className="inquiry-form-label">Phone Number</label>
-              <input className="inquiry-form-input" type="tel" placeholder="+94 77 123 4567" />
+              <input 
+                className="inquiry-form-input" 
+                type="tel"
+                name="phoneNumber"
+                placeholder="+94 77 123 4567"
+                value={formData.phoneNumber}
+                onChange={handleInputChange}
+                required
+              />
             </div>
 
             {activeTab === 'wholesale' && (
               <>
                 <div className="inquiry-form-group">
                   <label className="inquiry-form-label">Shop/Company Name</label>
-                  <input className="inquiry-form-input" type="text" placeholder="Udawatta Tea Shop" />
+                  <input 
+                    className="inquiry-form-input" 
+                    type="text"
+                    name="companyName"
+                    placeholder="Udawatta Tea Shop"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </div>
                 <div className="inquiry-form-group">
                   <label className="inquiry-form-label">Expected Monthly Volume (Kg)</label>
-                  <input className="inquiry-form-input" type="number" placeholder="100" />
+                  <input 
+                    className="inquiry-form-input" 
+                    type="number"
+                    name="expectedMonthlyVolume"
+                    placeholder="100"
+                    value={formData.expectedMonthlyVolume}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </div>
               </>
             )}
@@ -265,10 +409,12 @@ function Home({ cartCount }) {
               <label className="inquiry-form-label">Your Message *</label>
               <textarea 
                 className="inquiry-form-textarea"
+                name="message"
                 placeholder="Please type your message here" 
                 rows="4"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={formData.message}
+                onChange={handleInputChange}
+                required
               ></textarea>
               <div className="faq-section">
                 <p className="faq-title">Frequently Asked Questions</p>
@@ -323,7 +469,9 @@ function Home({ cartCount }) {
                 )}
               </div>
             </div>
-            <button type="submit" className="btn-submit">SUBMIT</button>
+            <button type="submit" className="btn-submit" disabled={isSubmitting}>
+              {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
+            </button>
           </form>
           <a href="https://wa.me/94761926066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
             <div className="whatsapp-text">
