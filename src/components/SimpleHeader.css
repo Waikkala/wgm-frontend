@@ -86,3 +86,24 @@
     font-size: 0.8rem;
   }
 }
+
+@media (max-width: 480px) {
+  .simple-header {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .simple-logo {
+    left: 0.75rem;
+    padding: 0.65rem;
+    top: 120%;
+  }
+
+  .simple-logo-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .simple-header-text p {
+    font-size: 0.75rem;
+  }
+}

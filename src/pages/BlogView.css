@@ -116,20 +116,50 @@
 }
 
 @media (max-width: 480px) {
+  .blog-view-main {
+    padding: 110px 10px 30px;
+  }
+
   .blog-view-container {
     padding: 1.5rem 1rem;
+    border-radius: 6px;
   }
 
   .blog-view-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-view-meta {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-view-author {
+    font-size: 0.85rem;
+  }
+
+  .author-avatar-large {
+    width: 32px;
+    height: 32px;
+  }
+
+  .blog-view-date {
+    font-size: 0.85rem;
   }
 
   .blog-view-image {
-    height: 220px;
+    height: 200px;
+    margin-bottom: 2rem;
+    border-radius: 6px;
   }
 
   .blog-view-content {
-    font-size: 0.95rem;
-    line-height: 1.8;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .blog-view-content p {
+    margin-bottom: 1.25rem;
   }
 }

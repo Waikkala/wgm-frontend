@@ -154,10 +154,6 @@
 }
 
 .btn-buy-now-corner {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 3rem;
   background: #d4a574;
   color: #1a4d3e;
   padding: 0.85rem 2.5rem;
@@ -181,13 +177,21 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 0.8fr 1fr;
   gap: 4rem;
   align-items: center;
   position: relative;
   z-index: 2;
-  padding: 0;
+  padding: 0 3rem 0 0;
   min-height: 280px;
+}
+
+.showcase-title-row .btn-buy-now-corner {
+  position: relative;
+  transform: none;
+  white-space: nowrap;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .showcase-image-wrapper {
@@ -239,15 +243,27 @@
   flex-direction: column;
   align-items: flex-start;
   padding-right: 3rem;
+  flex: 1;
+}
+
+.showcase-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  flex-wrap: nowrap;
 }
 
 .showcase-title {
-  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   color: #d4a574;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   font-weight: 400;
   letter-spacing: 1px;
   line-height: 1.2;
+  flex: 0 1 auto;
+  white-space: nowrap;
 }
 
 .showcase-tagline {
@@ -1065,14 +1081,42 @@
   }
 
   .product-showcase {
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 1rem 1rem;
+    min-height: auto;
   }
 
-  .btn-buy-now-corner {
-    top: 1rem;
-    right: 1rem;
-    padding: 0.8rem 2rem;
-    font-size: 0.85rem;
+  .showcase-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: auto;
+  }
+
+  .showcase-title-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .showcase-title-row .btn-buy-now-corner {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  .showcase-title-row .btn-buy-now-corner:hover {
+    transform: translateY(-2px);
+  }
+
+  .showcase-image-wrapper {
+    order: 1;
+  }
+
+  .showcase-content {
+    order: 2;
   }
 
   .showcase-image-wrapper {
@@ -1102,13 +1146,39 @@
 }
 
 @media (max-width: 480px) {
+  .home {
+    padding-top: 90px;
+  }
+
+  .hero-section {
+    height: 50vh;
+    min-height: 350px;
+    padding: 1.5rem;
+  }
+
+  .hero-content {
+    padding-left: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .hero-description {
+    font-size: 0.85rem;
+  }
+
   .spice-tags {
     gap: 0.5rem;
   }
 
   .spice-tag {
     padding: 0.4rem 0.9rem;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .btn-buy-now,
@@ -1117,27 +1187,101 @@
     width: 100%;
     text-align: center;
     margin: 0.5rem 0;
+    padding: 0.9rem 2rem;
+    font-size: 0.9rem;
   }
 
-  .inquiry-container {
-    padding: 2rem 1.5rem;
-    border-width: 2px;
-    box-shadow:
-      0 0 0 5px rgba(212, 165, 116, 0.3),
-      0 8px 30px rgba(0, 0, 0, 0.5);
+  .product-showcase {
+    padding: 1.5rem 1rem;
   }
 
-  .inquiry-title {
-    font-size: 1.5rem;
+  .showcase-container {
+    gap: 1.5rem;
   }
 
-  .tab-btn {
-    padding: 0.8rem 1.5rem;
+  .showcase-title-row {
+    gap: 1rem;
+  }
+
+  .showcase-title-row .btn-buy-now-corner {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.9rem 1.75rem;
     font-size: 0.85rem;
   }
 
+  .inquiry-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .inquiry-container::before {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .inquiry-title {
+    font-size: 1.3rem;
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .inquiry-tabs {
+    padding: 0 1.5rem;
+  }
+
+  .inquiry-form {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .tab-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
   .btn-submit {
-    padding: 0.9rem 2rem;
-    font-size: 0.95rem;
+    padding: 0.85rem 1.75rem;
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+
+  .whatsapp-link {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .whatsapp-text {
+    font-size: 0.85rem;
+  }
+
+  .whatsapp-main {
+    font-size: 0.9rem;
+  }
+
+  .whatsapp-sub {
+    font-size: 0.85rem;
+  }
+
+  .whatsapp-number {
+    font-size: 0.75rem;
+  }
+
+  .whatsapp-link img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .innovation-section,
+  .pillars-section {
+    padding: 3rem 1rem;
+  }
+
+  .section-title,
+  .pillars-title {
+    font-size: 1.5rem;
+  }
+
+  .section-description,
+  .pillars-description {
+    font-size: 0.85rem;
   }
 }

@@ -203,10 +203,13 @@
     .refund-header-content {
         padding: 0.875rem 1rem;
         gap: 1rem;
+        flex-direction: column;
+        align-items: center;
     }
 
     .refund-title {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        text-align: center;
     }
 
     .refund-logo-box {
@@ -216,5 +219,65 @@
     .refund-logo {
         width: 45px;
         height: 45px;
+    }
+
+    .refund-content {
+        padding: 2rem 0.75rem 3rem;
+    }
+
+    .refund-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .refund-intro {
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+    }
+
+    .policy-section {
+        margin-bottom: 2rem;
+    }
+
+    .policy-section h3 {
+        font-size: 1rem;
+        margin-bottom: 0.875rem;
+        padding-bottom: 0.4rem;
+    }
+
+    .policy-section p {
+        font-size: 0.85rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .policy-section li {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .note {
+        font-size: 0.8rem;
+        margin-top: 0.875rem;
+    }
+
+    .policy-contact-info,
+    .policy-contact-info-final {
+        padding: 1.25rem;
+        margin: 0.875rem 0;
+    }
+
+    .policy-contact-info p,
+    .policy-contact-info-final p {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .contact-item {
+        margin-bottom: 0.65rem;
+    }
+
+    .icon {
+        font-size: 1.1rem;
+        width: 22px;
     }
 }
