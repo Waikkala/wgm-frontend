@@ -106,7 +106,7 @@ function Home({ cartCount }) {
           setSubmitStatus(null);
         }, 7000);
       }
-    } catch (_error) {
+    } catch {
       setSubmitStatus({ 
         type: 'error', 
         message: 'Network error. Please check your connection and try again.' 
