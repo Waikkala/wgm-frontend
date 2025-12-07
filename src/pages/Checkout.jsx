@@ -272,6 +272,10 @@ const Checkout = () => {
         quantity: item.quantity
       }));
 
+      // Get city ID from the selected city
+      const selectedCity = cities.find(c => c.city_name === formData.city);
+      const cityId = selectedCity ? String(selectedCity.city_id) : '';
+
       // Prepare request body
       const orderData = {
         firstName: formData.firstName,
@@ -279,14 +283,14 @@ const Checkout = () => {
         email: formData.email,
         customerPhone: formData.phone,
         customerAddress: formData.streetAddress,
-        city: formData.city,
-        province: formData.province,
-        postalCode: parseInt(formData.postalCode) || 0,
+        city: cityId, // Send city ID as string
+        district: String(formData.districtId), // Send district ID as string
+        postalCode: formData.postalCode,
         notes: formData.orderNotes || '',
         paymentMethod: 'COD', // Cash on Delivery - will be updated after payment
-        paymentStatus: 'UNPAID',
+        paymentStatus: 'PENDING',
         promoCode: couponStatus.isApplied ? formData.couponCode : '',
-        deliveryTown: formData.district, // Using district as delivery town
+        deliveryTown: formData.district, // Using district name as delivery town
         deliveryFee: shipping,
         items: orderItems
       };
