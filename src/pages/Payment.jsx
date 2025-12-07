@@ -4,7 +4,6 @@ import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Payment.css';
 import img2 from '/2.png';
-import logo from '../assets/Logo.png';
 
 const Payment = () => {
   const navigate = useNavigate();
