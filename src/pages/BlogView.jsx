@@ -14,6 +14,40 @@ import blogSA7 from '../assets/blogSA (7).png';
 const BlogView = ({ cartCount = 0 }) => {
   const { id } = useParams();
 
+  // Different person icons for different authors
+  const getAuthorIcon = (authorName) => {
+    const icons = {
+      'Treeny Wilson': (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" fill="white"/>
+          <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="white" strokeWidth="2" strokeLinecap="round" fill="white"/>
+        </svg>
+      ),
+      'Jason Francisco': (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="3.5" fill="white"/>
+          <path d="M5 20c0-3.5 3-6.5 7-6.5s7 3 7 6.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="white"/>
+          <circle cx="12" cy="8" r="4.5" stroke="white" strokeWidth="0.5" fill="none"/>
+        </svg>
+      ),
+      'Elizabeth Sloan': (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8.5" r="4" fill="white"/>
+          <path d="M4.5 20.5c0-4 3.5-7 7.5-7s7.5 3 7.5 7" stroke="white" strokeWidth="2" strokeLinecap="round" fill="white"/>
+          <path d="M8 8c0-2 1.5-4 4-4s4 2 4 4" stroke="white" strokeWidth="0.8" fill="none"/>
+        </svg>
+      ),
+      'Kate Smith': (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="12" cy="8" rx="4" ry="4.5" fill="white"/>
+          <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="white" strokeWidth="2" strokeLinecap="round" fill="white"/>
+          <ellipse cx="12" cy="7.5" rx="5" ry="3" stroke="white" strokeWidth="0.6" fill="none"/>
+        </svg>
+      )
+    };
+    return icons[authorName] || icons['Treeny Wilson'];
+  };
+
   // Blog posts data
   const blogPosts = {
     'featured': {
@@ -133,22 +167,24 @@ const BlogView = ({ cartCount = 0 }) => {
   return (
     <div className="blog-view-page">
       <Header cartCount={cartCount} isLanding={true} />
-      
+
       <main className="blog-view-main">
         <article className="blog-view-container">
           <h1 className="blog-view-title">{blogPost.title}</h1>
-          
+
           <div className="blog-view-meta">
             <div className="blog-view-author">
-              <div className="author-avatar-large"></div>
+              <div className={`author-avatar-large avatar-${blogPost.author.split(' ')[0].toLowerCase()}`}>
+                {getAuthorIcon(blogPost.author)}
+              </div>
               <span>{blogPost.author}</span>
             </div>
             <span className="blog-view-date">{blogPost.date}</span>
           </div>
 
           <div className="blog-view-image">
-            <img 
-              src={blogPost.image} 
+            <img
+              src={blogPost.image}
               alt={blogPost.title}
               onError={(e) => {
                 e.target.style.display = 'none';

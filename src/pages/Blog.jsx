@@ -16,6 +16,41 @@ const Blog = ({ cartCount = 0 }) => {
   const navigate = useNavigate();
   const [visiblePosts, setVisiblePosts] = useState(6);
 
+  // Different person icons for different authors
+  const getAuthorIcon = (authorName) => {
+    const icons = {
+      'Treeny Wilson': (
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <circle cx="16" cy="10" r="5"/>
+          <path d="M16 17c-5.5 0-10 3-10 6.5V26h20v-2.5c0-3.5-4.5-6.5-10-6.5z"/>
+          <path d="M12 9c0-1 .5-2 1.5-2.5" stroke="currentColor" strokeWidth="0.5" fill="none"/>
+        </svg>
+      ),
+      'Jason Francisco': (
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <circle cx="16" cy="10" r="5"/>
+          <path d="M16 17c-5.5 0-10 3-10 6.5V26h20v-2.5c0-3.5-4.5-6.5-10-6.5z"/>
+          <rect x="13" y="8" width="6" height="1" rx="0.5"/>
+        </svg>
+      ),
+      'Elizabeth Sloan': (
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <circle cx="16" cy="10" r="5"/>
+          <path d="M16 17c-5.5 0-10 3-10 6.5V26h20v-2.5c0-3.5-4.5-6.5-10-6.5z"/>
+          <ellipse cx="16" cy="10" rx="6" ry="4" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+        </svg>
+      ),
+      'Kate Smith': (
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <circle cx="16" cy="10" r="5"/>
+          <path d="M16 17c-5.5 0-10 3-10 6.5V26h20v-2.5c0-3.5-4.5-6.5-10-6.5z"/>
+          <path d="M11 10c0-2 2-4 5-4s5 2 5 4" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+        </svg>
+      )
+    };
+    return icons[authorName] || icons['Treeny Wilson'];
+  };
+
   const featuredPost = {
     title: "Unveiling the Essence: The Raga Reserve Journey",
     description: "Discover the secrets behind our signature blend. A comforting guide to this soulful ritual.",
@@ -152,7 +187,9 @@ const Blog = ({ cartCount = 0 }) => {
                   <h3 className="blog-card-title">{post.title}</h3>
                   <div className="blog-meta">
                     <div className="blog-author">
-                      <div className="author-avatar"></div>
+                      <div className={`author-avatar avatar-${post.author.split(' ')[0].toLowerCase()}`}>
+                        {getAuthorIcon(post.author)}
+                      </div>
                       <span>{post.author}</span>
                     </div>
                     <span className="blog-date">{post.date}</span>

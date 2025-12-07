@@ -49,6 +49,34 @@
   height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, #6b9bd1 0%, #4a7ba7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.author-avatar-large svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Different colors for different authors */
+.author-avatar-large.avatar-treeny {
+  background: linear-gradient(135deg, #6b9bd1 0%, #4a7ba7 100%);
+}
+
+.author-avatar-large.avatar-jason {
+  background: linear-gradient(135deg, #d4a574 0%, #b8865f 100%);
+}
+
+.author-avatar-large.avatar-elizabeth {
+  background: linear-gradient(135deg, #e89a9a 0%, #c97a7a 100%);
+}
+
+.author-avatar-large.avatar-kate {
+  background: linear-gradient(135deg, #8b9ba8 0%, #6b7b88 100%);
 }
 
 .blog-view-date {
