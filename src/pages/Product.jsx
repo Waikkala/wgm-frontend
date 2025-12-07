@@ -4,10 +4,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Product.css';
 import blogSA4 from '../assets/blogSA (4).png';
-import product1 from '/product1.png';
-import img1 from '/1.png';
-import img2 from '/2.png';
-import img3 from '/3.png';
+import hotBeverageImg from '../assets/hotbeverage.png';
+import alcoholicImg from '../assets/alcoholic.png';
+import coldImg from '../assets/cold (2).png';
+import wellnessWithin1 from '../assets/wellnesswithin1.png';
+import wellnessWithin2 from '../assets/wellnesswithin2.png';
+import wellnessWithin3 from '../assets/wellnesswithin3.png';
+import wellness4 from '../assets/wellness4.png';
+import forumBg from '../assets/ForumBg.png';
 
 const Product = ({ cartCount }) => {
   const [activeBrewTab, setActiveBrewTab] = useState('hot');
@@ -170,14 +174,23 @@ const Product = ({ cartCount }) => {
             )}
           </div>
           <div className="brew-image">
-            <img src={product1} alt="Raga Reserve Brew" />
+            <img 
+              src={
+                activeBrewTab === 'hot' ? hotBeverageImg :
+                activeBrewTab === 'cold' ? coldImg :
+                alcoholicImg
+              } 
+              alt={`${activeBrewTab} beverages`} 
+            />
           </div>
         </div>
       </section>
 
       {/* Wellness Section */}
       <section className="wellness-section">
-        <h2 className="wellness-title">Wellness Within: The Science of Raga Reserve</h2>
+        <div className="wellness-title-bar" style={{ backgroundImage: `url(${forumBg})` }}>
+          <h2 className="wellness-title">Wellness Within: The Science of Raga Reserve</h2>
+        </div>
         <div className="wellness-container">
           <div className="wellness-grid-layout">
             {/* Row 1: O1 (left) - Image (center) - O2 (right) */}
@@ -194,7 +207,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-image-center">
-              <img src={img1} alt="Digestive Health" />
+              <img src={wellnessWithin1} alt="Digestive Health" />
             </div>
 
             <div className="wellness-card wellness-card-right">
@@ -215,7 +228,7 @@ const Product = ({ cartCount }) => {
 
             {/* Row 2: Image (left) - O3 (center) - Image (right) */}
             <div className="wellness-image-side">
-              <img src={img2} alt="Antioxidant Protection" />
+              <img src={wellnessWithin2} alt="Antioxidant Protection" />
             </div>
 
             <div className="wellness-card wellness-card-center">
@@ -235,7 +248,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-image-side">
-              <img src={img3} alt="Mental Clarity" />
+              <img src={wellnessWithin3} alt="Mental Clarity" />
             </div>
 
             {/* Row 3: O4 (left) - Image (center) - O5 (right) */}
@@ -257,7 +270,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-image-center">
-              <img src={img1} alt="Mood Balance" />
+              <img src={wellness4} alt="Mood Balance" />
             </div>
 
             <div className="wellness-card wellness-card-right">
