@@ -1,7 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Header.css';
-import logo1 from '/logo1.png';
+import logo1 from '../assets/Logo.png';
 
 const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = false }) => {
   const navigate = useNavigate();

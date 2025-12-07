@@ -330,3 +330,109 @@
     width: 100%;
   }
 }
+
+@media (max-width: 480px) {
+  .confirmation-page-wrapper {
+    padding: 1rem 0.75rem;
+  }
+
+  .confirmation-banner-card {
+    padding: 1.75rem 0.875rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+  }
+
+  .confirmation-banner-title {
+    font-size: 1.3rem;
+  }
+
+  .checkout-steps {
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
+  .step-label {
+    font-size: 0.7rem;
+  }
+
+  .step-line {
+    width: 30px;
+  }
+
+  .confirmation-card {
+    border-radius: 8px;
+  }
+
+  .confirmation-visual {
+    padding: 1.25rem 1.25rem 2rem;
+  }
+
+  .confirmation-logo-top {
+    height: 40px;
+    margin-bottom: 0.4rem;
+  }
+
+  .imperial-text {
+    font-size: 0.6rem;
+  }
+
+  .deer-character-section {
+    margin: 1rem 0 1.5rem;
+  }
+
+  .deer-character {
+    max-width: 240px;
+  }
+
+  .success-badge {
+    margin: 1.25rem 0 0.875rem;
+  }
+
+  .success-badge svg {
+    width: 70px;
+    height: 70px;
+  }
+
+  .success-title {
+    font-size: 1.2rem;
+    margin: 1.25rem 0;
+  }
+
+  .dots-indicator {
+    margin: 1.25rem 0 1.5rem;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .confirmation-buttons {
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-download,
+  .btn-email {
+    padding: 0.75rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .btn-download svg,
+  .btn-email svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn-back-home {
+    font-size: 0.85rem;
+    padding: 0.875rem;
+    margin-top: 1.5rem;
+  }
+}

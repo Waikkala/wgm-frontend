@@ -267,6 +267,10 @@
     padding: 1.5rem 1rem;
   }
 
+  .header-content {
+    flex-wrap: wrap;
+  }
+
   .header-text h1 {
     font-size: 1.25rem;
   }
@@ -276,8 +280,7 @@
   }
 
   .logo-icon {
-    width: 36px;
-    height: 36px;
+    width: 80px;
   }
 
   .cart-icon {
@@ -294,13 +297,13 @@
   }
 
   .header-landing .logo {
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 1.5rem;
     left: 1rem;
     top: 1rem;
   }
 
   .header-landing .logo-icon {
-    width: 80px;
+    width: 70px;
   }
 
   .header-landing .header-nav-bar {
@@ -334,5 +337,58 @@
   .shop-now-btn {
     padding: 0.4rem 0.5rem;
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1rem 0.75rem;
+  }
+
+  .header-text h1 {
+    font-size: 1.1rem;
+  }
+
+  .header-text p {
+    font-size: 0.7rem;
+  }
+
+  .logo-icon {
+    width: 70px;
+  }
+
+  .cart-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .header-landing .logo {
+    padding: 1rem 1.25rem;
+    left: 0.75rem;
+    top: 0.75rem;
+  }
+
+  .header-landing .logo-icon {
+    width: 60px;
+  }
+
+  .header-landing .header-nav-bar {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+
+  .shop-now-btn {
+    padding: 0.35rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .menu-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
   }
 }

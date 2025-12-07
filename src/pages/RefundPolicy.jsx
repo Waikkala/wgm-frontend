@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 import './RefundPolicy.css';
-import logo from '/logo.png';
+import logo from '../assets/Logo.png';
 
 const RefundPolicy = () => {
     return (

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Confirmation.css';
-import logo from '/logo.png';
+import logo from '../assets/Logo.png';
 import img1 from '/1.png';
 
 const Confirmation = () => {

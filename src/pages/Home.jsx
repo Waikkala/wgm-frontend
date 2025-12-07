@@ -168,13 +168,15 @@ function Home({ cartCount }) {
       {/* Product Showcase Section */}
       <section className="product-showcase-wrapper">
         <div className="product-showcase">
-          <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
           <div className="showcase-container">
             <div className="showcase-image-wrapper">
               <img src={ragaReserveImg} alt="Ceylon Raga Reserve Product" className="showcase-product-image" />
             </div>
             <div className="showcase-content">
-              <h2 className="showcase-title">Ceylon Raga Reserve</h2>
+              <div className="showcase-title-row">
+                <h2 className="showcase-title">Ceylon Raga Reserve</h2>
+                <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+              </div>
               <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
             </div>
           </div>

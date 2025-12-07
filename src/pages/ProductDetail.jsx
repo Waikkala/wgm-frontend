@@ -5,7 +5,7 @@ import SimpleFooter from '../components/SimpleFooter';
 import './ProductDetail.css';
 import PackImage from '../assets/Pack.png';
 import ProductImage from '../assets/blogSA (4).png';
-import logo from '/logo.png';
+import logo from '../assets/Logo.png';
 
 const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import './SimpleFooter.css';
-import logo1 from '/logo1.png';
+import logo1 from '../assets/Logo.png';
 
 const SimpleFooter = () => {
   return (

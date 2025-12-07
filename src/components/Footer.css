@@ -158,3 +158,56 @@
     font-size: 0.8rem;
   }
 }
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.75rem 0.75rem 0.875rem;
+  }
+
+  .footer-grid {
+    gap: 1.75rem;
+  }
+
+  .footer-logo {
+    padding: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-logo .logo-icon {
+    width: 55px;
+  }
+
+  .footer-description {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .footer-heading {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-nav {
+    gap: 0.7rem;
+  }
+
+  .footer-link {
+    font-size: 0.8rem;
+  }
+
+  .contact-info {
+    gap: 0.5rem;
+  }
+
+  .contact-info p {
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom {
+    padding-top: 1.75rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.75rem;
+  }
+}
