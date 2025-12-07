@@ -199,7 +199,11 @@ function Home({ cartCount }) {
             <div className="card-image-placeholder">
               <img src={handpickedImg} alt="Handpicked Quality" />
             </div>
-            <div className="card-icon">🌱</div>
+            <svg className="card-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22V12M12 12C12 9 10 7 8 5M12 12C12 9 14 7 16 5" stroke="#d4a574" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 5C8 5 6 6 6 8C6 10 8 11 10 12" stroke="#d4a574" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16 5C16 5 18 6 18 8C18 10 16 11 14 12" stroke="#d4a574" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             <h3>Handpicked Quality</h3>
             <p>
               Every ingredient is carefully selected from local farms, ensuring the highest standards of
@@ -210,7 +214,15 @@ function Home({ cartCount }) {
             <div className="card-image-placeholder">
               <img src={advancedProcessImg} alt="Advanced Processing" />
             </div>
-            <div className="card-icon">🔬</div>
+            <svg className="card-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 11H22M2 11L4 9M22 11L20 9M2 11L4 13M22 11L20 13" stroke="#d4a574" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="7" cy="11" r="1.5" fill="#d4a574"/>
+              <circle cx="12" cy="11" r="1.5" fill="#d4a574"/>
+              <circle cx="17" cy="11" r="1.5" fill="#d4a574"/>
+              <path d="M19 5L17 7H7L5 5H19Z" stroke="#d4a574" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="20" cy="17" r="3.5" stroke="#d4a574" strokeWidth="1.5" fill="none"/>
+              <path d="M20 15V19M18 17H22" stroke="#d4a574" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
             <h3>Advanced Processing</h3>
             <p>
               State-of-the-art facilities with stringent quality controls preserve the natural aroma
@@ -221,7 +233,11 @@ function Home({ cartCount }) {
             <div className="card-image-placeholder">
               <img src={globalStandardImg} alt="Global Standards" />
             </div>
-            <div className="card-icon">🌍</div>
+            <svg className="card-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="9" stroke="#d4a574" strokeWidth="1.5" fill="none"/>
+              <path d="M3 12H21M12 3C14.5 5.5 16 8.5 16 12C16 15.5 14.5 18.5 12 21M12 3C9.5 5.5 8 8.5 8 12C8 15.5 9.5 18.5 12 21" stroke="#d4a574" strokeWidth="1.5" fill="none"/>
+              <ellipse cx="12" cy="12" rx="9" ry="4" stroke="#d4a574" strokeWidth="1.5" fill="none"/>
+            </svg>
             <h3>Global Standards</h3>
             <p>
               GMP-Compliant facilities with ISO and HACCP certification underway, ensuring

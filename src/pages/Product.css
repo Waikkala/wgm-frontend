@@ -35,6 +35,7 @@
 }
 
 .raga-detail-title {
+  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   color: #d4a574;
   margin-bottom: 0.6rem;
