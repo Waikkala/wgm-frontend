@@ -8,6 +8,9 @@ import product1 from '/product1.png';
 import img1 from '/1.png';
 import img2 from '/2.png';
 import img3 from '/3.png';
+import hotBeverageImg from '../assets/hotbeverage.png';
+import alcoholicImg from '../assets/alcoholic.png';
+import coldImg from '../assets/cold (2).png';
 
 const Product = ({ cartCount }) => {
   const [activeBrewTab, setActiveBrewTab] = useState('hot');
@@ -170,7 +173,14 @@ const Product = ({ cartCount }) => {
             )}
           </div>
           <div className="brew-image">
-            <img src={product1} alt="Raga Reserve Brew" />
+            <img 
+              src={
+                activeBrewTab === 'hot' ? hotBeverageImg :
+                activeBrewTab === 'cold' ? coldImg :
+                alcoholicImg
+              } 
+              alt={`${activeBrewTab} beverages`} 
+            />
           </div>
         </div>
       </section>
