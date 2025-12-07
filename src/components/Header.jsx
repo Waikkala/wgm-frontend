@@ -1,6 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Header.css';
+import logo1 from '/logo1.png';
 
 const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = false }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
           <>
             <div className="header-top">
               <div className="logo" onClick={() => navigate('/')}>
-                <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+                <img src={logo1} alt="WGM Logo" className="logo-icon" />
               </div>
               <div className="header-actions">
                 <button className="shop-now-btn" onClick={() => navigate('/products')}>
@@ -37,7 +38,7 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
         ) : (
           <>
             <div className="logo" onClick={() => navigate('/')}>
-              <img src="/wgm-frontend/logo1.png" alt="WGM Logo" className="logo-icon" />
+              <img src={logo1} alt="WGM Logo" className="logo-icon" />
             </div>
             <div className="header-text">
               <h1>{title}</h1>

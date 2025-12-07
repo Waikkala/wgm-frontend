@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Payment.css';
+import img2 from '/2.png';
+import logo from '/logo.png';
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -163,8 +165,8 @@ const Payment = () => {
             <div className="payment-container">
               <div className="payment-card">
                 <div className="card-header">
-                  <img src="/wgm-frontend/2.png" alt="Card Background" className="card-bg" />
-                  <img src="/wgm-frontend/logo.png" alt="WGM Logo" className="card-logo" />
+                  <img src={img2} alt="Card Background" className="card-bg" />
+                  <img src={logo} alt="WGM Logo" className="card-logo" />
                 </div>
 
                 <div className="card-form">

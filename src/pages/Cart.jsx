@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Cart.css';
+import PackImage from '../assets/Pack.png';
 
 const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
                   {cartItems.map((item) => (
                     <div key={item.weight} className="cart-item">
                       <div className="item-image">
-                        <img src="/wgm-frontend/product.png" alt={item.name} />
+                        <img src={PackImage} alt={item.name} />
                       </div>
                       <div className="item-details">
                         <h3>{item.name}</h3>
@@ -135,7 +136,7 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
                   {cartItems.map((item) => (
                     <div key={item.weight} className="summary-item-card">
                       <div className="summary-item-image">
-                        <img src="/wgm-frontend/product.png" alt={item.name} />
+                        <img src={PackImage} alt={item.name} />
                       </div>
                       <div className="summary-item-info">
                         <h4>{item.name}</h4>
