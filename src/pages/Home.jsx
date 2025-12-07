@@ -277,7 +277,11 @@ function Home({ cartCount }) {
               <img src={qualityImg} alt="Quality" />
             </div>
             <div className="pillar-label">
-              <span className="pillar-icon">👨‍🍳</span>
+              <svg className="pillar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="9" r="6" stroke="#d4a574" strokeWidth="1.5" fill="none"/>
+                <path d="M12 5L13 7.5L15.5 8L13 10L13.5 12.5L12 11L10.5 12.5L11 10L8.5 8L11 7.5L12 5Z" fill="#d4a574"/>
+                <path d="M8 13L7 22L12 19L17 22L16 13" stroke="#d4a574" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
               <h3>Quality</h3>
             </div>
           </div>
@@ -286,7 +290,9 @@ function Home({ cartCount }) {
               <img src={sustainabilityImg} alt="Sustainability" />
             </div>
             <div className="pillar-label">
-              <span className="pillar-icon">🌱</span>
+              <svg className="pillar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C21 5 14 5.25 9 6.25C4 7.25 2 11.5 2 13.5C2 15.5 3.75 17.25 3.75 17.25C7 8 17 8 17 8Z" fill="#d4a574"/>
+              </svg>
               <h3>Sustainability</h3>
             </div>
           </div>
@@ -295,7 +301,9 @@ function Home({ cartCount }) {
               <img src={accountabilityImg} alt="Accountability" />
             </div>
             <div className="pillar-label">
-              <span className="pillar-icon">👥</span>
+              <svg className="pillar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z" fill="#d4a574"/>
+              </svg>
               <h3>Accountability</h3>
             </div>
           </div>
@@ -304,7 +312,9 @@ function Home({ cartCount }) {
               <img src={trustImg} alt="Trust" />
             </div>
             <div className="pillar-label">
-              <span className="pillar-icon">🛡️</span>
+              <svg className="pillar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z" fill="#d4a574"/>
+              </svg>
               <h3>Trust</h3>
             </div>
           </div>

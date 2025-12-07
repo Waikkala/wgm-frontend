@@ -393,6 +393,10 @@
   gap: 0.5rem;
 }
 
+.raga-features li::first-letter {
+  filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
+}
+
 .btn-buy-now {
   display: inline-block;
   background: #d4a574;
@@ -512,6 +516,8 @@
 .card-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: #d4a574;
+  filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
 }
 
 .innovation-card h3 {
@@ -632,8 +638,18 @@
 }
 
 .pillar-icon {
-  font-size: 1.8rem;
-  color: #d4a574;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.pillar-icon path {
+  fill: #d4a574;
+  transition: fill 0.3s ease;
+}
+
+.pillar-card:hover .pillar-icon path {
+  fill: #c49563;
 }
 
 .pillar-card h3 {

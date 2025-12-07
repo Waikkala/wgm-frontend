@@ -94,6 +94,10 @@
   gap: 0.5rem;
 }
 
+.raga-features li::first-letter {
+  filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
+}
+
 .btn-buy-now {
   display: inline-block;
   background: #d4a574;
@@ -186,6 +190,10 @@
   gap: 0.5rem;
 }
 
+.brew-tab::first-letter {
+  filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
+}
+
 .brew-tab.active {
   background: #d4af37;
   color: white;
@@ -234,6 +242,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #d4a574;
+  filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
 }
 
 .recipe-details h4 {
@@ -608,6 +618,8 @@
     font-size: 1.5rem;
     width: 32px;
     height: 32px;
+    color: #d4a574;
+    filter: sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.1);
   }
 
   .recipe-details h4 {
