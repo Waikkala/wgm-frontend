@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './AboutUs.css';
-import founderImg from '../assets/man.jpg';
+import founderImg from '../assets/man.png';
 
 const AboutUs = ({ cartCount = 0 }) => {
 

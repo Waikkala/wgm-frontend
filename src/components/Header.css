@@ -157,6 +157,7 @@
 
 .header-landing .header-nav-bar {
   background-color: #d9d9d9;
+  background-image: url('/header-bar.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -176,8 +177,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(217, 217, 217, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   pointer-events: none;
+  z-index: 0;
 }
 
 .nav-menu {
@@ -186,6 +188,8 @@
   align-items: center;
   justify-content: center;
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-link {

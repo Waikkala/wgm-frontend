@@ -2,7 +2,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import './Header.css';
 import logo1 from '/logo1.png';
-import headerBarImg from '../assets/Headr_Bar (1440 x 60).png';
 
 const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = false }) => {
   const navigate = useNavigate();
@@ -27,12 +26,7 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
                 </button>
               </div>
             </div>
-            <div 
-              className="header-nav-bar" 
-              style={{ 
-                backgroundImage: `url(${headerBarImg}), url(/header-bar.png)` 
-              }}
-            >
+            <div className="header-nav-bar">
               <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
                 <Link to="/" className="nav-link">HOME</Link>
                 <Link to="/products" className="nav-link">PRODUCTS</Link>
