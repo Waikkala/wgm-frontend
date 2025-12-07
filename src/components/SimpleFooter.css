@@ -13,10 +13,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/wgm-frontend/background.png');
+  background-image: url('../assets/Footer_1 (1440 x 415).png');
   background-size: cover;
   background-position: center;
-  opacity: 0.15;
+  opacity: 0.3;
 }
 
 .simple-footer-content {
