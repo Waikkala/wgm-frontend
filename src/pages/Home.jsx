@@ -165,8 +165,14 @@ function Home({ cartCount }) {
         </div>
       </section>
 
+      {/* Decorative Separator Bar */}
+      <div className="decorative-separator"></div>
+
       {/* Product Showcase Section */}
       <section className="product-showcase-wrapper">
+        {/* Decorative Separator Bar */}
+        <div className="decorative-separator"></div>
+        
         <div className="product-showcase">
           <div className="showcase-container">
             <div className="showcase-image-wrapper">
@@ -181,6 +187,10 @@ function Home({ cartCount }) {
             </div>
           </div>
         </div>
+        
+        {/* Decorative Separator Bar */}
+        <div className="decorative-separator"></div>
+        
         <div className="showcase-explore-section">
           <Link to="/products" className="btn-explore">EXPLORE RAGA RESERVE</Link>
         </div>
