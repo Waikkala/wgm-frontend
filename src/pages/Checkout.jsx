@@ -291,7 +291,7 @@ const Checkout = () => {
         paymentStatus: 'PENDING',
         promoCode: couponStatus.isApplied ? formData.couponCode : '',
         deliveryTown: formData.district, // Using district name as delivery town
-        deliveryFee: shipping,
+        deliveryFee: 0, // Delivery charges already included in product price
         items: orderItems
       };
 
