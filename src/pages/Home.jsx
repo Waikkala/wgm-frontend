@@ -181,7 +181,7 @@ function Home({ cartCount }) {
             <div className="showcase-content">
               <div className="showcase-title-row">
                 <h2 className="showcase-title">Ceylon Raga Reserve</h2>
-                <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+                <Link to="/product-detail" className="btn-buy-now-corner">BUY NOW</Link>
               </div>
               <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
             </div>
@@ -280,9 +280,10 @@ function Home({ cartCount }) {
               <li>✨ No preservatives. No artificial ingredients.</li>
               <li>☀️ Solar-powered production.</li>
               <li>🌾 Supporting Sri Lankan rural farmers.</li>
+                <li>👩🏽‍🌾 Empowering women.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
-            <Link to="/products" className="btn-buy-now">BUY NOW</Link>
+            <Link to="/product-detail" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
             <img src={blogSA4} alt="Raga Reserve Package" />
@@ -505,11 +506,11 @@ function Home({ cartCount }) {
               {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
             </button>
           </form>
-          <a href="https://wa.me/94761926066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
+          <a href="https://wa.me/94761826066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
             <div className="whatsapp-text">
               <span className="whatsapp-main">Need an immediate answer?</span>
               <span className="whatsapp-sub">Chat with us on Whatsapp</span>
-              <span className="whatsapp-number">+94 76 192 6066</span>
+              <span className="whatsapp-number">+94 76 182 6066</span>
             </div>
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
           </a>

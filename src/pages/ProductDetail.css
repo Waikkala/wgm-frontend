@@ -242,9 +242,33 @@
 }
 
 .product-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-price .amount {
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-dark);
+}
+
+.price-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.per-cup {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.delivery-note {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 400;
 }
 
 .currency {
@@ -342,9 +366,10 @@
   color: var(--text-dark);
 }
 
-.weight-oz {
-  font-size: 0.875rem;
+.weight-price {
+  font-size: 0.75rem;
   color: var(--text-light);
+  font-weight: 500;
 }
 
 .quantity-section {
@@ -522,14 +547,14 @@
 .tab-panel {
   max-width: 1000px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .description-text {
   line-height: 1.8;
   margin-bottom: 1.5rem;
   color: #555;
-  text-align: center;
+  text-align: left;
   font-size: 0.95rem;
 }
 
@@ -537,14 +562,14 @@
   font-size: 1.125rem;
   font-weight: 700;
   margin: 2rem 0 1.5rem;
-  text-align: center;
+  text-align: left;
   color: var(--text-dark);
 }
 
 .features-list {
   list-style: none;
   padding: 0;
-  text-align: center;
+  text-align: left;
   display: block;
 }
 
@@ -554,15 +579,52 @@
   font-size: 0.95rem;
 }
 
+.return-policy-content {
+  text-align: left;
+}
+
+.policy-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.policy-text {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.btn-view-policy {
+  padding: 1rem 2rem;
+  background: var(--primary-green);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.btn-view-policy:hover {
+  background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
+}
+
 .guidance-content {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   text-align: left;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 0;
   align-items: flex-start;
-  padding: 0 12rem;
+  padding: 0;
 }
 
 .guidance-item {
@@ -603,17 +665,18 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  max-width: 1000px;
+  margin: 0;
+  padding: 0;
 }
 
 .info-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 1.5rem 200px;
+  padding: 1.5rem 0;
   border-bottom: 1px solid #e0e0e0;
+  gap: 3rem;
 }
 
 .info-row:first-child {
@@ -675,9 +738,9 @@
 
 .instruction-section {
   margin-bottom: 2.5rem;
-  text-align: center;
-  max-width: 700px;
-  margin-left: auto;
+  text-align: left;
+  max-width: 1000px;
+  margin-left: 0;
   margin-right: auto;
 }
 
@@ -762,11 +825,11 @@
   }
 
   .guidance-content {
-    padding: 0 1rem;
+    padding: 0;
   }
 
   .info-list {
-    padding: 0 1rem;
+    padding: 0;
   }
 
   .info-row {
@@ -942,8 +1005,8 @@
     font-size: 0.95rem;
   }
 
-  .weight-oz {
-    font-size: 0.8rem;
+  .weight-price {
+    font-size: 0.7rem;
   }
 
   .quantity-section {

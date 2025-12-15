@@ -12,9 +12,9 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
   };
 
   const subtotal = calculateSubtotal();
-  const shipping = subtotal > 0 ? 250.00 : 0;
-  const tax = subtotal * 0.0583; // 5.83% tax
-  const total = subtotal + shipping + tax;
+  const shipping = 0; // Delivery charges already included in product price
+  const tax = 0; // Tax already included in product price
+  const total = subtotal;
 
   const handlePlaceOrder = () => {
     if (cartItems.length > 0) {
@@ -143,7 +143,7 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
                         <p className="summary-item-meta">Quantity: {item.quantity} × {item.weight}</p>
                       </div>
                       <div className="summary-item-price">
-                        LKR {item.price.toLocaleString('en-LK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                        LKR {(item.price * item.quantity).toLocaleString('en-LK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                       </div>
                     </div>
                   ))}
@@ -153,9 +153,8 @@ const Cart = ({ cartItems = [], updateCartItem, removeFromCart }) => {
                       <span>Subtotal</span>
                       <span>LKR {subtotal.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
-                    <div className="summary-row">
-                      <span>Tax (Estimated)</span>
-                      <span>LKR {tax.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <div className="summary-note">
+                      <span style={{ fontSize: '0.85rem', color: '#666' }}>* Delivery charges included in price</span>
                     </div>
                   </div>
 
