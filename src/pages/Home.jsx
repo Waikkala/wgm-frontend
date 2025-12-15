@@ -505,11 +505,11 @@ function Home({ cartCount }) {
               {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
             </button>
           </form>
-          <a href="https://wa.me/94761926066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
+          <a href="https://wa.me/94761826066" target="_blank" rel="noopener noreferrer" className="whatsapp-link">
             <div className="whatsapp-text">
               <span className="whatsapp-main">Need an immediate answer?</span>
               <span className="whatsapp-sub">Chat with us on Whatsapp</span>
-              <span className="whatsapp-number">+94 76 192 6066</span>
+              <span className="whatsapp-number">+94 76 182 6066</span>
             </div>
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
           </a>
