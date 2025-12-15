@@ -192,6 +192,12 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
             >
               Additional Information
             </button>
+            <button 
+              className={`tab ${activeTab === 'return-policy' ? 'active' : ''}`}
+              onClick={() => setActiveTab('return-policy')}
+            >
+              Return & Policy
+            </button>
           </div>
 
           <div className="tabs-content">
@@ -270,6 +276,29 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                     <strong>Product Type</strong>
                     <span>Masala Brew / Spice Blend</span>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'return-policy' && (
+              <div className="tab-panel">
+                <div className="return-policy-content">
+                  <h3 className="policy-title">Return & Refund Policy</h3>
+                  <p className="policy-text">
+                    At Waikkala Grinding Mills, we are committed to ensuring your complete satisfaction with every purchase. 
+                    We understand that sometimes products may not meet your expectations, and we're here to help make things right.
+                  </p>
+                  <p className="policy-text">
+                    Our return and refund policy is designed to be fair and transparent. If you're not completely satisfied with 
+                    your Ceylon Raga Reserve purchase, you may be eligible for a return or exchange within the specified timeframe, 
+                    subject to our terms and conditions.
+                  </p>
+                  <button 
+                    className="btn-view-policy"
+                    onClick={() => navigate('/refund-policy')}
+                  >
+                    View Full Return & Refund Policy
+                  </button>
                 </div>
               </div>
             )}

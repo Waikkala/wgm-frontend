@@ -547,14 +547,14 @@
 .tab-panel {
   max-width: 1000px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .description-text {
   line-height: 1.8;
   margin-bottom: 1.5rem;
   color: #555;
-  text-align: center;
+  text-align: left;
   font-size: 0.95rem;
 }
 
@@ -562,14 +562,14 @@
   font-size: 1.125rem;
   font-weight: 700;
   margin: 2rem 0 1.5rem;
-  text-align: center;
+  text-align: left;
   color: var(--text-dark);
 }
 
 .features-list {
   list-style: none;
   padding: 0;
-  text-align: center;
+  text-align: left;
   display: block;
 }
 
@@ -577,6 +577,43 @@
   padding: 0.5rem 0;
   color: #666;
   font-size: 0.95rem;
+}
+
+.return-policy-content {
+  text-align: left;
+}
+
+.policy-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.policy-text {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.btn-view-policy {
+  padding: 1rem 2rem;
+  background: var(--primary-green);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.btn-view-policy:hover {
+  background: var(--secondary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
 }
 
 .guidance-content {
