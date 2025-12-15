@@ -17,7 +17,7 @@ import sustainabilityImg from '../assets/sustainability.png';
 import accountabilityImg from '../assets/Accountability.png';
 import trustImg from '../assets/trust.png';
 
-const API_BASE_URL = 'https://wgm-backend.onrender.com';
+const API_BASE_URL = 'http://54.226.87.105:8080';
 
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
