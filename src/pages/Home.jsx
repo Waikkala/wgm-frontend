@@ -280,6 +280,7 @@ function Home({ cartCount }) {
               <li>✨ No preservatives. No artificial ingredients.</li>
               <li>☀️ Solar-powered production.</li>
               <li>🌾 Supporting Sri Lankan rural farmers.</li>
+                <li>👩🏽‍🌾 Empowering women.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
             <Link to="/products" className="btn-buy-now">BUY NOW</Link>
