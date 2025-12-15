@@ -242,9 +242,33 @@
 }
 
 .product-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-price .amount {
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-dark);
+}
+
+.price-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.per-cup {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.delivery-note {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 400;
 }
 
 .currency {
@@ -342,9 +366,10 @@
   color: var(--text-dark);
 }
 
-.weight-oz {
-  font-size: 0.875rem;
+.weight-price {
+  font-size: 0.75rem;
   color: var(--text-light);
+  font-weight: 500;
 }
 
 .quantity-section {
@@ -942,8 +967,8 @@
     font-size: 0.95rem;
   }
 
-  .weight-oz {
-    font-size: 0.8rem;
+  .weight-price {
+    font-size: 0.7rem;
   }
 
   .quantity-section {

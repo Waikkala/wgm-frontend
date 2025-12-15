@@ -376,17 +376,19 @@ const Checkout = () => {
     }
   };
 
-  // Use cart data from navigation state or fallback to default values
-  const subtotal = cartSubtotal || 1500.00;
-  const shipping = cartShipping || 250.00;
-  const tax = cartTax || 87.50;
+  // Use cart data from navigation state or calculate from cart items
+  const subtotal = cartSubtotal || (cartItems && cartItems.length > 0 
+    ? cartItems.reduce((total, item) => total + (item.price * item.quantity), 0) 
+    : 2100.00);
+  const shipping = 0; // Delivery charges already included in product price
+  const tax = 0; // Tax already included in product price
 
   // Calculate discount based on coupon
   const discount = couponStatus.isApplied
     ? (subtotal * couponStatus.discountPercent / 100)
     : 0;
 
-  const total = subtotal + shipping + tax - discount;
+  const total = subtotal - discount;
 
   return (
     <div className="page-container">
@@ -675,13 +677,8 @@ const Checkout = () => {
                     <span>Subtotal</span>
                     <span>LKR {subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="summary-row">
-                    <span>Shipping</span>
-                    <span>LKR {shipping.toFixed(2)}</span>
-                  </div>
-                  <div className="summary-row">
-                    <span>Tax (Estimated)</span>
-                    <span>LKR {tax.toFixed(2)}</span>
+                  <div className="summary-note">
+                    <span style={{ fontSize: '0.85rem', color: '#666' }}>* Delivery charges included in price</span>
                   </div>
                   {discount > 0 && (
                     <div className="summary-row discount">

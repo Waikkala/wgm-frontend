@@ -14,19 +14,20 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const [activeTab, setActiveTab] = useState('description');
 
   const weights = [
-    { value: '100g', label: '100g', price: '3.5oz' },
-    { value: '250g', label: '250g', price: '8.8oz' },
-    { value: '500g', label: '500g', price: '17.6oz' },
-    { value: '1000g', label: '1000g', price: '35.2oz' }
+    { value: '100g', label: '100g', price: 'Rs 2,100.00', priceValue: 2100, perCup: 'Rs 42.00 / per cup', note: '(including delivery charges)' },
+    { value: '250g', label: '250g Bulk Pack', price: 'Rs 4,725.00', priceValue: 4725, perCup: 'Rs 37.80 / per cup', note: '(Including delivery charges)' },
+    { value: '500g', label: '500g Bulk Pack', price: 'Rs 8,400.00', priceValue: 8400, perCup: 'Rs 33.60 / per cup', note: '(Including delivery charges)' },
+    { value: '1kg', label: '1kg Bulk Pack', price: 'Rs 15,600.00', priceValue: 15600, perCup: 'Rs 31.20 / per cup', note: '(Including delivery charges)' }
   ];
 
   const handleAddToCart = () => {
+    const selectedWeightData = weights.find(w => w.value === selectedWeight);
     const item = {
       name: 'Ceylon Raga Reserve',
       subtitle: 'Masala Brew',
       weight: selectedWeight,
       quantity: quantity,
-      price: 1500
+      price: selectedWeightData?.priceValue || 2100
     };
     addToCart(item);
     // Reset quantity after adding
@@ -88,8 +89,11 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
             <div className="stock-badge">✓ In Stock</div>
             
             <div className="product-price">
-              <span className="currency">LKR</span>
-              <span className="amount">1,500.00</span>
+              <span className="amount">{weights.find(w => w.value === selectedWeight)?.price || 'Rs 2,100.00'}</span>
+              <div className="price-details">
+                <span className="per-cup">(Average {weights.find(w => w.value === selectedWeight)?.perCup || 'Rs 42 / per cup'})</span>
+                <span className="delivery-note">{weights.find(w => w.value === selectedWeight)?.note || '(including delivery charges)'}</span>
+              </div>
             </div>
 
             <div className="package-weight">
@@ -108,7 +112,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                     </div>
                     <div className="weight-text">
                       <div className="weight-value">{weight.label}</div>
-                      <div className="weight-oz">{weight.price}</div>
+                      <div className="weight-price">{weight.price}</div>
                     </div>
                   </button>
                 ))}
