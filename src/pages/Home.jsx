@@ -181,7 +181,7 @@ function Home({ cartCount }) {
             <div className="showcase-content">
               <div className="showcase-title-row">
                 <h2 className="showcase-title">Ceylon Raga Reserve</h2>
-                <Link to="/products" className="btn-buy-now-corner">BUY NOW</Link>
+                <Link to="/product-detail" className="btn-buy-now-corner">BUY NOW</Link>
               </div>
               <p className="showcase-tagline">Masala Brew - Anytime Energy. Everyday Luxury.</p>
             </div>
@@ -283,7 +283,7 @@ function Home({ cartCount }) {
                 <li>👩🏽‍🌾 Empowering women.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
-            <Link to="/products" className="btn-buy-now">BUY NOW</Link>
+            <Link to="/product-detail" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
             <img src={blogSA4} alt="Raga Reserve Package" />

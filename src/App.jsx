@@ -11,6 +11,7 @@ import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import Confirmation from './pages/Confirmation';
 import RefundPolicy from './pages/RefundPolicy';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"
@@ -90,7 +92,7 @@ function App() {
           }
         />
         <Route
-          path="/product"
+          path="/product-detail"
           element={
             <ProductDetail
               addToCart={addToCart}

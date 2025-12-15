@@ -24,7 +24,7 @@ const Footer = () => {
             <h3 className="footer-heading">Quick Links</h3>
             <nav className="footer-nav">
               <Link to="/" className="footer-link">Home</Link>
-              <Link to="/product" className="footer-link">Products</Link>
+              <Link to="/products" className="footer-link">Products</Link>
               <Link to="/about" className="footer-link">About Us</Link>
               <Link to="/blog" className="footer-link">Blog</Link>
             </nav>

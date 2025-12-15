@@ -45,7 +45,7 @@ const Product = ({ cartCount }) => {
               <li>🌾 Supporting Sri Lankan rural farmers.</li>
               <li>💼 Fostering female entrepreneurship.</li>
             </ul>
-            <Link to="/product" className="btn-buy-now">BUY NOW</Link>
+            <Link to="/product-detail" className="btn-buy-now">BUY NOW</Link>
           </div>
           <div className="raga-detail-image">
             <img src={blogSA4} alt="Raga Reserve Package" />

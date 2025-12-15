@@ -18,7 +18,7 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
                 <img src={logo1} alt="WGM Logo" className="logo-icon" />
               </div>
               <div className="header-actions">
-                <button className="shop-now-btn" onClick={() => navigate('/product')}>
+                <button className="shop-now-btn" onClick={() => navigate('/product-detail')}>
                   Shop Now 🛒
                 </button>
                 <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
