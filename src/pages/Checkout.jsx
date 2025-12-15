@@ -5,7 +5,7 @@ import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
 import PackImage from '../assets/Pack.png';
 
-const API_BASE_URL = 'https://wgm-backend.onrender.com';
+const API_BASE_URL = 'http://54.226.87.105:8080';
 
 const Checkout = () => {
   const navigate = useNavigate();

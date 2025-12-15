@@ -47,7 +47,7 @@ function App() {
   };
 
   return (
-    <Router basename="/wgm-frontend">
+    <Router>
       <Routes>
         <Route
           path="/"
