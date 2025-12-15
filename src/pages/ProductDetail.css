@@ -621,10 +621,10 @@
   flex-direction: column;
   gap: 2rem;
   text-align: left;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 0;
   align-items: flex-start;
-  padding: 0 12rem;
+  padding: 0;
 }
 
 .guidance-item {
@@ -665,17 +665,18 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  max-width: 1000px;
+  margin: 0;
+  padding: 0;
 }
 
 .info-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 1.5rem 200px;
+  padding: 1.5rem 0;
   border-bottom: 1px solid #e0e0e0;
+  gap: 3rem;
 }
 
 .info-row:first-child {
@@ -737,9 +738,9 @@
 
 .instruction-section {
   margin-bottom: 2.5rem;
-  text-align: center;
-  max-width: 700px;
-  margin-left: auto;
+  text-align: left;
+  max-width: 1000px;
+  margin-left: 0;
   margin-right: auto;
 }
 
@@ -824,11 +825,11 @@
   }
 
   .guidance-content {
-    padding: 0 1rem;
+    padding: 0;
   }
 
   .info-list {
-    padding: 0 1rem;
+    padding: 0;
   }
 
   .info-row {

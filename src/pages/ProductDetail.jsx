@@ -295,7 +295,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
                   </p>
                   <button 
                     className="btn-view-policy"
-                    onClick={() => navigate('/refund-policy')}
+                    onClick={() => window.open('/refund-policy', '_blank')}
                   >
                     View Full Return & Refund Policy
                   </button>
