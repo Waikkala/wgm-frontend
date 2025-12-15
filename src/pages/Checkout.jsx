@@ -10,7 +10,7 @@ const API_BASE_URL = 'http://54.226.87.105:8080';
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cartItems = [], subtotal: cartSubtotal = 0, shipping: cartShipping = 0, tax: cartTax = 0 } = location.state || {};
+  const { cartItems = [], subtotal: cartSubtotal = 0 } = location.state || {};
   const currentStep = 1; // Current step indicator
   const [formData, setFormData] = useState({
     firstName: '',
@@ -380,8 +380,7 @@ const Checkout = () => {
   const subtotal = cartSubtotal || (cartItems && cartItems.length > 0 
     ? cartItems.reduce((total, item) => total + (item.price * item.quantity), 0) 
     : 2100.00);
-  const shipping = 0; // Delivery charges already included in product price
-  const tax = 0; // Tax already included in product price
+  // Note: Delivery charges and tax already included in product price
 
   // Calculate discount based on coupon
   const discount = couponStatus.isApplied
