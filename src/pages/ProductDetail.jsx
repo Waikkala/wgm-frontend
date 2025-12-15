@@ -38,6 +38,22 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
     navigate('/cart');
   };
 
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent('Inquiry about Ceylon Raga Reserve - Masala Brew');
+    const body = encodeURIComponent(`Dear Waikkala Grinding Mills Team,
+
+I am interested in learning more about your Ceylon Raga Reserve - Masala Brew product.
+
+[Please share your thoughts, questions, or feedback here]
+
+Best regards,
+[Your Name]`);
+    // Open Gmail compose in a new tab
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=marketing@wgm.lk&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank');
+  };
+
   return (
     <div className="page-container">
       <div className="header-wrapper">
@@ -52,7 +68,7 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
       
       <div className="nav-bar">
         <div className="nav-buttons">
-          <button className="nav-btn" onClick={() => window.location.href = 'mailto:contact@waikkala.com'}>Contacts</button>
+          <button type="button" className="nav-btn" onClick={handleContactClick}>Contacts</button>
           <button className="nav-btn" onClick={() => alert('Order tracking feature coming soon!')}>Order Tracking</button>
           <button className="nav-btn" onClick={() => navigate('/')}>Home</button>
         </div>
