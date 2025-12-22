@@ -722,7 +722,7 @@ const Checkout = () => {
                 </button>
 
                 <p className="refund-policy">
-                  By placing your order, you agree to our <Link to="/refund-policy" target="_blank" rel="noopener noreferrer">Refund & Return Policy</Link>
+                  By placing your order, you agree to our <Link to="/refund-policy">Refund & Return Policy</Link>
                 </p>
 
                 <div className="payment-methods">
