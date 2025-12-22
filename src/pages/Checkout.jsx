@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import SimpleHeader from '../components/SimpleHeader';
-import SimpleFooter from '../components/SimpleFooter';
-import './Checkout.css';
-import PackImage from '../assets/Pack.png';
+import { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import SimpleHeader from "../components/SimpleHeader";
+import SimpleFooter from "../components/SimpleFooter";
+import "./Checkout.css";
+import PackImage from "../assets/Pack.png";
 
-const API_BASE_URL = 'http://54.226.87.105:8080';
+const API_BASE_URL = "http://54.226.87.105:8080";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -13,18 +13,18 @@ const Checkout = () => {
   const { cartItems = [], subtotal: cartSubtotal = 0 } = location.state || {};
   const currentStep = 1; // Current step indicator
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    streetAddress: '',
-    district: '',
-    districtId: '',
-    city: '',
-    province: '',
-    postalCode: '',
-    orderNotes: '',
-    couponCode: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    streetAddress: "",
+    district: "",
+    districtId: "",
+    city: "",
+    province: "",
+    postalCode: "",
+    orderNotes: "",
+    couponCode: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -33,8 +33,8 @@ const Checkout = () => {
     isValid: false,
     isApplied: false,
     discountPercent: 0,
-    message: '',
-    description: ''
+    message: "",
+    description: "",
   });
 
   // State for districts and cities data
@@ -54,7 +54,7 @@ const Checkout = () => {
   const validatePhone = (phone) => {
     // Accepts formats like: +94771234567, 0771234567, 077-123-4567, etc.
     const phoneRegex = /^(\+94|0)?[0-9]{9,10}$/;
-    const cleanPhone = phone.replace(/[\s-]/g, '');
+    const cleanPhone = phone.replace(/[\s-]/g, "");
     return phoneRegex.test(cleanPhone);
   };
 
@@ -62,13 +62,13 @@ const Checkout = () => {
     const { name, value } = e.target;
 
     // If district changes, clear city selection and cities list
-    if (name === 'district') {
-      const selectedDistrict = districts.find(d => d.district_name === value);
+    if (name === "district") {
+      const selectedDistrict = districts.find((d) => d.district_name === value);
       setFormData({
         ...formData,
         district: value,
-        districtId: selectedDistrict ? selectedDistrict.district_id : '',
-        city: '' // Clear city when district changes
+        districtId: selectedDistrict ? selectedDistrict.district_id : "",
+        city: "", // Clear city when district changes
       });
       setCities([]); // Clear cities list
 
@@ -79,7 +79,7 @@ const Checkout = () => {
     } else {
       setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
       });
     }
 
@@ -87,19 +87,19 @@ const Checkout = () => {
     if (errors[name]) {
       setErrors({
         ...errors,
-        [name]: ''
+        [name]: "",
       });
     }
 
     // Reset coupon status when user modifies the coupon code
-    if (name === 'couponCode' && couponStatus.isApplied) {
+    if (name === "couponCode" && couponStatus.isApplied) {
       setCouponStatus({
         isValidating: false,
         isValid: false,
         isApplied: false,
         discountPercent: 0,
-        message: '',
-        description: ''
+        message: "",
+        description: "",
       });
     }
   };
@@ -113,21 +113,21 @@ const Checkout = () => {
         isValid: false,
         isApplied: false,
         discountPercent: 0,
-        message: 'Please enter a coupon code',
-        description: ''
+        message: "Please enter a coupon code",
+        description: "",
       });
       return;
     }
 
-    setCouponStatus(prev => ({ ...prev, isValidating: true, message: '' }));
+    setCouponStatus((prev) => ({ ...prev, isValidating: true, message: "" }));
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/promos/validate`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code })
+        body: JSON.stringify({ code }),
       });
 
       const data = await response.json();
@@ -138,8 +138,8 @@ const Checkout = () => {
           isValid: true,
           isApplied: true,
           discountPercent: data.discountPercent || 0,
-          message: data.message || 'Coupon applied successfully!',
-          description: data.description || ''
+          message: data.message || "Coupon applied successfully!",
+          description: data.description || "",
         });
       } else {
         setCouponStatus({
@@ -147,8 +147,8 @@ const Checkout = () => {
           isValid: false,
           isApplied: false,
           discountPercent: 0,
-          message: data.message || 'Invalid coupon code',
-          description: ''
+          message: data.message || "Invalid coupon code",
+          description: "",
         });
       }
     } catch (error) {
@@ -157,10 +157,10 @@ const Checkout = () => {
         isValid: false,
         isApplied: false,
         discountPercent: 0,
-        message: 'Failed to validate coupon. Please try again.',
-        description: ''
+        message: "Failed to validate coupon. Please try again.",
+        description: "",
       });
-      console.error('Coupon validation error:', error);
+      console.error("Coupon validation error:", error);
     }
   };
 
@@ -176,10 +176,10 @@ const Checkout = () => {
       if (response.ok && Array.isArray(data)) {
         setDistricts(data);
       } else {
-        console.error('Failed to fetch districts:', data);
+        console.error("Failed to fetch districts:", data);
       }
     } catch (error) {
-      console.error('Error fetching districts:', error);
+      console.error("Error fetching districts:", error);
     } finally {
       setLoadingDistricts(false);
     }
@@ -191,17 +191,19 @@ const Checkout = () => {
 
     setLoadingCities(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/delivery/cities?districtId=${districtId}`);
+      const response = await fetch(
+        `${API_BASE_URL}/api/v1/delivery/cities?districtId=${districtId}`
+      );
       const data = await response.json();
 
       if (response.ok && Array.isArray(data)) {
         setCities(data);
       } else {
-        console.error('Failed to fetch cities:', data);
+        console.error("Failed to fetch cities:", data);
         setCities([]);
       }
     } catch (error) {
-      console.error('Error fetching cities:', error);
+      console.error("Error fetching cities:", error);
       setCities([]);
     } finally {
       setLoadingCities(false);
@@ -213,35 +215,35 @@ const Checkout = () => {
 
     // Check required fields
     if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+      newErrors.firstName = "First name is required";
     }
     if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
+      newErrors.lastName = "Last name is required";
     }
     if (!formData.email.trim()) {
-      newErrors.email = 'Email address is required';
+      newErrors.email = "Email address is required";
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = "Phone number is required";
     } else if (!validatePhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+      newErrors.phone = "Please enter a valid phone number";
     }
     if (!formData.streetAddress.trim()) {
-      newErrors.streetAddress = 'Street address is required';
+      newErrors.streetAddress = "Street address is required";
     }
     if (!formData.district.trim()) {
-      newErrors.district = 'District is required';
+      newErrors.district = "District is required";
     }
     if (!formData.city.trim()) {
-      newErrors.city = 'City is required';
+      newErrors.city = "City is required";
     }
     if (!formData.province) {
-      newErrors.province = 'Province is required';
+      newErrors.province = "Province is required";
     }
     if (!formData.postalCode.trim()) {
-      newErrors.postalCode = 'Postal code is required';
+      newErrors.postalCode = "Postal code is required";
     }
 
     setErrors(newErrors);
@@ -252,7 +254,7 @@ const Checkout = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      alert('Please fill in all required fields correctly.');
+      alert("Please fill in all required fields correctly.");
       return;
     }
 
@@ -261,20 +263,20 @@ const Checkout = () => {
     try {
       // Check if cart has items
       if (!cartItems || cartItems.length === 0) {
-        alert('Your cart is empty. Please add items before checkout.');
+        alert("Your cart is empty. Please add items before checkout.");
         setIsSubmittingOrder(false);
         return;
       }
 
       // Prepare order items - map cart items to API format
-      const orderItems = cartItems.map(item => ({
+      const orderItems = cartItems.map((item) => ({
         productId: item.productId || 1, // Default to 1 if productId not available
-        quantity: item.quantity
+        quantity: item.quantity,
       }));
 
       // Get city ID from the selected city
-      const selectedCity = cities.find(c => c.city_name === formData.city);
-      const cityId = selectedCity ? String(selectedCity.city_id) : '';
+      const selectedCity = cities.find((c) => c.city_name === formData.city);
+      const cityId = selectedCity ? String(selectedCity.city_id) : "";
 
       // Prepare request body
       const orderData = {
@@ -286,66 +288,103 @@ const Checkout = () => {
         city: cityId, // Send city ID as string
         district: String(formData.districtId), // Send district ID as string
         postalCode: formData.postalCode,
-        notes: formData.orderNotes || '',
-        paymentMethod: 'COD', // Cash on Delivery - will be updated after payment
-        paymentStatus: 'PENDING',
-        promoCode: couponStatus.isApplied ? formData.couponCode : '',
+        notes: formData.orderNotes || "",
+        paymentMethod: "COD", // Cash on Delivery - will be updated after payment
+        paymentStatus: "PENDING",
+        promoCode: couponStatus.isApplied ? formData.couponCode : "",
         deliveryTown: formData.district, // Using district name as delivery town
         deliveryFee: 0, // Delivery charges already included in product price
-        items: orderItems
+        items: orderItems,
       };
 
       // Debug: Log the request body
-      console.log('=== ORDER SUBMISSION DEBUG ===');
-      console.log('Request Body:', JSON.stringify(orderData, null, 2));
-      console.log('Cart Items:', cartItems);
-      console.log('Order Items:', orderItems);
-      console.log('============================');
+      console.log("=== ORDER SUBMISSION DEBUG ===");
+      console.log("Request Body:", JSON.stringify(orderData, null, 2));
+      console.log("Cart Items:", cartItems);
+      console.log("Order Items:", orderItems);
+      console.log("============================");
 
       // Make API call
       const response = await fetch(`${API_BASE_URL}/api/v1/orders`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify(orderData),
       });
 
       // Debug: Log the response status
-      console.log('=== API RESPONSE ===');
-      console.log('Status:', response.status);
-      console.log('Status Text:', response.statusText);
+      console.log("=== API RESPONSE ===");
+      console.log("Status:", response.status);
+      console.log("Status Text:", response.statusText);
 
       // Check if response has content before parsing
-      const contentType = response.headers.get('content-type');
+      const contentType = response.headers.get("content-type");
       let data = null;
 
-      if (contentType && contentType.includes('application/json')) {
+      if (contentType && contentType.includes("application/json")) {
         const text = await response.text();
-        console.log('Response Text:', text);
+        console.log("Response Text:", text);
         if (text) {
           try {
             data = JSON.parse(text);
-            console.log('Parsed Response Data:', data);
+            console.log("Parsed Response Data:", data);
           } catch (e) {
-            console.error('Failed to parse JSON:', e);
-            data = { message: 'Invalid JSON response from server' };
+            console.error("Failed to parse JSON:", e);
+            data = { message: "Invalid JSON response from server" };
           }
         } else {
-          console.warn('Empty response body');
-          data = { message: 'Server returned empty response' };
+          console.warn("Empty response body");
+          data = { message: "Server returned empty response" };
         }
       } else {
-        console.warn('Response is not JSON');
+        console.warn("Response is not JSON");
         const text = await response.text();
-        console.log('Non-JSON Response:', text);
-        data = { message: text || 'Server returned non-JSON response' };
+        console.log("Non-JSON Response:", text);
+        data = { message: text || "Server returned non-JSON response" };
       }
-      console.log('===================');
+      console.log("===================");
+
+      const initiatePayment = async (orderUid) => {
+        try {
+          const response = await fetch(
+            "https://wgm-backend.onrender.com/api/v1/payment/initiate",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                orderId: orderUid,
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (!response.ok || !data.success) {
+            throw new Error(data?.message || "Payment initiation failed");
+          }
+
+          // Configure Mastercard Hosted Checkout
+          window.Checkout.configure({
+            session: {
+              id: data.sessionId,
+            },
+          });
+
+          // Redirect to payment page
+          window.Checkout.showPaymentPage();
+        } catch (error) {
+          console.error("Payment initiation error:", error);
+          alert("Unable to initiate payment. Please try again.");
+        }
+      };
 
       if (response.ok) {
-        // Order created successfully, navigate to payment/confirmation
-        navigate('/payment', {
+        // Order created successfully, initiate payment and navigate
+        await initiatePayment(data.orderUid);
+        navigate("/payment", {
           state: {
             orderData: {
               orderUid: data.orderUid,
@@ -357,34 +396,40 @@ const Checkout = () => {
               promoCode: data.promoCode,
               message: data.message,
               billingInfo: formData,
-              cartItems: cartItems
-            }
-          }
+              cartItems: cartItems,
+            },
+          },
         });
       } else {
         // Handle error response
-        const errorMessage = data?.message || `Server error: ${response.status} ${response.statusText}`;
-        console.error('Order creation failed. Status:', response.status);
-        console.error('Error data:', data);
-        alert(`Order Error (${response.status}): ${errorMessage}\n\nPlease check the console for details.`);
+        const errorMessage =
+          data?.message ||
+          `Server error: ${response.status} ${response.statusText}`;
+        console.error("Order creation failed. Status:", response.status);
+        console.error("Error data:", data);
+        alert(
+          `Order Error (${response.status}): ${errorMessage}\n\nPlease check the console for details.`
+        );
       }
     } catch (error) {
-      console.error('Error submitting order:', error);
-      alert('An error occurred while placing your order. Please try again.');
+      console.error("Error submitting order:", error);
+      alert("An error occurred while placing your order. Please try again.");
     } finally {
       setIsSubmittingOrder(false);
     }
   };
 
   // Use cart data from navigation state or calculate from cart items
-  const subtotal = cartSubtotal || (cartItems && cartItems.length > 0 
-    ? cartItems.reduce((total, item) => total + (item.price * item.quantity), 0) 
-    : 2100.00);
+  const subtotal =
+    cartSubtotal ||
+    (cartItems && cartItems.length > 0
+      ? cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+      : 2100.0);
   // Note: Delivery charges and tax already included in product price
 
   // Calculate discount based on coupon
   const discount = couponStatus.isApplied
-    ? (subtotal * couponStatus.discountPercent / 100)
+    ? (subtotal * couponStatus.discountPercent) / 100
     : 0;
 
   const total = subtotal - discount;
@@ -398,32 +443,43 @@ const Checkout = () => {
         {/* Checkout Banner Card */}
         <section className="checkout-banner-card">
           <div className="checkout-banner-content">
-            <h1 className="checkout-banner-title">Place Your Raga Reserve Order</h1>
-            <p className="checkout-banner-subtitle">Complete Your Order for Ceylon Raga Reserve</p>
+            <h1 className="checkout-banner-title">
+              Place Your Raga Reserve Order
+            </h1>
+            <p className="checkout-banner-subtitle">
+              Complete Your Order for Ceylon Raga Reserve
+            </p>
           </div>
         </section>
 
         <main className="checkout-page">
           <div className="checkout-main-card">
             <button className="back-btn-checkout" onClick={() => navigate(-1)}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                width="24"
+                height="24"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 8l-4 4 4 4M16 12H8" />
               </svg>
             </button>
 
             <div className="checkout-steps">
-              <div className={`step ${currentStep >= 1 ? 'active' : ''} `}>
+              <div className={`step ${currentStep >= 1 ? "active" : ""} `}>
                 <div className="step-number">1</div>
                 <div className="step-label">Billing Info</div>
               </div>
               <div className="step-line"></div>
-              <div className={`step ${currentStep >= 2 ? 'active' : ''} `}>
+              <div className={`step ${currentStep >= 2 ? "active" : ""} `}>
                 <div className="step-number">2</div>
                 <div className="step-label">Payment</div>
               </div>
               <div className="step-line"></div>
-              <div className={`step ${currentStep >= 3 ? 'active' : ''} `}>
+              <div className={`step ${currentStep >= 3 ? "active" : ""} `}>
                 <div className="step-number">3</div>
                 <div className="step-label">Confirmation</div>
               </div>
@@ -443,9 +499,13 @@ const Checkout = () => {
                         placeholder="John"
                         value={formData.firstName}
                         onChange={handleInputChange}
-                        className={errors.firstName ? 'error' : ''}
+                        className={errors.firstName ? "error" : ""}
                       />
-                      {errors.firstName && <span className="error-message">{errors.firstName}</span>}
+                      {errors.firstName && (
+                        <span className="error-message">
+                          {errors.firstName}
+                        </span>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>Last Name *</label>
@@ -455,9 +515,11 @@ const Checkout = () => {
                         placeholder="Doe"
                         value={formData.lastName}
                         onChange={handleInputChange}
-                        className={errors.lastName ? 'error' : ''}
+                        className={errors.lastName ? "error" : ""}
                       />
-                      {errors.lastName && <span className="error-message">{errors.lastName}</span>}
+                      {errors.lastName && (
+                        <span className="error-message">{errors.lastName}</span>
+                      )}
                     </div>
                   </div>
 
@@ -469,9 +531,11 @@ const Checkout = () => {
                       placeholder="john.doe@example.com"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={errors.email ? 'error' : ''}
+                      className={errors.email ? "error" : ""}
                     />
-                    {errors.email && <span className="error-message">{errors.email}</span>}
+                    {errors.email && (
+                      <span className="error-message">{errors.email}</span>
+                    )}
                   </div>
 
                   <div className="form-group">
@@ -482,9 +546,11 @@ const Checkout = () => {
                       placeholder="+94 77 123 4567"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className={errors.phone ? 'error' : ''}
+                      className={errors.phone ? "error" : ""}
                     />
-                    {errors.phone && <span className="error-message">{errors.phone}</span>}
+                    {errors.phone && (
+                      <span className="error-message">{errors.phone}</span>
+                    )}
                   </div>
 
                   <div className="form-group">
@@ -495,9 +561,13 @@ const Checkout = () => {
                       placeholder="House number and street name"
                       value={formData.streetAddress}
                       onChange={handleInputChange}
-                      className={errors.streetAddress ? 'error' : ''}
+                      className={errors.streetAddress ? "error" : ""}
                     />
-                    {errors.streetAddress && <span className="error-message">{errors.streetAddress}</span>}
+                    {errors.streetAddress && (
+                      <span className="error-message">
+                        {errors.streetAddress}
+                      </span>
+                    )}
                   </div>
 
                   <div className="form-row">
@@ -508,19 +578,26 @@ const Checkout = () => {
                         value={formData.district}
                         onChange={handleInputChange}
                         onFocus={fetchDistricts}
-                        className={errors.district ? 'error' : ''}
+                        className={errors.district ? "error" : ""}
                         disabled={loadingDistricts}
                       >
                         <option value="">
-                          {loadingDistricts ? 'Loading districts...' : 'Select District'}
+                          {loadingDistricts
+                            ? "Loading districts..."
+                            : "Select District"}
                         </option>
                         {districts.map((district) => (
-                          <option key={district.district_id} value={district.district_name}>
+                          <option
+                            key={district.district_id}
+                            value={district.district_name}
+                          >
                             {district.district_name}
                           </option>
                         ))}
                       </select>
-                      {errors.district && <span className="error-message">{errors.district}</span>}
+                      {errors.district && (
+                        <span className="error-message">{errors.district}</span>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>City *</label>
@@ -528,15 +605,15 @@ const Checkout = () => {
                         name="city"
                         value={formData.city}
                         onChange={handleInputChange}
-                        className={errors.city ? 'error' : ''}
+                        className={errors.city ? "error" : ""}
                         disabled={!formData.district || loadingCities}
                       >
                         <option value="">
                           {!formData.district
-                            ? 'Select district first'
+                            ? "Select district first"
                             : loadingCities
-                              ? 'Loading cities...'
-                              : 'Select City'}
+                            ? "Loading cities..."
+                            : "Select City"}
                         </option>
                         {cities.map((city) => (
                           <option key={city.city_id} value={city.city_name}>
@@ -544,7 +621,9 @@ const Checkout = () => {
                           </option>
                         ))}
                       </select>
-                      {errors.city && <span className="error-message">{errors.city}</span>}
+                      {errors.city && (
+                        <span className="error-message">{errors.city}</span>
+                      )}
                     </div>
                   </div>
 
@@ -555,7 +634,7 @@ const Checkout = () => {
                         name="province"
                         value={formData.province}
                         onChange={handleInputChange}
-                        className={errors.province ? 'error' : ''}
+                        className={errors.province ? "error" : ""}
                       >
                         <option value="">Select Province</option>
                         <option value="western">Western</option>
@@ -568,7 +647,9 @@ const Checkout = () => {
                         <option value="uva">Uva</option>
                         <option value="sabaragamuwa">Sabaragamuwa</option>
                       </select>
-                      {errors.province && <span className="error-message">{errors.province}</span>}
+                      {errors.province && (
+                        <span className="error-message">{errors.province}</span>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>Postal Code *</label>
@@ -578,12 +659,16 @@ const Checkout = () => {
                         placeholder="10100"
                         value={formData.postalCode}
                         onChange={handleInputChange}
-                        className={errors.postalCode ? 'error' : ''}
+                        className={errors.postalCode ? "error" : ""}
                       />
                       {formData.postalCode && !errors.postalCode && (
                         <span className="input-check">✓</span>
                       )}
-                      {errors.postalCode && <span className="error-message">{errors.postalCode}</span>}
+                      {errors.postalCode && (
+                        <span className="error-message">
+                          {errors.postalCode}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -612,15 +697,22 @@ const Checkout = () => {
                   cartItems.map((item, index) => (
                     <div key={index} className="summary-product">
                       <div className="product-image-small">
-                        <img src={PackImage} alt={item.name || 'Product'} />
+                        <img src={PackImage} alt={item.name || "Product"} />
                       </div>
                       <div className="product-info-small">
-                        <h4>{item.name || 'Ceylon Raga Reserve'}</h4>
-                        <p className="product-subtitle-small">{item.subtitle || 'Masala Brew'}</p>
-                        <p className="product-meta-small">Quantity: {item.quantity} • {item.weight}</p>
+                        <h4>{item.name || "Ceylon Raga Reserve"}</h4>
+                        <p className="product-subtitle-small">
+                          {item.subtitle || "Masala Brew"}
+                        </p>
+                        <p className="product-meta-small">
+                          Quantity: {item.quantity} • {item.weight}
+                        </p>
                       </div>
                       <div className="product-price-small">
-                        LKR {(item.price * item.quantity).toLocaleString('en-LK', { minimumFractionDigits: 0 })}
+                        LKR{" "}
+                        {(item.price * item.quantity).toLocaleString("en-LK", {
+                          minimumFractionDigits: 0,
+                        })}
                       </div>
                     </div>
                   ))
@@ -634,9 +726,7 @@ const Checkout = () => {
                       <p className="product-subtitle-small">Masala Brew</p>
                       <p className="product-meta-small">Quantity: 1 • 100g</p>
                     </div>
-                    <div className="product-price-small">
-                      LKR 1,500
-                    </div>
+                    <div className="product-price-small">LKR 1,500</div>
                   </div>
                 )}
 
@@ -650,22 +740,33 @@ const Checkout = () => {
                       value={formData.couponCode}
                       onChange={handleInputChange}
                       disabled={couponStatus.isValidating}
-                      className={couponStatus.isApplied ? 'coupon-applied' : ''}
+                      className={couponStatus.isApplied ? "coupon-applied" : ""}
                     />
                     <button
                       type="button"
                       className="btn-apply-coupon"
                       onClick={handleApplyCoupon}
-                      disabled={couponStatus.isValidating || !formData.couponCode.trim()}
+                      disabled={
+                        couponStatus.isValidating || !formData.couponCode.trim()
+                      }
                     >
-                      {couponStatus.isValidating ? 'VALIDATING...' : 'APPLY COUPON'}
+                      {couponStatus.isValidating
+                        ? "VALIDATING..."
+                        : "APPLY COUPON"}
                     </button>
                   </div>
                   {couponStatus.message && (
-                    <div className={`coupon - message ${couponStatus.isValid ? 'success' : 'error'} `}>
+                    <div
+                      className={`coupon - message ${
+                        couponStatus.isValid ? "success" : "error"
+                      } `}
+                    >
                       {couponStatus.message}
                       {couponStatus.description && (
-                        <span className="coupon-description"> - {couponStatus.description}</span>
+                        <span className="coupon-description">
+                          {" "}
+                          - {couponStatus.description}
+                        </span>
                       )}
                     </div>
                   )}
@@ -677,7 +778,9 @@ const Checkout = () => {
                     <span>LKR {subtotal.toFixed(2)}</span>
                   </div>
                   <div className="summary-note">
-                    <span style={{ fontSize: '0.85rem', color: '#666' }}>* Delivery charges included in price</span>
+                    <span style={{ fontSize: "0.85rem", color: "#666" }}>
+                      * Delivery charges included in price
+                    </span>
                   </div>
                   {discount > 0 && (
                     <div className="summary-row discount">
@@ -698,11 +801,18 @@ const Checkout = () => {
                   onClick={handleSubmit}
                   disabled={isSubmittingOrder}
                 >
-                  {isSubmittingOrder ? 'PLACING ORDER...' : 'CHECKOUT'}
+                  {isSubmittingOrder ? "PLACING ORDER..." : "CHECKOUT"}
                 </button>
 
                 <p className="refund-policy">
-                  By placing your order, you agree to our <Link to="/refund-policy" target="_blank" rel="noopener noreferrer">Refund & Return Policy</Link>
+                  By placing your order, you agree to our{" "}
+                  <Link
+                    to="/refund-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Refund & Return Policy
+                  </Link>
                 </p>
 
                 <div className="payment-methods">
