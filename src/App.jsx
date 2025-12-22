@@ -10,6 +10,8 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import Confirmation from './pages/Confirmation';
+import PaymentSuccess from './pages/PaymentSuccess';
+import PaymentFailure from './pages/PaymentFailure';
 import RefundPolicy from './pages/RefundPolicy';
 import ScrollToTop from './components/ScrollToTop';
 import './App.css';
@@ -121,6 +123,14 @@ function App() {
         <Route
           path="/confirmation"
           element={<Confirmation />}
+        />
+        <Route
+          path="/payment-success"
+          element={<PaymentSuccess />}
+        />
+        <Route
+          path="/payment-failure"
+          element={<PaymentFailure />}
         />
         <Route
           path="/refund-policy"

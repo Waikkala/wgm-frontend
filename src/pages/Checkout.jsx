@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SimpleHeader from '../components/SimpleHeader';
@@ -7,6 +7,11 @@ import './Checkout.css';
 import PackImage from '../assets/Pack.png';
 
 const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
+
+// BOC Payment Gateway Configuration
+// For Create React App, environment variables are available at build time
+const BOC_MERCHANT_ID = 'TEST700154990514';
+const BOC_GATEWAY_URL = 'https://test-bankofceylon.mtf.gateway.mastercard.com';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -447,20 +452,25 @@ const Checkout = () => {
       if (response.ok && data && data.success) {
         console.log('Payment Session ID:', data.sessionId);
         console.log('Payment Amount:', data.amount);
+        console.log('Order ID:', data.orderId);
         
-        // TODO: Implement BOC payment gateway with sessionId
-        alert(`Payment session created successfully!\nSession ID: ${data.sessionId}\nAmount: LKR ${data.amount}\n\nPayment gateway integration will be implemented next.`);
-        
-        // Store session data for next step
-        // You can navigate to payment page or open payment modal here
+        // Check if backend provided checkoutUrl (direct redirect method)
+        if (data.checkoutUrl) {
+          console.log('Redirecting to BOC checkout URL:', data.checkoutUrl);
+          // Redirect to BOC payment page
+          window.location.href = data.checkoutUrl;
+        } else {
+          alert('Payment URL not received from server. Please try again.');
+          setIsProcessingPayment(false);
+        }
       } else {
         const errorMessage = data?.message || 'Failed to initiate payment';
         alert(`Payment Error: ${errorMessage}`);
+        setIsProcessingPayment(false);
       }
     } catch (error) {
       console.error('Error initiating payment:', error);
       alert('An error occurred while initiating payment. Please try again.');
-    } finally {
       setIsProcessingPayment(false);
     }
   };
