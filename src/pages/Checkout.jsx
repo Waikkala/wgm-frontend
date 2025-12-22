@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
@@ -45,6 +46,9 @@ const Checkout = () => {
 
   // State for order submission
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+
+  // State for reCAPTCHA
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -208,6 +212,10 @@ const Checkout = () => {
     }
   };
 
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -256,6 +264,11 @@ const Checkout = () => {
       return;
     }
 
+    if (!recaptchaToken) {
+      alert('Please complete the reCAPTCHA verification.');
+      return;
+    }
+
     setIsSubmittingOrder(true);
 
     try {
@@ -283,15 +296,14 @@ const Checkout = () => {
         email: formData.email,
         customerPhone: formData.phone,
         customerAddress: formData.streetAddress,
-        city: cityId, // Send city ID as string
-        district: String(formData.districtId), // Send district ID as string
+        city: String(cityId),
+        district: String(formData.districtId),
         postalCode: formData.postalCode,
         notes: formData.orderNotes || '',
-        paymentMethod: 'COD', // Cash on Delivery - will be updated after payment
+        paymentMethod: 'COD',
         paymentStatus: 'PENDING',
         promoCode: couponStatus.isApplied ? formData.couponCode : '',
-        deliveryTown: formData.district, // Using district name as delivery town
-        deliveryFee: 0, // Delivery charges already included in product price
+        deliveryTown: formData.district,
         items: orderItems
       };
 
@@ -692,11 +704,19 @@ const Checkout = () => {
                   <span className="total-amount">LKR {total.toFixed(2)}</span>
                 </div>
 
+                <div className="recaptcha-container">
+                  <ReCAPTCHA
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    onChange={handleRecaptchaChange}
+                    theme="light"
+                  />
+                </div>
+
                 <button
                   type="submit"
                   className="btn-checkout"
                   onClick={handleSubmit}
-                  disabled={isSubmittingOrder}
+                  disabled={isSubmittingOrder || !recaptchaToken}
                 >
                   {isSubmittingOrder ? 'PLACING ORDER...' : 'CHECKOUT'}
                 </button>
