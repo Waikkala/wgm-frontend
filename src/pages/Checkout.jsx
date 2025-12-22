@@ -61,6 +61,44 @@ const Checkout = () => {
   // State for reCAPTCHA
   const [recaptchaToken, setRecaptchaToken] = useState(null);
 
+  // Load BOC Checkout.js library
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = `${BOC_GATEWAY_URL}/static/checkout/checkout.min.js`;
+    script.setAttribute('data-error', 'errorCallback');
+    script.setAttribute('data-cancel', 'cancelCallback');
+    script.async = true;
+    
+    script.onload = () => {
+      console.log('BOC Checkout.js library loaded successfully');
+    };
+    
+    script.onerror = () => {
+      console.error('Failed to load BOC Checkout.js library');
+    };
+    
+    document.body.appendChild(script);
+
+    // Define global callbacks for BOC payment gateway
+    window.errorCallback = function(error) {
+      console.error('BOC Payment Error:', error);
+      alert('Payment failed. Please try again.');
+    };
+
+    window.cancelCallback = function() {
+      console.log('Payment cancelled by user');
+      alert('Payment was cancelled.');
+    };
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+      delete window.errorCallback;
+      delete window.cancelCallback;
+    };
+  }, []);
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -404,6 +442,40 @@ const Checkout = () => {
 
   const total = subtotal - discount;
 
+  const initiateHostedCheckout = (sessionId, orderId) => {
+    try {
+      // Check if Checkout library is loaded
+      if (typeof window.Checkout === 'undefined') {
+        console.error('BOC Checkout library not loaded');
+        alert('Payment gateway not ready. Please refresh and try again.');
+        setIsProcessingPayment(false);
+        return;
+      }
+
+      console.log('Configuring BOC Checkout with session:', sessionId);
+
+      // Configure the hosted checkout
+      window.Checkout.configure({
+        session: {
+          id: sessionId
+        }
+      });
+
+      console.log('Showing BOC payment page...');
+
+      // Show the payment page (not showLightbox)
+      window.Checkout.showPaymentPage();
+
+      // Reset processing state after showing payment page
+      setIsProcessingPayment(false);
+
+    } catch (error) {
+      console.error('Error configuring BOC checkout:', error);
+      alert('Failed to open payment gateway. Please try again.');
+      setIsProcessingPayment(false);
+    }
+  };
+
   const handlePayment = async () => {
     if (!orderResponse || !orderResponse.orderUid) {
       alert('Order ID not found. Please try again.');
@@ -454,15 +526,8 @@ const Checkout = () => {
         console.log('Payment Amount:', data.amount);
         console.log('Order ID:', data.orderId);
         
-        // Check if backend provided checkoutUrl (direct redirect method)
-        if (data.checkoutUrl) {
-          console.log('Redirecting to BOC checkout URL:', data.checkoutUrl);
-          // Redirect to BOC payment page
-          window.location.href = data.checkoutUrl;
-        } else {
-          alert('Payment URL not received from server. Please try again.');
-          setIsProcessingPayment(false);
-        }
+        // Use Checkout.js library to show payment lightbox
+        initiateHostedCheckout(data.sessionId, data.orderId);
       } else {
         const errorMessage = data?.message || 'Failed to initiate payment';
         alert(`Payment Error: ${errorMessage}`);
