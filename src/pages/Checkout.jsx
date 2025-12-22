@@ -46,6 +46,12 @@ const Checkout = () => {
 
   // State for order submission
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const [orderResponse, setOrderResponse] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+
+  // State for payment
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   // State for reCAPTCHA
   const [recaptchaToken, setRecaptchaToken] = useState(null);
@@ -356,23 +362,15 @@ const Checkout = () => {
       console.log('===================');
 
       if (response.ok) {
-        // Order created successfully, navigate to payment/confirmation
-        navigate('/payment', {
-          state: {
-            orderData: {
-              orderUid: data.orderUid,
-              totalAmount: data.totalAmount,
-              discountAmount: data.discountAmount,
-              deliveryFee: data.deliveryFee,
-              finalTotal: data.finalTotal,
-              paymentStatus: data.paymentStatus,
-              promoCode: data.promoCode,
-              message: data.message,
-              billingInfo: formData,
-              cartItems: cartItems
-            }
-          }
-        });
+        // Order created successfully
+        setOrderResponse(data);
+        setOrderSubmitted(true);
+        setShowToast(true);
+        
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
       } else {
         // Handle error response
         const errorMessage = data?.message || `Server error: ${response.status} ${response.statusText}`;
@@ -401,8 +399,79 @@ const Checkout = () => {
 
   const total = subtotal - discount;
 
+  const handlePayment = async () => {
+    if (!orderResponse || !orderResponse.orderUid) {
+      alert('Order ID not found. Please try again.');
+      return;
+    }
+
+    setIsProcessingPayment(true);
+
+    try {
+      const paymentData = {
+        orderId: orderResponse.orderUid
+      };
+
+      console.log('=== PAYMENT INITIATION DEBUG ===');
+      console.log('Request Body:', JSON.stringify(paymentData, null, 2));
+
+      const response = await fetch(`${API_BASE_URL}/api/v1/payment/initiate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentData)
+      });
+
+      console.log('Payment Response Status:', response.status);
+
+      const contentType = response.headers.get('content-type');
+      let data = null;
+
+      if (contentType && contentType.includes('application/json')) {
+        const text = await response.text();
+        console.log('Payment Response Text:', text);
+        if (text) {
+          try {
+            data = JSON.parse(text);
+            console.log('Parsed Payment Response:', data);
+          } catch (e) {
+            console.error('Failed to parse payment JSON:', e);
+            alert('Invalid response from payment gateway');
+            setIsProcessingPayment(false);
+            return;
+          }
+        }
+      }
+
+      if (response.ok && data && data.success) {
+        console.log('Payment Session ID:', data.sessionId);
+        console.log('Payment Amount:', data.amount);
+        
+        // TODO: Implement BOC payment gateway with sessionId
+        alert(`Payment session created successfully!\nSession ID: ${data.sessionId}\nAmount: LKR ${data.amount}\n\nPayment gateway integration will be implemented next.`);
+        
+        // Store session data for next step
+        // You can navigate to payment page or open payment modal here
+      } else {
+        const errorMessage = data?.message || 'Failed to initiate payment';
+        alert(`Payment Error: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error('Error initiating payment:', error);
+      alert('An error occurred while initiating payment. Please try again.');
+    } finally {
+      setIsProcessingPayment(false);
+    }
+  };
+
   return (
     <div className="page-container">
+      {showToast && (
+        <div className="toast-notification">
+          ✓ Order submitted successfully!
+        </div>
+      )}
       <SimpleHeader />
 
       {/* White Space Wrapper */}
@@ -706,7 +775,7 @@ const Checkout = () => {
 
                 <div className="recaptcha-container">
                   <ReCAPTCHA
-                    sitekey="6LcIyDMsAAAAAAxmYwtpT0ATtOrjbQ2tvxEKoLFV"
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     onChange={handleRecaptchaChange}
                     theme="light"
                   />
@@ -716,10 +785,21 @@ const Checkout = () => {
                   type="submit"
                   className="btn-checkout"
                   onClick={handleSubmit}
-                  disabled={isSubmittingOrder || !recaptchaToken}
+                  disabled={isSubmittingOrder || !recaptchaToken || orderSubmitted}
                 >
-                  {isSubmittingOrder ? 'PLACING ORDER...' : 'CHECKOUT'}
+                  {isSubmittingOrder ? 'PLACING ORDER...' : orderSubmitted ? 'ORDER SUBMITTED ✓' : 'CHECKOUT'}
                 </button>
+
+                {orderSubmitted && (
+                  <button
+                    type="button"
+                    className="btn-pay"
+                    onClick={handlePayment}
+                    disabled={isProcessingPayment}
+                  >
+                    {isProcessingPayment ? 'PROCESSING...' : 'PAY NOW'}
+                  </button>
+                )}
 
                 <p className="refund-policy">
                   By placing your order, you agree to our <Link to="/refund-policy">Refund & Return Policy</Link>
