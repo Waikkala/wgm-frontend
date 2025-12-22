@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SimpleHeader from '../components/SimpleHeader';
@@ -7,6 +7,11 @@ import './Checkout.css';
 import PackImage from '../assets/Pack.png';
 
 const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
+
+// BOC Payment Gateway Configuration
+// For Create React App, environment variables are available at build time
+const BOC_MERCHANT_ID = 'TEST700154990514';
+const BOC_GATEWAY_URL = 'https://test-bankofceylon.mtf.gateway.mastercard.com';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -46,9 +51,53 @@ const Checkout = () => {
 
   // State for order submission
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const [orderResponse, setOrderResponse] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+
+  // State for payment
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   // State for reCAPTCHA
   const [recaptchaToken, setRecaptchaToken] = useState(null);
+
+  // Load BOC Checkout.js library
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = `${BOC_GATEWAY_URL}/static/checkout/checkout.min.js`;
+    script.setAttribute('data-error', 'errorCallback');
+    script.setAttribute('data-cancel', 'cancelCallback');
+    script.async = true;
+    
+    script.onload = () => {
+      console.log('BOC Checkout.js library loaded successfully');
+    };
+    
+    script.onerror = () => {
+      console.error('Failed to load BOC Checkout.js library');
+    };
+    
+    document.body.appendChild(script);
+
+    // Define global callbacks for BOC payment gateway
+    window.errorCallback = function(error) {
+      console.error('BOC Payment Error:', error);
+      alert('Payment failed. Please try again.');
+    };
+
+    window.cancelCallback = function() {
+      console.log('Payment cancelled by user');
+      alert('Payment was cancelled.');
+    };
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+      delete window.errorCallback;
+      delete window.cancelCallback;
+    };
+  }, []);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -356,23 +405,15 @@ const Checkout = () => {
       console.log('===================');
 
       if (response.ok) {
-        // Order created successfully, navigate to payment/confirmation
-        navigate('/payment', {
-          state: {
-            orderData: {
-              orderUid: data.orderUid,
-              totalAmount: data.totalAmount,
-              discountAmount: data.discountAmount,
-              deliveryFee: data.deliveryFee,
-              finalTotal: data.finalTotal,
-              paymentStatus: data.paymentStatus,
-              promoCode: data.promoCode,
-              message: data.message,
-              billingInfo: formData,
-              cartItems: cartItems
-            }
-          }
-        });
+        // Order created successfully
+        setOrderResponse(data);
+        setOrderSubmitted(true);
+        setShowToast(true);
+        
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
       } else {
         // Handle error response
         const errorMessage = data?.message || `Server error: ${response.status} ${response.statusText}`;
@@ -401,8 +442,111 @@ const Checkout = () => {
 
   const total = subtotal - discount;
 
+  const initiateHostedCheckout = (sessionId) => {
+    try {
+      // Check if Checkout library is loaded
+      if (typeof window.Checkout === 'undefined') {
+        console.error('BOC Checkout library not loaded');
+        alert('Payment gateway not ready. Please refresh and try again.');
+        setIsProcessingPayment(false);
+        return;
+      }
+
+      console.log('Configuring BOC Checkout with session:', sessionId);
+
+      // Configure the hosted checkout
+      window.Checkout.configure({
+        session: {
+          id: sessionId
+        }
+      });
+
+      console.log('Showing BOC payment page...');
+
+      // Show the payment page (not showLightbox)
+      window.Checkout.showPaymentPage();
+
+      // Reset processing state after showing payment page
+      setIsProcessingPayment(false);
+
+    } catch (error) {
+      console.error('Error configuring BOC checkout:', error);
+      alert('Failed to open payment gateway. Please try again.');
+      setIsProcessingPayment(false);
+    }
+  };
+
+  const handlePayment = async () => {
+    if (!orderResponse || !orderResponse.orderUid) {
+      alert('Order ID not found. Please try again.');
+      return;
+    }
+
+    setIsProcessingPayment(true);
+
+    try {
+      const paymentData = {
+        orderId: orderResponse.orderUid
+      };
+
+      console.log('=== PAYMENT INITIATION DEBUG ===');
+      console.log('Request Body:', JSON.stringify(paymentData, null, 2));
+
+      const response = await fetch(`${API_BASE_URL}/api/v1/payment/initiate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentData)
+      });
+
+      console.log('Payment Response Status:', response.status);
+
+      const contentType = response.headers.get('content-type');
+      let data = null;
+
+      if (contentType && contentType.includes('application/json')) {
+        const text = await response.text();
+        console.log('Payment Response Text:', text);
+        if (text) {
+          try {
+            data = JSON.parse(text);
+            console.log('Parsed Payment Response:', data);
+          } catch (e) {
+            console.error('Failed to parse payment JSON:', e);
+            alert('Invalid response from payment gateway');
+            setIsProcessingPayment(false);
+            return;
+          }
+        }
+      }
+
+      if (response.ok && data && data.success) {
+        console.log('Payment Session ID:', data.sessionId);
+        console.log('Payment Amount:', data.amount);
+        console.log('Order ID:', data.orderId);
+        
+        // Use Checkout.js library to show payment lightbox
+        initiateHostedCheckout(data.sessionId);
+      } else {
+        const errorMessage = data?.message || 'Failed to initiate payment';
+        alert(`Payment Error: ${errorMessage}`);
+        setIsProcessingPayment(false);
+      }
+    } catch (error) {
+      console.error('Error initiating payment:', error);
+      alert('An error occurred while initiating payment. Please try again.');
+      setIsProcessingPayment(false);
+    }
+  };
+
   return (
     <div className="page-container">
+      {showToast && (
+        <div className="toast-notification">
+          ✓ Order submitted successfully!
+        </div>
+      )}
       <SimpleHeader />
 
       {/* White Space Wrapper */}
@@ -706,7 +850,7 @@ const Checkout = () => {
 
                 <div className="recaptcha-container">
                   <ReCAPTCHA
-                    sitekey="6LcIyDMsAAAAAAxmYwtpT0ATtOrjbQ2tvxEKoLFV"
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     onChange={handleRecaptchaChange}
                     theme="light"
                   />
@@ -716,10 +860,21 @@ const Checkout = () => {
                   type="submit"
                   className="btn-checkout"
                   onClick={handleSubmit}
-                  disabled={isSubmittingOrder || !recaptchaToken}
+                  disabled={isSubmittingOrder || !recaptchaToken || orderSubmitted}
                 >
-                  {isSubmittingOrder ? 'PLACING ORDER...' : 'CHECKOUT'}
+                  {isSubmittingOrder ? 'PLACING ORDER...' : orderSubmitted ? 'ORDER SUBMITTED ✓' : 'CHECKOUT'}
                 </button>
+
+                {orderSubmitted && (
+                  <button
+                    type="button"
+                    className="btn-pay"
+                    onClick={handlePayment}
+                    disabled={isProcessingPayment}
+                  >
+                    {isProcessingPayment ? 'PROCESSING...' : 'PAY NOW'}
+                  </button>
+                )}
 
                 <p className="refund-policy">
                   By placing your order, you agree to our <Link to="/refund-policy">Refund & Return Policy</Link>
