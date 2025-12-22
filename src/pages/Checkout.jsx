@@ -4,8 +4,11 @@ import SimpleHeader from "../components/SimpleHeader";
 import SimpleFooter from "../components/SimpleFooter";
 import "./Checkout.css";
 import PackImage from "../assets/Pack.png";
+{
+  /* <script src="https://test-bankofceylon.mtf.gateway.mastercard.com/checkout/version/100/checkout.js"></script>; */
+}
 
-const API_BASE_URL = "http://54.226.87.105:8080";
+const API_BASE_URL = "https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -280,21 +283,30 @@ const Checkout = () => {
 
       // Prepare request body
       const orderData = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        customerPhone: formData.phone,
-        customerAddress: formData.streetAddress,
-        city: cityId, // Send city ID as string
-        district: String(formData.districtId), // Send district ID as string
-        postalCode: formData.postalCode,
-        notes: formData.orderNotes || "",
-        paymentMethod: "COD", // Cash on Delivery - will be updated after payment
+        firstName: "Deshantest",
+        lastName: "Mt",
+        email: "deshan@gmail.com",
+        notes: "please be quick!",
+        customerPhone: "0721456493",
+        customerAddress: "100, ABC Road, Matara",
+        city: cityId,
+        district: "2",
+        postalCode: 90896,
+        paymentMethod: "COD",
         paymentStatus: "PENDING",
-        promoCode: couponStatus.isApplied ? formData.couponCode : "",
-        deliveryTown: formData.district, // Using district name as delivery town
-        deliveryFee: 0, // Delivery charges already included in product price
-        items: orderItems,
+        promoCode: "",
+        deliveryTown: "Matara",
+        deliveryFee: 0,
+        items: [
+          {
+            productId: 5,
+            quantity: 2,
+          },
+          {
+            productId: 6,
+            quantity: 4,
+          },
+        ],
       };
 
       // Debug: Log the request body
@@ -346,9 +358,15 @@ const Checkout = () => {
       console.log("===================");
 
       const initiatePayment = async (orderUid) => {
+        const finalOrderId =
+          orderUid && orderUid.trim() !== ""
+            ? orderUid
+            : "a15e4dee-1c71-430a-8106-608643c73bda";
+
+        console.log("Initiating payment for order:", finalOrderId);
         try {
           const response = await fetch(
-            "https://wgm-backend.onrender.com/api/v1/payment/initiate",
+            `${API_BASE_URL}/api/v1/payment/initiate`,
             {
               method: "POST",
               headers: {
@@ -366,6 +384,11 @@ const Checkout = () => {
             throw new Error(data?.message || "Payment initiation failed");
           }
 
+          if (!window.Checkout) {
+            alert("Payment system not loaded. Please refresh the page.");
+            return;
+          }
+
           // Configure Mastercard Hosted Checkout
           window.Checkout.configure({
             session: {
@@ -374,7 +397,7 @@ const Checkout = () => {
           });
 
           // Redirect to payment page
-          window.Checkout.showPaymentPage();
+          window.Checkout.showPaymentPage({});
         } catch (error) {
           console.error("Payment initiation error:", error);
           alert("Unable to initiate payment. Please try again.");

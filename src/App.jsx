@@ -89,7 +89,7 @@ function App() {
         />
         <Route path="/checkout" element={<Checkout cartItems={cartItems} />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/payment-success" element={<Confirmation />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
       </Routes>
     </Router>
