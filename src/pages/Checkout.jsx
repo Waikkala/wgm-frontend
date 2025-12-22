@@ -5,7 +5,7 @@ import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
 import PackImage from '../assets/Pack.png';
 
-const API_BASE_URL = 'http://54.226.87.105:8080';
+const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
 
 const Checkout = () => {
   const navigate = useNavigate();

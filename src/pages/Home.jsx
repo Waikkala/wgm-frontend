@@ -17,7 +17,7 @@ import sustainabilityImg from '../assets/sustainability.png';
 import accountabilityImg from '../assets/Accountability.png';
 import trustImg from '../assets/trust.png';
 
-const API_BASE_URL = 'http://54.226.87.105:8080';
+const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
 
 function Home({ cartCount }) {
   const [activeTab, setActiveTab] = useState('private');
