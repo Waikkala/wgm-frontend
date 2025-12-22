@@ -1,19 +1,29 @@
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import './RefundPolicy.css';
 import logo from '../assets/Logo.png';
 import headerBar from '../assets/Headr_Bar (1440 x 60).png';
 
 const RefundPolicy = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="refund-policy-wrapper">
             <div className="refund-policy-page">
                 <div className="refund-header">
                     <img src={headerBar} alt="Header Bar" className="header-bar-bg" />
                     <div className="refund-header-content">
-                        <div className="refund-logo-box">
+                        <div className="refund-logo-box" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                             <img src={logo} alt="WGM Logo" className="refund-logo" />
                         </div>
                         <h1 className="refund-title">Refund & Return Policy of Waikkala Grinding Mills Pvt Ltd</h1>
+                        <button className="btn-return-home" onClick={() => navigate('/')}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                            Return to Home
+                        </button>
                     </div>
                 </div>
 

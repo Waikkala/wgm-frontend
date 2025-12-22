@@ -311,7 +311,7 @@ Best regards,
                   </p>
                   <button 
                     className="btn-view-policy"
-                    onClick={() => window.open('/refund-policy', '_blank')}
+                    onClick={() => navigate('/refund-policy')}
                   >
                     View Full Return & Refund Policy
                   </button>
