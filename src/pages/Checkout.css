@@ -462,6 +462,13 @@
   font-size: 1.25rem;
 }
 
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+}
+
 .btn-checkout {
   width: 100%;
   padding: 1rem;
@@ -476,8 +483,14 @@
   cursor: pointer;
 }
 
-.btn-checkout:hover {
+.btn-checkout:hover:not(:disabled) {
   background: var(--secondary-green);
+}
+
+.btn-checkout:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .refund-policy {
@@ -711,5 +724,11 @@
   .btn-checkout {
     padding: 0.9rem;
     font-size: 0.95rem;
+  }
+
+  .recaptcha-container {
+    transform: scale(0.85);
+    transform-origin: center;
+    margin-bottom: 0.5rem;
   }
 }
