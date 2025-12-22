@@ -442,7 +442,7 @@ const Checkout = () => {
 
   const total = subtotal - discount;
 
-  const initiateHostedCheckout = (sessionId, orderId) => {
+  const initiateHostedCheckout = (sessionId) => {
     try {
       // Check if Checkout library is loaded
       if (typeof window.Checkout === 'undefined') {
@@ -527,7 +527,7 @@ const Checkout = () => {
         console.log('Order ID:', data.orderId);
         
         // Use Checkout.js library to show payment lightbox
-        initiateHostedCheckout(data.sessionId, data.orderId);
+        initiateHostedCheckout(data.sessionId);
       } else {
         const errorMessage = data?.message || 'Failed to initiate payment';
         alert(`Payment Error: ${errorMessage}`);

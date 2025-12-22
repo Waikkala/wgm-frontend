@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
@@ -7,19 +7,16 @@ import './PaymentSuccess.css';
 const PaymentFailure = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [failureReason, setFailureReason] = useState('');
+  
+  // Get failure reason directly from URL parameters
+  const reason = searchParams.get('reason') || 'Payment was not completed';
+  const orderId = searchParams.get('orderId');
 
   useEffect(() => {
-    // Get failure reason from URL parameters
-    const reason = searchParams.get('reason') || 'Payment was not completed';
-    const orderId = searchParams.get('orderId');
-    
-    setFailureReason(reason);
-
     console.log('=== PAYMENT FAILURE ===');
     console.log('Order ID:', orderId);
     console.log('Reason:', reason);
-  }, [searchParams]);
+  }, [orderId, reason]);
 
   return (
     <div className="page-container">
@@ -29,7 +26,7 @@ const PaymentFailure = () => {
           <div className="status-icon failure-icon">✕</div>
           <h2>Payment Failed</h2>
           <p className="failure-message">
-            {failureReason}
+            {reason}
           </p>
 
           <div className="failure-info">
