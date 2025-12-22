@@ -281,7 +281,7 @@ const Checkout = () => {
 
       // Prepare order items - map cart items to API format
       const orderItems = cartItems.map(item => ({
-        productId: item.productId || 1, // Default to 1 if productId not available
+        productId: item.productId || 5, // Default to 5 if productId not available
         quantity: item.quantity
       }));
 
