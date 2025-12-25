@@ -27,8 +27,6 @@ const Checkout = () => {
     district: '',
     districtId: '',
     city: '',
-    province: '',
-    postalCode: '',
     orderNotes: '',
     couponCode: ''
   });
@@ -294,12 +292,6 @@ const Checkout = () => {
     if (!formData.city.trim()) {
       newErrors.city = 'City is required';
     }
-    if (!formData.province) {
-      newErrors.province = 'Province is required';
-    }
-    if (!formData.postalCode.trim()) {
-      newErrors.postalCode = 'Postal code is required';
-    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -347,7 +339,7 @@ const Checkout = () => {
         customerAddress: formData.streetAddress,
         city: String(cityId),
         district: String(formData.districtId),
-        postalCode: formData.postalCode,
+        postalCode: null,
         notes: formData.orderNotes || '',
         paymentMethod: 'COD',
         paymentStatus: 'PENDING',
@@ -704,44 +696,7 @@ const Checkout = () => {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label>Province *</label>
-                      <select
-                        name="province"
-                        value={formData.province}
-                        onChange={handleInputChange}
-                        className={errors.province ? 'error' : ''}
-                      >
-                        <option value="">Select Province</option>
-                        <option value="western">Western</option>
-                        <option value="central">Central</option>
-                        <option value="southern">Southern</option>
-                        <option value="northern">Northern</option>
-                        <option value="eastern">Eastern</option>
-                        <option value="north-western">North Western</option>
-                        <option value="north-central">North Central</option>
-                        <option value="uva">Uva</option>
-                        <option value="sabaragamuwa">Sabaragamuwa</option>
-                      </select>
-                      {errors.province && <span className="error-message">{errors.province}</span>}
-                    </div>
-                    <div className="form-group">
-                      <label>Postal Code *</label>
-                      <input
-                        type="text"
-                        name="postalCode"
-                        placeholder="10100"
-                        value={formData.postalCode}
-                        onChange={handleInputChange}
-                        className={errors.postalCode ? 'error' : ''}
-                      />
-                      {formData.postalCode && !errors.postalCode && (
-                        <span className="input-check">✓</span>
-                      )}
-                      {errors.postalCode && <span className="error-message">{errors.postalCode}</span>}
-                    </div>
-                  </div>
+
 
                   <div className="form-group">
                     <label>Order Notes (Optional)</label>
