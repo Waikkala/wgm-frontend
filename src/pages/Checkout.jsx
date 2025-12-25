@@ -97,6 +97,11 @@ const Checkout = () => {
     };
   }, []);
 
+  // Fetch districts on page load
+  useEffect(() => {
+    fetchDistricts();
+  }, []);
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -655,7 +660,6 @@ const Checkout = () => {
                         name="district"
                         value={formData.district}
                         onChange={handleInputChange}
-                        onFocus={fetchDistricts}
                         className={errors.district ? 'error' : ''}
                         disabled={loadingDistricts}
                       >
