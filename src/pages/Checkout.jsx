@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SimpleHeader from '../components/SimpleHeader';
@@ -94,8 +94,29 @@ const Checkout = () => {
 
   // Fetch districts on page load
   useEffect(() => {
-    fetchDistricts();
-  }, [fetchDistricts]);
+    const loadDistricts = async () => {
+      if (districts.length > 0) return; // Already loaded
+
+      setLoadingDistricts(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/delivery/districts`);
+        const data = await response.json();
+
+        if (response.ok && Array.isArray(data)) {
+          setDistricts(data);
+        } else {
+          console.error('Failed to fetch districts:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching districts:', error);
+      } finally {
+        setLoadingDistricts(false);
+      }
+    };
+
+    loadDistricts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -214,27 +235,6 @@ const Checkout = () => {
       console.error('Coupon validation error:', error);
     }
   };
-
-  // Fetch districts from API
-  const fetchDistricts = useCallback(async () => {
-    if (districts.length > 0) return; // Already loaded
-
-    setLoadingDistricts(true);
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/delivery/districts`);
-      const data = await response.json();
-
-      if (response.ok && Array.isArray(data)) {
-        setDistricts(data);
-      } else {
-        console.error('Failed to fetch districts:', data);
-      }
-    } catch (error) {
-      console.error('Error fetching districts:', error);
-    } finally {
-      setLoadingDistricts(false);
-    }
-  }, [districts.length]);
 
   // Fetch cities from API based on selected district
   const fetchCities = async (districtId) => {
