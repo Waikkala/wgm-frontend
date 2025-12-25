@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SimpleHeader from '../components/SimpleHeader';
@@ -49,8 +49,6 @@ const Checkout = () => {
 
   // State for order submission
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
-  const [orderSubmitted, setOrderSubmitted] = useState(false);
-  const [orderResponse, setOrderResponse] = useState(null);
   const [showToast, setShowToast] = useState(false);
 
   // State for reCAPTCHA
@@ -97,7 +95,7 @@ const Checkout = () => {
   // Fetch districts on page load
   useEffect(() => {
     fetchDistricts();
-  }, []);
+  }, [fetchDistricts]);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -218,7 +216,7 @@ const Checkout = () => {
   };
 
   // Fetch districts from API
-  const fetchDistricts = async () => {
+  const fetchDistricts = useCallback(async () => {
     if (districts.length > 0) return; // Already loaded
 
     setLoadingDistricts(true);
@@ -236,7 +234,7 @@ const Checkout = () => {
     } finally {
       setLoadingDistricts(false);
     }
-  };
+  }, [districts.length]);
 
   // Fetch cities from API based on selected district
   const fetchCities = async (districtId) => {
@@ -400,8 +398,6 @@ const Checkout = () => {
 
       if (response.ok && data && data.orderUid) {
         // Order created successfully
-        setOrderResponse(data);
-        setOrderSubmitted(true);
         setShowToast(true);
         
         // Hide toast after 3 seconds
