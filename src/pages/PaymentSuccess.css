@@ -1,10 +1,177 @@
 .payment-status-wrapper {
-  background: var(--white);
-  min-height: 60vh;
+  background: #f5f5f5;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3rem 1rem;
+}
+
+.payment-success-card {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.success-card-inner {
+  background: linear-gradient(180deg, #1a4d3e 0%, #1a4d3e 35%, #2d3e2d 35%, #2d3e2d 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.success-header {
+  background: #1a4d3e;
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+}
+
+.success-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.brand-logo {
+  position: relative;
+  z-index: 1;
+}
+
+.antler-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  filter: sepia(1) saturate(3) hue-rotate(20deg) brightness(1.2);
+}
+
+.brand-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #d4af37;
+  letter-spacing: 0.3rem;
+  margin-bottom: 0.25rem;
+  font-family: 'Georgia', serif;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: #d4af37;
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+}
+
+.success-content {
+  padding: 3rem 2rem;
+  position: relative;
+}
+
+.success-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.deer-illustration {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.deer-character {
+  font-size: 8rem;
+  filter: sepia(0.8) saturate(2) hue-rotate(20deg) brightness(1.1);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.success-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #d4af37;
+  letter-spacing: 0.15rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-family: 'Georgia', serif;
+  position: relative;
+  z-index: 1;
+}
+
+.order-info-compact {
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.order-info-compact p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+  letter-spacing: 0.05rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-download,
+.btn-email {
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: #d4af37;
+  border: 2px solid #d4af37;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  min-width: 200px;
+}
+
+.btn-download:hover,
+.btn-email:hover {
+  background: #d4af37;
+  color: #1a4d3e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-home {
+  padding: 0.875rem 2.5rem;
+  background: white;
+  color: #666;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+  background: #f5f5f5;
+  border-color: #999;
+  color: #333;
 }
 
 .payment-status-card {
@@ -222,13 +389,63 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {
   .payment-status-wrapper {
     padding: 2rem 1rem;
+  }
+
+  .success-card-inner {
+    border-radius: 12px;
+  }
+
+  .success-header {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .antler-icon {
+    font-size: 2.5rem;
+  }
+
+  .brand-text {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .success-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .deer-character {
+    font-size: 6rem;
+  }
+
+  .success-title {
+    font-size: 1.75rem;
+    letter-spacing: 0.1rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn-download,
+  .btn-email {
+    width: 100%;
+    min-width: auto;
   }
 
   .payment-status-card {
@@ -258,6 +475,52 @@
 }
 
 @media (max-width: 480px) {
+  .success-header {
+    padding: 1.25rem 1rem 0.75rem;
+  }
+
+  .antler-icon {
+    font-size: 2rem;
+  }
+
+  .brand-text {
+    font-size: 1.75rem;
+    letter-spacing: 0.15rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.6rem;
+    letter-spacing: 0.15rem;
+  }
+
+  .success-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .deer-character {
+    font-size: 5rem;
+  }
+
+  .success-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .order-info-compact p {
+    font-size: 0.85rem;
+  }
+
+  .btn-download,
+  .btn-email {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .btn-home {
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+  }
+
   .payment-status-card {
     padding: 1.5rem 1rem;
   }

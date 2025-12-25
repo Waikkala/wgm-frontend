@@ -46,13 +46,6 @@ const PaymentFailure = () => {
               Back to Home
             </button>
           </div>
-
-          <div className="help-section">
-            <p className="help-text">
-              Need help? Contact our support team at{' '}
-              <a href="mailto:support@ceylonragareserve.com">support@ceylonragareserve.com</a>
-            </p>
-          </div>
         </div>
       </div>
       <SimpleFooter />

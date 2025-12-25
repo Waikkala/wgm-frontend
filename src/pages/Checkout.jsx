@@ -450,6 +450,10 @@ const Checkout = () => {
           console.log('Payment Amount:', paymentData_response.amount);
           console.log('Order ID:', paymentData_response.orderId);
           
+          // Store order ID in sessionStorage for success page
+          sessionStorage.setItem('lastOrderId', data.orderUid);
+          sessionStorage.setItem('lastOrderAmount', paymentData_response.amount);
+          
           // Use Checkout.js library to show payment page
           initiateHostedCheckout(paymentData_response.sessionId);
         } else {
