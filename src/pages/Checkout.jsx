@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SimpleHeader from '../components/SimpleHeader';
@@ -27,8 +27,6 @@ const Checkout = () => {
     district: '',
     districtId: '',
     city: '',
-    province: '',
-    postalCode: '',
     orderNotes: '',
     couponCode: ''
   });
@@ -51,12 +49,7 @@ const Checkout = () => {
 
   // State for order submission
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
-  const [orderSubmitted, setOrderSubmitted] = useState(false);
-  const [orderResponse, setOrderResponse] = useState(null);
   const [showToast, setShowToast] = useState(false);
-
-  // State for payment
-  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   // State for reCAPTCHA
   const [recaptchaToken, setRecaptchaToken] = useState(null);
@@ -98,6 +91,11 @@ const Checkout = () => {
       delete window.cancelCallback;
     };
   }, []);
+
+  // Fetch districts on page load
+  useEffect(() => {
+    fetchDistricts();
+  }, [fetchDistricts]);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -218,7 +216,7 @@ const Checkout = () => {
   };
 
   // Fetch districts from API
-  const fetchDistricts = async () => {
+  const fetchDistricts = useCallback(async () => {
     if (districts.length > 0) return; // Already loaded
 
     setLoadingDistricts(true);
@@ -236,7 +234,7 @@ const Checkout = () => {
     } finally {
       setLoadingDistricts(false);
     }
-  };
+  }, [districts.length]);
 
   // Fetch cities from API based on selected district
   const fetchCities = async (districtId) => {
@@ -294,12 +292,6 @@ const Checkout = () => {
     if (!formData.city.trim()) {
       newErrors.city = 'City is required';
     }
-    if (!formData.province) {
-      newErrors.province = 'Province is required';
-    }
-    if (!formData.postalCode.trim()) {
-      newErrors.postalCode = 'Postal code is required';
-    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -347,7 +339,7 @@ const Checkout = () => {
         customerAddress: formData.streetAddress,
         city: String(cityId),
         district: String(formData.districtId),
-        postalCode: formData.postalCode,
+        postalCode: null,
         notes: formData.orderNotes || '',
         paymentMethod: 'COD',
         paymentStatus: 'PENDING',
@@ -363,7 +355,7 @@ const Checkout = () => {
       console.log('Order Items:', orderItems);
       console.log('============================');
 
-      // Make API call
+      // Make API call to create order
       const response = await fetch(`${API_BASE_URL}/api/v1/orders`, {
         method: 'POST',
         headers: {
@@ -404,27 +396,78 @@ const Checkout = () => {
       }
       console.log('===================');
 
-      if (response.ok) {
+      if (response.ok && data && data.orderUid) {
         // Order created successfully
-        setOrderResponse(data);
-        setOrderSubmitted(true);
         setShowToast(true);
         
         // Hide toast after 3 seconds
         setTimeout(() => {
           setShowToast(false);
         }, 3000);
+
+        // Immediately initiate payment
+        console.log('=== PAYMENT INITIATION DEBUG ===');
+        const paymentData = {
+          orderId: data.orderUid
+        };
+        console.log('Request Body:', JSON.stringify(paymentData, null, 2));
+
+        const paymentResponse = await fetch(`${API_BASE_URL}/api/v1/payment/initiate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(paymentData)
+        });
+
+        console.log('Payment Response Status:', paymentResponse.status);
+
+        const paymentContentType = paymentResponse.headers.get('content-type');
+        let paymentData_response = null;
+
+        if (paymentContentType && paymentContentType.includes('application/json')) {
+          const paymentText = await paymentResponse.text();
+          console.log('Payment Response Text:', paymentText);
+          if (paymentText) {
+            try {
+              paymentData_response = JSON.parse(paymentText);
+              console.log('Parsed Payment Response:', paymentData_response);
+            } catch (e) {
+              console.error('Failed to parse payment JSON:', e);
+              alert('Invalid response from payment gateway');
+              setIsSubmittingOrder(false);
+              return;
+            }
+          }
+        }
+
+        if (paymentResponse.ok && paymentData_response && paymentData_response.success) {
+          console.log('Payment Session ID:', paymentData_response.sessionId);
+          console.log('Payment Amount:', paymentData_response.amount);
+          console.log('Order ID:', paymentData_response.orderId);
+          
+          // Store order ID in sessionStorage for success page
+          sessionStorage.setItem('lastOrderId', data.orderUid);
+          sessionStorage.setItem('lastOrderAmount', paymentData_response.amount);
+          
+          // Use Checkout.js library to show payment page
+          initiateHostedCheckout(paymentData_response.sessionId);
+        } else {
+          const errorMessage = paymentData_response?.message || 'Failed to initiate payment';
+          alert(`Payment Error: ${errorMessage}`);
+          setIsSubmittingOrder(false);
+        }
       } else {
         // Handle error response
         const errorMessage = data?.message || `Server error: ${response.status} ${response.statusText}`;
         console.error('Order creation failed. Status:', response.status);
         console.error('Error data:', data);
         alert(`Order Error (${response.status}): ${errorMessage}\n\nPlease check the console for details.`);
+        setIsSubmittingOrder(false);
       }
     } catch (error) {
       console.error('Error submitting order:', error);
       alert('An error occurred while placing your order. Please try again.');
-    } finally {
       setIsSubmittingOrder(false);
     }
   };
@@ -448,7 +491,6 @@ const Checkout = () => {
       if (typeof window.Checkout === 'undefined') {
         console.error('BOC Checkout library not loaded');
         alert('Payment gateway not ready. Please refresh and try again.');
-        setIsProcessingPayment(false);
         return;
       }
 
@@ -466,77 +508,9 @@ const Checkout = () => {
       // Show the payment page (not showLightbox)
       window.Checkout.showPaymentPage();
 
-      // Reset processing state after showing payment page
-      setIsProcessingPayment(false);
-
     } catch (error) {
       console.error('Error configuring BOC checkout:', error);
       alert('Failed to open payment gateway. Please try again.');
-      setIsProcessingPayment(false);
-    }
-  };
-
-  const handlePayment = async () => {
-    if (!orderResponse || !orderResponse.orderUid) {
-      alert('Order ID not found. Please try again.');
-      return;
-    }
-
-    setIsProcessingPayment(true);
-
-    try {
-      const paymentData = {
-        orderId: orderResponse.orderUid
-      };
-
-      console.log('=== PAYMENT INITIATION DEBUG ===');
-      console.log('Request Body:', JSON.stringify(paymentData, null, 2));
-
-      const response = await fetch(`${API_BASE_URL}/api/v1/payment/initiate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(paymentData)
-      });
-
-      console.log('Payment Response Status:', response.status);
-
-      const contentType = response.headers.get('content-type');
-      let data = null;
-
-      if (contentType && contentType.includes('application/json')) {
-        const text = await response.text();
-        console.log('Payment Response Text:', text);
-        if (text) {
-          try {
-            data = JSON.parse(text);
-            console.log('Parsed Payment Response:', data);
-          } catch (e) {
-            console.error('Failed to parse payment JSON:', e);
-            alert('Invalid response from payment gateway');
-            setIsProcessingPayment(false);
-            return;
-          }
-        }
-      }
-
-      if (response.ok && data && data.success) {
-        console.log('Payment Session ID:', data.sessionId);
-        console.log('Payment Amount:', data.amount);
-        console.log('Order ID:', data.orderId);
-        
-        // Use Checkout.js library to show payment lightbox
-        initiateHostedCheckout(data.sessionId);
-      } else {
-        const errorMessage = data?.message || 'Failed to initiate payment';
-        alert(`Payment Error: ${errorMessage}`);
-        setIsProcessingPayment(false);
-      }
-    } catch (error) {
-      console.error('Error initiating payment:', error);
-      alert('An error occurred while initiating payment. Please try again.');
-      setIsProcessingPayment(false);
     }
   };
 
@@ -663,7 +637,6 @@ const Checkout = () => {
                         name="district"
                         value={formData.district}
                         onChange={handleInputChange}
-                        onFocus={fetchDistricts}
                         className={errors.district ? 'error' : ''}
                         disabled={loadingDistricts}
                       >
@@ -704,44 +677,7 @@ const Checkout = () => {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label>Province *</label>
-                      <select
-                        name="province"
-                        value={formData.province}
-                        onChange={handleInputChange}
-                        className={errors.province ? 'error' : ''}
-                      >
-                        <option value="">Select Province</option>
-                        <option value="western">Western</option>
-                        <option value="central">Central</option>
-                        <option value="southern">Southern</option>
-                        <option value="northern">Northern</option>
-                        <option value="eastern">Eastern</option>
-                        <option value="north-western">North Western</option>
-                        <option value="north-central">North Central</option>
-                        <option value="uva">Uva</option>
-                        <option value="sabaragamuwa">Sabaragamuwa</option>
-                      </select>
-                      {errors.province && <span className="error-message">{errors.province}</span>}
-                    </div>
-                    <div className="form-group">
-                      <label>Postal Code *</label>
-                      <input
-                        type="text"
-                        name="postalCode"
-                        placeholder="10100"
-                        value={formData.postalCode}
-                        onChange={handleInputChange}
-                        className={errors.postalCode ? 'error' : ''}
-                      />
-                      {formData.postalCode && !errors.postalCode && (
-                        <span className="input-check">✓</span>
-                      )}
-                      {errors.postalCode && <span className="error-message">{errors.postalCode}</span>}
-                    </div>
-                  </div>
+
 
                   <div className="form-group">
                     <label>Order Notes (Optional)</label>
@@ -850,7 +786,7 @@ const Checkout = () => {
 
                 <div className="recaptcha-container">
                   <ReCAPTCHA
-                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    sitekey="6LcIyDMsAAAAAAxmYwtpT0ATtOrjbQ2tvxEKoLFV"
                     onChange={handleRecaptchaChange}
                     theme="light"
                   />
@@ -860,21 +796,10 @@ const Checkout = () => {
                   type="submit"
                   className="btn-checkout"
                   onClick={handleSubmit}
-                  disabled={isSubmittingOrder || !recaptchaToken || orderSubmitted}
+                  disabled={isSubmittingOrder || !recaptchaToken}
                 >
-                  {isSubmittingOrder ? 'PLACING ORDER...' : orderSubmitted ? 'ORDER SUBMITTED ✓' : 'CHECKOUT'}
+                  {isSubmittingOrder ? 'PROCESSING...' : 'CHECKOUT & PAY'}
                 </button>
-
-                {orderSubmitted && (
-                  <button
-                    type="button"
-                    className="btn-pay"
-                    onClick={handlePayment}
-                    disabled={isProcessingPayment}
-                  >
-                    {isProcessingPayment ? 'PROCESSING...' : 'PAY NOW'}
-                  </button>
-                )}
 
                 <p className="refund-policy">
                   By placing your order, you agree to our <Link to="/refund-policy">Refund & Return Policy</Link>
