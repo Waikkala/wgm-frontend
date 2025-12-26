@@ -786,7 +786,7 @@ const Checkout = () => {
 
                 <div className="recaptcha-container">
                   <ReCAPTCHA
-                    sitekey="6LcMJzcsAAAAAFdj8sYWeF4yRuoeGGTY1PI7C_8J"
+                    sitekey="6LehJzcsAAAAANZrcCSDZpHX_jCWqEMvfQB6-TCw"
                     onChange={handleRecaptchaChange}
                     theme="light"
                   />
