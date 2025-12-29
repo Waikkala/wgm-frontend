@@ -624,10 +624,11 @@
 
 /* Four Pillars Section */
 .pillars-section {
-  background: #f5f5f5;
+  background: #d9d9d9;
   padding: 5rem 2rem;
   text-align: center;
   position: relative;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .pillars-section::before {
@@ -637,10 +638,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/wgm-frontend/background.png');
-  background-size: cover;
+  background-image: url('/trans_bg2.png');
+  background-size: 50%;
   background-position: center;
-  opacity: 0.03;
+  background-repeat: no-repeat;
+  opacity: 2;
   pointer-events: none;
 }
 
@@ -651,6 +653,7 @@
   font-weight: 400;
   position: relative;
   z-index: 1;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .pillars-divider {
@@ -670,6 +673,7 @@
   color: #666;
   position: relative;
   z-index: 1;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .pillars-grid {
@@ -747,6 +751,7 @@
   color: #1a4d3e;
   font-weight: 500;
   margin: 0;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 /* Inquiry Section */
