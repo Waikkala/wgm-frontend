@@ -39,9 +39,11 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
     };
     addToCart(item);
     
-    // Show toast notification
-    const itemText = quantity === 1 ? 'item' : 'items';
-    setToastMessage(`✓ ${quantity} ${itemText} added to cart`);
+    // Calculate new cart total after adding
+    const newCartTotal = cartCount + quantity;
+    
+    // Show toast notification with current cart quantity
+    setToastMessage(`Added to cart (${newCartTotal})`);
     setShowToast(true);
     
     // Hide toast after 3 seconds
