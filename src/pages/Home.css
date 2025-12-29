@@ -234,9 +234,9 @@
   z-index: 1;
   opacity: 1;
   pointer-events: none;
-  box-shadow: 25px 25px 50px rgba(0, 0, 0, 0.45),
-    15px 15px 30px rgba(0, 0, 0, 0.3),
-    5px 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 25px 25px 50px rgba(0, 0, 0, 0.8),
+    15px 15px 30px rgba(0, 0, 0, 0.5),
+    5px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .showcase-product-image {
@@ -304,7 +304,7 @@
   display: inline-block;
   background: #1a4d3e;
   color: white;
-  border: 2px solid #1a4d3e;
+  border: 3px solid #EA993F;
   padding: 1.1rem 3.5rem;
   font-size: 1rem;
   font-weight: 700;
@@ -313,14 +313,36 @@
   border-radius: 4px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-explore::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/src/assets/ForumBg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+  z-index: -1;
+  transition: all 0.3s ease;
 }
 
 .btn-explore:hover {
   background: #EA993F;
-  color: #1a4d3e;
-  border-color: #d4a574;
+  color: white;
+  border-color: #9D6501;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+}
+
+.btn-explore:hover::before {
+  opacity: 0.4;
 }
 
 /* Raga Detail Section */
