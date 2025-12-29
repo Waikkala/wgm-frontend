@@ -417,9 +417,10 @@
 }
 
 .action-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
   gap: 1rem;
+  width: 100%;
 }
 
 .btn-add-cart,
@@ -437,6 +438,8 @@
   width: 100%;
   white-space: nowrap;
   position: relative;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-add-cart svg {
@@ -487,21 +490,26 @@
 
 .delivery-info {
   display: flex;
-  gap: 2rem;
-  padding: 1rem;
-  background: var(--light-bg);
-  border-radius: 4px;
+  gap: 3rem;
+  padding: 1.25rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  justify-content: center;
 }
 
 .delivery-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  font-weight: 500;
 }
 
 .delivery-icon {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  flex-shrink: 0;
 }
 
 .product-tabs {
@@ -886,7 +894,23 @@
   }
 
   .action-buttons {
-    flex-direction: column;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem;
+  }
+
+  .delivery-info {
+    flex-direction: row;
+    gap: 2rem;
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .delivery-item {
+    font-size: 0.875rem;
+  }
+
+  .delivery-icon {
+    font-size: 1.25rem;
   }
 
   .tabs-header {
@@ -1030,13 +1054,15 @@
   }
 
   .action-buttons {
+    grid-template-columns: 1fr 1fr !important;
     gap: 0.75rem;
   }
 
   .delivery-info {
-    flex-direction: column;
-    gap: 0.65rem;
+    flex-direction: row;
+    gap: 1.5rem;
     padding: 0.875rem;
+    justify-content: center;
   }
 
   .delivery-item {
@@ -1192,8 +1218,18 @@
   }
 
   .delivery-info {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.75rem;
+    padding: 0.75rem;
+    justify-content: center;
+  }
+
+  .delivery-item {
+    font-size: 0.7rem;
+  }
+
+  .delivery-icon {
+    font-size: 0.95rem;
   }
 
   .thumbnail {
