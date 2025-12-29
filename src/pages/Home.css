@@ -498,13 +498,34 @@
   background: #f8f8f8;
   padding: 5rem 2rem;
   text-align: center;
+  margin-top: -4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.innovation-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/bg_trans.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .section-title {
+  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem, 4vw, 2.8rem);
   color: #1a4d3e;
   margin-bottom: 1rem;
   font-weight: 400;
+  position: relative;
+  z-index: 1;
 }
 
 .section-description {
@@ -513,6 +534,8 @@
   font-size: clamp(0.95rem, 2vw, 1.1rem);
   line-height: 1.8;
   color: #666;
+  position: relative;
+  z-index: 1;
 }
 
 .innovation-cards {
@@ -521,6 +544,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .innovation-card {
@@ -528,12 +553,14 @@
   border-radius: 8px;
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  border: 2px solid #d4a574;
 }
 
 .innovation-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #c49563;
 }
 
 .card-image-placeholder {
