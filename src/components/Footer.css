@@ -63,6 +63,10 @@
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  color: #FFD700;
+}
+
+.footer-social .footer-heading {
   color: #ffffff;
 }
 
@@ -127,6 +131,41 @@
 .social-icon:hover {
   color: #d4a574 !important;
   transform: translateY(-3px);
+}
+
+/* BOC Payment Badge in Footer */
+.boc-payment-badge {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.boc-badge-title {
+  font-size: 0.85rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.boc-badge-logo {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: inline-block;
+}
+
+.boc-logo-img {
+  max-width: 50px;
+  height: auto;
+  display: block;
+  filter: brightness(1.1);
+}
+
+.boc-badge-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #FFD700;
+  letter-spacing: 0.1em;
 }
 
 .footer-bottom {
@@ -202,6 +241,10 @@
     font-size: 1.2rem;
   }
 
+  .boc-logo-img {
+    max-width: 100px;
+  }
+
   .footer-copyright {
     font-size: 0.8rem;
   }
@@ -259,6 +302,23 @@
     width: 34px;
     height: 34px;
     font-size: 1.1rem;
+  }
+
+  .boc-payment-badge {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .boc-badge-title {
+    font-size: 0.75rem;
+  }
+
+  .boc-logo-img {
+    max-width: 90px;
+  }
+
+  .boc-badge-text {
+    font-size: 1.2rem;
   }
 
   .footer-bottom {
