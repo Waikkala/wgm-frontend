@@ -460,10 +460,16 @@
   color: var(--white);
 }
 
-.btn-add-cart:hover {
+.btn-add-cart:hover:not(.disabled) {
   background: var(--secondary-green);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
+}
+
+.btn-add-cart.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn-place-order {
@@ -471,21 +477,17 @@
   color: var(--white);
 }
 
-.btn-place-order:hover {
+.btn-place-order:hover:not(.disabled):not(:disabled) {
   background: var(--secondary-green);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
 }
 
-.btn-place-order.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
+.btn-place-order.disabled,
 .btn-place-order:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .delivery-info {
