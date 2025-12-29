@@ -181,10 +181,11 @@
 
 .nav-menu {
   display: flex;
-  gap: 4rem;
+  gap: 6rem;
   align-items: center;
   justify-content: center;
   margin: 0;
+  margin-right: -35rem;
   position: relative;
   z-index: 1;
 }
