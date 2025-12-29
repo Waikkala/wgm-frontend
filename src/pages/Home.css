@@ -511,8 +511,9 @@
   right: 0;
   bottom: 0;
   background-image: url('/bg_trans.png');
-  background-size: 1100px 900px;
+  background-size: 55%;
   background-position: center;
+    background-repeat: no-repeat;
   opacity: 0.15;
   pointer-events: none;
   z-index: 0;
