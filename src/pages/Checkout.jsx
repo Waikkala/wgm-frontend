@@ -535,7 +535,7 @@ const Checkout = () => {
 
         <main className="checkout-page">
           <div className="checkout-main-card">
-            <button className="back-btn-checkout" onClick={() => navigate(-1)}>
+            <button className="back-btn-checkout" onClick={() => navigate('/cart')}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 8l-4 4 4 4M16 12H8" />
@@ -805,15 +805,28 @@ const Checkout = () => {
                   By placing your order, you agree to our <Link to="/refund-policy">Refund & Return Policy</Link>
                 </p>
 
-                <div className="payment-methods">
-                  🔒 Secure SSL Encrypted Payment
-                  <div className="payment-icons">
-                    <span className="payment-icon">💳</span>
-                    <span className="payment-icon">🏦</span>
-                    <span className="payment-icon">💰</span>
-                    <span className="payment-icon">💵</span>
-                    <span className="payment-icon">📱</span>
-                    <span className="payment-icon">💻</span>
+                <div className="payment-gateway-section">
+                  <div className="payment-gateway-logos">
+                    <div className="boc-ipg-logo">
+                      <span className="boc-text">BOC</span>
+                      <span className="ipg-text">iPG</span>
+                      <span className="tagline">Enabling you</span>
+                    </div>
+                    <div className="card-logos">
+                      <div className="card-logo visa">VISA</div>
+                      <div className="card-logo mastercard">
+                        <div className="mc-circle mc-red"></div>
+                        <div className="mc-circle mc-yellow"></div>
+                      </div>
+                      <div className="card-logo amex">AMEX</div>
+                    </div>
+                  </div>
+                  <div className="secure-payment-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <span>Secure SSL Encrypted Payment</span>
                   </div>
                 </div>
               </div>

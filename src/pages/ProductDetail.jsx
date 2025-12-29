@@ -10,8 +10,10 @@ import logo from '../assets/Logo.png';
 const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-  const [selectedWeight, setSelectedWeight] = useState('100g');
+  const [selectedWeight, setSelectedWeight] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const weights = [
     { value: '100g', label: '100g', price: 'Rs 2,100.00', priceValue: 2100, perCup: 'Rs 42.00 / per cup', note: '(including delivery charges)' },
@@ -21,21 +23,73 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   ];
 
   const handleAddToCart = () => {
+    if (!selectedWeight) {
+      alert('Please select a package weight before adding to cart.');
+      return;
+    }
+    
     const selectedWeightData = weights.find(w => w.value === selectedWeight);
     const item = {
       name: 'Ceylon Raga Reserve',
       subtitle: 'Masala Brew',
       weight: selectedWeight,
       quantity: quantity,
-      price: selectedWeightData?.priceValue || 2100
+      price: selectedWeightData?.priceValue || 2100,
+      productId: 5 // Add productId for checkout
     };
     addToCart(item);
+    
+    // Calculate new cart total after adding
+    const newCartTotal = cartCount + quantity;
+    
+    // Show toast notification with current cart quantity
+    setToastMessage(`Added to cart (${newCartTotal})`);
+    setShowToast(true);
+    
+    // Hide toast after 3 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+    
     // Reset quantity after adding
     setQuantity(1);
   };
 
   const handlePlaceOrder = () => {
-    navigate('/cart');
+    if (!selectedWeight) {
+      alert('Please select a package weight before placing your order.');
+      return;
+    }
+    
+    // Add the selected item to cart
+    const selectedWeightData = weights.find(w => w.value === selectedWeight);
+    const item = {
+      name: 'Ceylon Raga Reserve',
+      subtitle: 'Masala Brew',
+      weight: selectedWeight,
+      quantity: quantity,
+      price: selectedWeightData?.priceValue || 2100,
+      productId: 5 // Add productId for checkout
+    };
+    addToCart(item);
+    
+    // If only one item with quantity 1, go directly to checkout
+    // Otherwise, go to cart page
+    if (cartCount === 0 && quantity === 1) {
+      // Single item, single quantity - go directly to checkout
+      const cartItems = [item];
+      const subtotal = item.price * item.quantity;
+      
+      navigate('/checkout', {
+        state: {
+          cartItems: cartItems,
+          subtotal: subtotal
+        }
+      });
+    } else {
+      // Multiple items or quantity > 1 - go to cart page
+      navigate('/cart');
+    }
   };
 
   const handleContactClick = (e) => {
@@ -56,6 +110,11 @@ Best regards,
 
   return (
     <div className="page-container">
+      {showToast && (
+        <div className="toast-notification-product">
+          {toastMessage}
+        </div>
+      )}
       <div className="header-wrapper">
         <div className="logo-section" onClick={() => navigate('/')}>
           <img src={logo} alt="Waikkala Grinding Mills" className="nav-logo" />
@@ -105,11 +164,17 @@ Best regards,
             <div className="stock-badge">✓ In Stock</div>
             
             <div className="product-price">
-              <span className="amount">{weights.find(w => w.value === selectedWeight)?.price || 'Rs 2,100.00'}</span>
-              <div className="price-details">
-                <span className="per-cup">(Average {weights.find(w => w.value === selectedWeight)?.perCup || 'Rs 42 / per cup'})</span>
-                <span className="delivery-note">{weights.find(w => w.value === selectedWeight)?.note || '(including delivery charges)'}</span>
-              </div>
+              <span className="amount">
+                {selectedWeight 
+                  ? weights.find(w => w.value === selectedWeight)?.price 
+                  : 'Select a package'}
+              </span>
+              {selectedWeight && (
+                <div className="price-details">
+                  <span className="per-cup">(Average {weights.find(w => w.value === selectedWeight)?.perCup})</span>
+                  <span className="delivery-note">{weights.find(w => w.value === selectedWeight)?.note}</span>
+                </div>
+              )}
             </div>
 
             <div className="package-weight">
@@ -160,16 +225,20 @@ Best regards,
             </div>
 
             <div className="action-buttons">
-              <button className="btn-add-cart" onClick={handleAddToCart}>
+              <button 
+                className={`btn-add-cart ${!selectedWeight ? 'disabled' : ''}`}
+                onClick={handleAddToCart}
+                disabled={!selectedWeight}
+              >
                 <span>ADD TO CART</span>
                 <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
                   <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
                 </svg>
               </button>
               <button 
-                className={`btn-place-order ${cartCount === 0 ? 'disabled' : ''}`}
+                className={`btn-place-order ${!selectedWeight ? 'disabled' : ''}`}
                 onClick={handlePlaceOrder}
-                disabled={cartCount === 0}
+                disabled={!selectedWeight}
               >
                 PLACE ORDER
               </button>

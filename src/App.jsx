@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import Blog from './pages/Blog';
@@ -17,7 +17,25 @@ import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  // Initialize cart from localStorage or empty array
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const savedCart = localStorage.getItem('cartItems');
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error('Error loading cart from localStorage:', error);
+      return [];
+    }
+  });
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    } catch (error) {
+      console.error('Error saving cart to localStorage:', error);
+    }
+  }, [cartItems]);
 
   const addToCart = (item) => {
     setCartItems(prevItems => {

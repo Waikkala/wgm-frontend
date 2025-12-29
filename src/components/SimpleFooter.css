@@ -16,7 +16,7 @@
   background-image: url('../assets/Footer_1 (1440 x 415).png');
   background-size: cover;
   background-position: center;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .simple-footer-content {
@@ -45,6 +45,7 @@
   font-weight: 600;
   margin-bottom: 1rem;
   letter-spacing: 1px;
+  color: #D4A574;
 }
 
 .simple-footer-description {
@@ -66,13 +67,15 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .simple-social-icon {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid var(--white);
+  border: 2px solid #D4A574;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,11 +120,34 @@
   color: var(--white);
 }
 
+.simple-footer-payment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: -0.5rem;
+}
+
+.simple-footer-payment-text {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.boc-text {
+  color: #D4A574;
+  font-weight: 600;
+}
+
+.boc-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
 .simple-footer-copyright {
   font-size: 0.75rem;
   opacity: 0.8;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -142,6 +168,15 @@
     width: 40px;
     height: 40px;
     padding: 8px;
+  }
+
+  .simple-footer-payment {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .boc-logo {
+    height: 25px;
   }
 }
 
@@ -179,6 +214,18 @@
     width: 36px;
     height: 36px;
     padding: 7px;
+  }
+
+  .simple-footer-payment {
+    margin-bottom: 1.25rem;
+  }
+
+  .simple-footer-payment-text {
+    font-size: 0.75rem;
+  }
+
+  .boc-logo {
+    height: 22px;
   }
 
   .simple-footer-copyright {

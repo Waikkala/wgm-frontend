@@ -16,7 +16,7 @@
   background-image: url('../assets/Footer_1 (1440 x 415).png');
   background-size: cover;
   background-position: center;
-  opacity: 0.4;
+  opacity: 0.7;
   pointer-events: none;
 }
 
@@ -39,9 +39,9 @@
 }
 
 .footer-logo {
-  background: rgba(45, 107, 69, 0.6);
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   display: inline-block;
   margin-bottom: 1.5rem;
 }
@@ -63,6 +63,10 @@
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  color: #C28F34;
+}
+
+.footer-social .footer-heading {
   color: #ffffff;
 }
 
@@ -129,6 +133,41 @@
   transform: translateY(-3px);
 }
 
+/* BOC Payment Badge in Footer */
+.boc-payment-badge {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.boc-badge-title {
+  font-size: 0.85rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.boc-badge-logo {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: inline-block;
+}
+
+.boc-logo-img {
+  max-width: 50px;
+  height: auto;
+  display: block;
+  filter: brightness(1.1);
+}
+
+.boc-badge-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #FFD700;
+  letter-spacing: 0.1em;
+}
+
 .footer-bottom {
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -176,7 +215,7 @@
   }
 
   .footer-logo {
-    padding: 1rem;
+    padding: 0;
   }
 
   .footer-logo .logo-icon {
@@ -202,6 +241,10 @@
     font-size: 1.2rem;
   }
 
+  .boc-logo-img {
+    max-width: 100px;
+  }
+
   .footer-copyright {
     font-size: 0.8rem;
   }
@@ -217,7 +260,7 @@
   }
 
   .footer-logo {
-    padding: 0.875rem;
+    padding: 0;
     margin-bottom: 1.25rem;
   }
 
@@ -259,6 +302,23 @@
     width: 34px;
     height: 34px;
     font-size: 1.1rem;
+  }
+
+  .boc-payment-badge {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .boc-badge-title {
+    font-size: 0.75rem;
+  }
+
+  .boc-logo-img {
+    max-width: 90px;
+  }
+
+  .boc-badge-text {
+    font-size: 1.2rem;
   }
 
   .footer-bottom {

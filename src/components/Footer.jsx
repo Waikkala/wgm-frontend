@@ -31,15 +31,11 @@ const Footer = () => {
           </div>
 
           <div className="footer-contact">
-            <h3 className="footer-heading">Contact us</h3>
+            <h3 className="footer-heading">Contact</h3>
             <div className="contact-info">
-              <p>Waikkala Grinding Mills Pvt Ltd,</p>
-              <p>Seetha Villa, Waikkala,</p>
-              <p>Sri Lanka.</p>
-              <p className="contact-phone">+ 94 76 182 6066</p>
-              <p className="contact-phone">+ 94 76 409 3287</p>
-              <p className="contact-email">Info@wgm.lk</p>
-              <p className="contact-email">Marketing@wgm.lk</p>
+              <p>Waikkala, Sri Lanka</p>
+              <p className="contact-email">info@wgm.lk</p>
+              <p className="contact-phone">+94 76 182 6066</p>
             </div>
           </div>
 
@@ -67,6 +63,12 @@ const Footer = () => {
               <a href="https://threads.net" target="_blank" rel="noopener noreferrer" className="social-icon">
                 <FaThreads />
               </a>
+            </div>
+            <div className="boc-payment-badge">
+              <p className="boc-badge-title">Official Payment Gateway Partner</p>
+              <div className="boc-badge-logo">
+                <img src="/Bank_of_Ceylon.png" alt="Bank of Ceylon" className="boc-logo-img" />
+              </div>
             </div>
           </div>
         </div>

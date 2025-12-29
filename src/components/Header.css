@@ -135,14 +135,11 @@
 .header-landing .logo {
   cursor: pointer;
   transition: transform 0.3s ease;
-  background: #1a4d2e;
   padding: 1.5rem 2rem;
-  border-radius: 4px;
   position: absolute;
-  left: 2rem;
-  top: 0.75rem;
+  left: 1rem;
+  top: -0.25rem;
   z-index: 10;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .header-landing .logo:hover {
@@ -150,7 +147,7 @@
 }
 
 .header-landing .logo-icon {
-  width: 90px;
+  width: 110px;
   height: auto;
   display: block;
 }
@@ -184,10 +181,11 @@
 
 .nav-menu {
   display: flex;
-  gap: 4rem;
+  gap: 6rem;
   align-items: center;
   justify-content: center;
   margin: 0;
+  margin-right: -35rem;
   position: relative;
   z-index: 1;
 }
