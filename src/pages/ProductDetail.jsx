@@ -73,10 +73,6 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
     };
     addToCart(item);
     
-    // Check if user has multiple items or quantity > 1
-    // cartCount is the current count before adding this item
-    const totalItemsAfterAdd = cartCount + quantity;
-    
     // If only one item with quantity 1, go directly to checkout
     // Otherwise, go to cart page
     if (cartCount === 0 && quantity === 1) {
