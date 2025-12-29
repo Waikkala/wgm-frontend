@@ -12,6 +12,8 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedWeight, setSelectedWeight] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const weights = [
     { value: '100g', label: '100g', price: 'Rs 2,100.00', priceValue: 2100, perCup: 'Rs 42.00 / per cup', note: '(including delivery charges)' },
@@ -36,6 +38,17 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
       productId: 5 // Add productId for checkout
     };
     addToCart(item);
+    
+    // Show toast notification
+    const itemText = quantity === 1 ? 'item' : 'items';
+    setToastMessage(`✓ ${quantity} ${itemText} added to cart`);
+    setShowToast(true);
+    
+    // Hide toast after 3 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+    
     // Reset quantity after adding
     setQuantity(1);
   };
@@ -99,6 +112,11 @@ Best regards,
 
   return (
     <div className="page-container">
+      {showToast && (
+        <div className="toast-notification-product">
+          {toastMessage}
+        </div>
+      )}
       <div className="header-wrapper">
         <div className="logo-section" onClick={() => navigate('/')}>
           <img src={logo} alt="Waikkala Grinding Mills" className="nav-logo" />

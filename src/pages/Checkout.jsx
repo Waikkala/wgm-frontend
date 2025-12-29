@@ -535,7 +535,7 @@ const Checkout = () => {
 
         <main className="checkout-page">
           <div className="checkout-main-card">
-            <button className="back-btn-checkout" onClick={() => navigate(-1)}>
+            <button className="back-btn-checkout" onClick={() => navigate('/cart')}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 8l-4 4 4 4M16 12H8" />
