@@ -66,8 +66,13 @@ const Footer = () => {
             </div>
             <div className="boc-payment-badge">
               <p className="boc-badge-title">Official Payment Gateway Partner</p>
-              <div className="boc-badge-logo">
+              <div className="boc-badge-logos">
                 <img src="/Bank_of_Ceylon.png" alt="Bank of Ceylon" className="boc-logo-img" />
+                <div className="boc-ipg-logo">
+                  <span className="boc-text">BOC</span>
+                  <span className="ipg-text">iPG</span>
+                  <span className="tagline">Enabling you</span>
+                </div>
               </div>
             </div>
           </div>

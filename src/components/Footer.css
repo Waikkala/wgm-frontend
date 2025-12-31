@@ -147,6 +147,13 @@
   font-weight: 500;
 }
 
+.boc-badge-logos {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .boc-badge-logo {
   background: transparent;
   padding: 0;
@@ -159,6 +166,41 @@
   height: auto;
   display: block;
   filter: brightness(1.1);
+}
+
+.boc-ipg-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.boc-text {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: -0.05em;
+  text-shadow: 1.2px 1.2px 0px #ffd700, 2.4px 2.4px 0px #ff8c00;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.ipg-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: -0.02em;
+  font-family: Arial, sans-serif;
+}
+
+.tagline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 0.42rem;
+  color: #666;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .boc-badge-text {

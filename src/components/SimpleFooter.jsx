@@ -42,6 +42,11 @@ const SimpleFooter = () => {
         <div className="simple-footer-payment">
           <p className="simple-footer-payment-text">Secure Payment via </p>
           <img src={bocLogo} alt="Bank of Ceylon" className="boc-logo" />
+          <div className="boc-ipg-logo">
+            <span className="boc-text">BOC</span>
+            <span className="ipg-text">iPG</span>
+            <span className="tagline">Enabling you</span>
+          </div>
         </div>
         <p className="simple-footer-copyright">
           Copyright 2025 © Waikkala Grinding Mills Pvt Ltd. All rights reserved.
