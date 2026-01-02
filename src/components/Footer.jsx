@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 import { FaFacebook, FaInstagram, FaYoutube, FaXTwitter, FaLinkedin, FaPinterest, FaThreads } from 'react-icons/fa6';
 import logo from '../assets/Logo.png';
+import f1 from '../assets/f1.jpeg';
+import f2 from '../assets/f2.jpeg';
+import f3 from '../assets/f3.jpeg';
+import f4 from '../assets/f4.jpeg';
 
 const Footer = () => {
   return (
@@ -73,6 +77,10 @@ const Footer = () => {
                   <span className="ipg-text">iPG</span>
                   <span className="tagline">Enabling you</span>
                 </div>
+                <img src={f1} alt="Payment Method" className="payment-method-icon" />
+                <img src={f2} alt="Payment Method" className="payment-method-icon" />
+                <img src={f3} alt="Payment Method" className="payment-method-icon" />
+                <img src={f4} alt="Payment Method" className="payment-method-icon" />
               </div>
             </div>
           </div>
