@@ -222,6 +222,7 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-dark);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .product-subtitle {
@@ -291,6 +292,7 @@
   align-items: center;
   gap: 0.5rem;
   color: var(--text-dark);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .package-icon {
@@ -574,6 +576,7 @@
   margin: 2rem 0 1.5rem;
   text-align: left;
   color: var(--text-dark);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .features-list {
@@ -598,6 +601,7 @@
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--text-dark);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .policy-text {
@@ -760,6 +764,7 @@
   color: var(--text-dark);
   margin-bottom: 1rem;
   text-align: center;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .instruction-list {

@@ -3,6 +3,38 @@
   background: #f8f9fa;
 }
 
+/* Header Line Pattern Bar Styles */
+.header-line-bar {
+  width: 100%;
+  height: 30px;
+  background-color: #d9d9d9;
+  background-image: url('/header-bar.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-line-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* White Spacer Bar */
+.white-spacer-bar {
+  width: 100%;
+  height: 40px;
+  background: #f8f9fa;
+}
+
 /* Raga Detail Section */
 .raga-detail-section {
   background: #0d2e24;
@@ -155,9 +187,32 @@
 /* Art of the Brew Section */
 .brew-section {
   background: #f8f9fa;
-  padding: 3rem 2rem;
+  padding: 0;
   max-width: 100vw;
   overflow: hidden;
+  position: relative;
+}
+
+.brew-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/ForumBg.png'), url('/header-bar.png');
+  background-size: 400px, 300px;
+  background-position: center, center;
+  background-repeat: repeat, repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.brew-section-content {
+  padding: 3rem 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .brew-title {
@@ -166,6 +221,7 @@
   color: #d4af37;
   margin-bottom: 2.5rem;
   font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .brew-tabs {
@@ -196,14 +252,14 @@
 }
 
 .brew-tab.active {
-  background: #EA993F;
+  background: linear-gradient(135deg, #9D6501 0%, #EA993F 100%);
   color: white;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 16px rgba(212, 165, 116, 0.5), 0 0 20px rgba(255, 223, 128, 0.4);
   transform: translateY(-2px);
 }
 
 .brew-tab:hover {
-  background: #C28F34;
+  background: linear-gradient(135deg, #EA993F 0%, #9D6501 100%);
   transform: translateY(-2px);
 }
 
@@ -252,6 +308,7 @@
   color: #1a4d3a;
   margin: 0 0 0.5rem 0;
   font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .recipe-amount {
@@ -295,6 +352,22 @@
   position: relative;
 }
 
+.wellness-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/ForumBg.png'), url('/header-bar.png');
+  background-size: 400px, 300px;
+  background-position: center, center;
+  background-repeat: repeat, repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .wellness-title-bar {
   background-size: cover;
   background-position: center;
@@ -305,6 +378,7 @@
   justify-content: center;
   position: relative;
   min-height: 120px;
+  z-index: 1;
 }
 
 .wellness-title-bar::before {
@@ -327,6 +401,7 @@
   position: relative;
   z-index: 1;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .wellness-container {
@@ -368,6 +443,7 @@
   margin: 0;
   font-weight: 700;
   line-height: 1.4;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .wellness-description {
@@ -501,8 +577,12 @@
     font-size: 2rem;
   }
 
-  .brew-section,
+  .brew-section-content,
   .wellness-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .brew-section-content {
     padding: 3rem 1.5rem;
   }
 
@@ -558,6 +638,14 @@
     margin: 0 auto;
     display: block;
   }
+
+  .header-line-bar {
+    height: 50px;
+  }
+
+  .white-spacer-bar {
+    height: 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -589,7 +677,7 @@
     min-height: 300px;
   }
 
-  .brew-section {
+  .brew-section-content {
     padding: 2rem 1rem;
   }
 
@@ -676,5 +764,13 @@
   .wellness-list li,
   .wellness-benefit {
     font-size: 0.85rem;
+  }
+
+  .header-line-bar {
+    height: 40px;
+  }
+
+  .white-spacer-bar {
+    height: 25px;
   }
 }

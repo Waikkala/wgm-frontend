@@ -7,6 +7,8 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className={`header ${isLanding ? 'header-landing' : ''}`}>
       <div className="header-background"></div>
@@ -27,11 +29,12 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
               </div>
             </div>
             <div className="header-nav-bar">
+              {menuOpen && <div className="menu-overlay" onClick={closeMenu}></div>}
               <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
-                <Link to="/" className="nav-link">HOME</Link>
-                <Link to="/products" className="nav-link">PRODUCTS</Link>
-                <Link to="/about" className="nav-link">ABOUT US</Link>
-                <Link to="/blog" className="nav-link">BLOG</Link>
+                <Link to="/" className="nav-link" onClick={closeMenu}>HOME</Link>
+                <Link to="/products" className="nav-link" onClick={closeMenu}>PRODUCTS</Link>
+                <Link to="/about" className="nav-link" onClick={closeMenu}>ABOUT US</Link>
+                <Link to="/blog" className="nav-link" onClick={closeMenu}>BLOG</Link>
               </nav>
             </div>
           </>

@@ -150,8 +150,15 @@
 .boc-badge-logos {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+.payment-method-icon {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .boc-badge-logo {
@@ -287,6 +294,10 @@
     max-width: 100px;
   }
 
+  .payment-method-icon {
+    height: 25px;
+  }
+
   .footer-copyright {
     font-size: 0.8rem;
   }
@@ -357,6 +368,10 @@
 
   .boc-logo-img {
     max-width: 90px;
+  }
+
+  .payment-method-icon {
+    height: 22px;
   }
 
   .boc-badge-text {

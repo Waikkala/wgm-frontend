@@ -20,8 +20,11 @@ const Product = ({ cartCount }) => {
     <div className="product-page">
       <Header cartCount={cartCount} isLanding={true} />
       
+      <div className="white-spacer-bar"></div>
+
       {/* Ceylon Raga Reserve Detail Section */}
       <section className="raga-detail-section">
+        <div className="header-line-bar"></div>
         <div className="raga-detail-container">
           <div className="raga-detail-content">
             <h2 className="raga-detail-title">Ceylon Raga Reserve</h2>
@@ -51,11 +54,16 @@ const Product = ({ cartCount }) => {
             <img src={blogSA4} alt="Raga Reserve Package" />
           </div>
         </div>
+        <div className="header-line-bar"></div>
       </section>
+
+      <div className="white-spacer-bar"></div>
 
       {/* Art of the Brew Section */}
       <section className="brew-section">
-        <h2 className="brew-title">The Art of the Brew: Versatile Inspirations</h2>
+        <div className="header-line-bar"></div>
+        <div className="brew-section-content">
+          <h2 className="brew-title">The Art of the Brew: Versatile Inspirations</h2>
         <div className="brew-tabs">
           <button 
             className={`brew-tab ${activeBrewTab === 'hot' ? 'active' : ''}`}
@@ -184,10 +192,15 @@ const Product = ({ cartCount }) => {
             />
           </div>
         </div>
+        </div>
+        <div className="header-line-bar"></div>
       </section>
+
+      <div className="white-spacer-bar"></div>
 
       {/* Wellness Section */}
       <section className="wellness-section">
+        <div className="header-line-bar"></div>
         <div className="wellness-title-bar" style={{ backgroundImage: `url(${forumBg})` }}>
           <h2 className="wellness-title">Wellness Within: The Science of Raga Reserve</h2>
         </div>
@@ -195,7 +208,7 @@ const Product = ({ cartCount }) => {
           <div className="wellness-grid-layout">
             {/* Row 1: O1 (left) - Image (center) - O2 (right) */}
             <div className="wellness-card wellness-card-left">
-              <h3>O1: Powerful Anti-Inflammatory Support</h3>
+              <h3>Powerful Anti-Inflammatory Support</h3>
               <p className="wellness-description">
                 Clove, ginger, cinnamon, cumin, and black pepper contain bioactive compounds
                 (eugenol, gingerols, cinnamaldehyde, piperine) that help lower inflammation
@@ -211,7 +224,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-card wellness-card-right">
-              <h3>O2: Enhanced Digestion & Gut Comfort</h3>
+              <h3>Enhanced Digestion & Gut Comfort</h3>
               <p className="wellness-description">
                 Fennel, cumin, cardamom, ginger, and pepper work together to improve:
               </p>
@@ -232,7 +245,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-card wellness-card-center">
-              <h3>O3: Strong Antioxidant Protection</h3>
+              <h3>Strong Antioxidant Protection</h3>
               <p className="wellness-description">
                 Clove, cinnamon, nutmeg, cardamom, and ginger provide very high antioxidant
                 activity, helping to:
@@ -253,7 +266,7 @@ const Product = ({ cartCount }) => {
 
             {/* Row 3: O4 (left) - Image (center) - O5 (right) */}
             <div className="wellness-card wellness-card-left">
-              <h3>O4: Mood Balance, Calmness & Focused Mental Clarity</h3>
+              <h3>Mood Balance, Calmness & Focused Mental Clarity</h3>
               <p className="wellness-description">
                 The synergistic aroma and compounds in nutmeg, cinnamon, cardamom, clove, and
                 ginger naturally promote:
@@ -274,7 +287,7 @@ const Product = ({ cartCount }) => {
             </div>
 
             <div className="wellness-card wellness-card-right">
-              <h3>O5: Metabolism Boost & Natural Weight-Supporting Effect</h3>
+              <h3>Metabolism Boost & Natural Weight-Supporting Effect</h3>
               <p className="wellness-description">
                 Black pepper, ginger, cumin and cinnamon increase thermogenesis and
                 metabolic activity while supporting blood sugar control.
@@ -285,6 +298,7 @@ const Product = ({ cartCount }) => {
             </div>
           </div>
         </div>
+        <div className="header-line-bar"></div>
       </section>
 
       <Footer />
