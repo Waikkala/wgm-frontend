@@ -28,10 +28,10 @@ const Header = ({ title, subtitle, showCart = false, cartCount = 0, isLanding = 
             </div>
             <div className="header-nav-bar">
               <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
-                <Link to="/" className="nav-link">HOME</Link>
-                <Link to="/products" className="nav-link">PRODUCTS</Link>
-                <Link to="/about" className="nav-link">ABOUT US</Link>
-                <Link to="/blog" className="nav-link">BLOG</Link>
+                <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>HOME</Link>
+                <Link to="/products" className="nav-link" onClick={() => setMenuOpen(false)}>PRODUCTS</Link>
+                <Link to="/about" className="nav-link" onClick={() => setMenuOpen(false)}>ABOUT US</Link>
+                <Link to="/blog" className="nav-link" onClick={() => setMenuOpen(false)}>BLOG</Link>
               </nav>
             </div>
           </>
