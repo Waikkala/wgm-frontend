@@ -3,6 +3,38 @@
   background: #f8f9fa;
 }
 
+/* Header Line Pattern Bar Styles */
+.header-line-bar {
+  width: 100%;
+  height: 30px;
+  background-color: #d9d9d9;
+  background-image: url('/header-bar.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-line-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* White Spacer Bar */
+.white-spacer-bar {
+  width: 100%;
+  height: 40px;
+  background: #f8f9fa;
+}
+
 /* Raga Detail Section */
 .raga-detail-section {
   background: #0d2e24;
@@ -155,9 +187,13 @@
 /* Art of the Brew Section */
 .brew-section {
   background: #f8f9fa;
-  padding: 3rem 2rem;
+  padding: 0;
   max-width: 100vw;
   overflow: hidden;
+}
+
+.brew-section-content {
+  padding: 3rem 2rem;
 }
 
 .brew-title {
@@ -166,6 +202,7 @@
   color: #d4af37;
   margin-bottom: 2.5rem;
   font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .brew-tabs {
@@ -252,6 +289,7 @@
   color: #1a4d3a;
   margin: 0 0 0.5rem 0;
   font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .recipe-amount {
@@ -327,6 +365,7 @@
   position: relative;
   z-index: 1;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .wellness-container {
@@ -368,6 +407,7 @@
   margin: 0;
   font-weight: 700;
   line-height: 1.4;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .wellness-description {
@@ -501,8 +541,12 @@
     font-size: 2rem;
   }
 
-  .brew-section,
+  .brew-section-content,
   .wellness-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .brew-section-content {
     padding: 3rem 1.5rem;
   }
 
@@ -558,6 +602,14 @@
     margin: 0 auto;
     display: block;
   }
+
+  .header-line-bar {
+    height: 50px;
+  }
+
+  .white-spacer-bar {
+    height: 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -589,7 +641,7 @@
     min-height: 300px;
   }
 
-  .brew-section {
+  .brew-section-content {
     padding: 2rem 1rem;
   }
 
@@ -676,5 +728,13 @@
   .wellness-list li,
   .wellness-benefit {
     font-size: 0.85rem;
+  }
+
+  .header-line-bar {
+    height: 40px;
+  }
+
+  .white-spacer-bar {
+    height: 25px;
   }
 }

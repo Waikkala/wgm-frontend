@@ -20,8 +20,11 @@ const Product = ({ cartCount }) => {
     <div className="product-page">
       <Header cartCount={cartCount} isLanding={true} />
       
+      <div className="white-spacer-bar"></div>
+
       {/* Ceylon Raga Reserve Detail Section */}
       <section className="raga-detail-section">
+        <div className="header-line-bar"></div>
         <div className="raga-detail-container">
           <div className="raga-detail-content">
             <h2 className="raga-detail-title">Ceylon Raga Reserve</h2>
@@ -51,11 +54,16 @@ const Product = ({ cartCount }) => {
             <img src={blogSA4} alt="Raga Reserve Package" />
           </div>
         </div>
+        <div className="header-line-bar"></div>
       </section>
+
+      <div className="white-spacer-bar"></div>
 
       {/* Art of the Brew Section */}
       <section className="brew-section">
-        <h2 className="brew-title">The Art of the Brew: Versatile Inspirations</h2>
+        <div className="header-line-bar"></div>
+        <div className="brew-section-content">
+          <h2 className="brew-title">The Art of the Brew: Versatile Inspirations</h2>
         <div className="brew-tabs">
           <button 
             className={`brew-tab ${activeBrewTab === 'hot' ? 'active' : ''}`}
@@ -184,10 +192,15 @@ const Product = ({ cartCount }) => {
             />
           </div>
         </div>
+        </div>
+        <div className="header-line-bar"></div>
       </section>
+
+      <div className="white-spacer-bar"></div>
 
       {/* Wellness Section */}
       <section className="wellness-section">
+        <div className="header-line-bar"></div>
         <div className="wellness-title-bar" style={{ backgroundImage: `url(${forumBg})` }}>
           <h2 className="wellness-title">Wellness Within: The Science of Raga Reserve</h2>
         </div>
@@ -285,6 +298,7 @@ const Product = ({ cartCount }) => {
             </div>
           </div>
         </div>
+        <div className="header-line-bar"></div>
       </section>
 
       <Footer />
