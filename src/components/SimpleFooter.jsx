@@ -1,10 +1,10 @@
 import './SimpleFooter.css';
 import logo1 from '../assets/Logo.png';
 import bocLogo from '/Bank_of_Ceylon.png';
-import f1 from '../assets/f1.jpeg';
-import f2 from '../assets/f2.jpeg';
-import f3 from '../assets/f3.jpeg';
-import f4 from '../assets/f4.jpeg';
+import f1 from '../assets/f1.png';
+import f2 from '../assets/f2.png';
+import f3 from '../assets/f3.png';
+import f4 from '../assets/f4.png';
 
 const SimpleFooter = () => {
   return (

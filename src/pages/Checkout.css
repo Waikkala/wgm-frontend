@@ -467,6 +467,13 @@
   justify-content: center;
   margin-bottom: 1rem;
   padding: 1rem 0;
+  min-height: 78px;
+  align-items: center;
+}
+
+.recaptcha-container > div {
+  transform: scale(1);
+  transform-origin: center;
 }
 
 .btn-checkout {
@@ -850,6 +857,15 @@
   font-weight: 400;
 }
 
+.checkout-payment-icon {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  background: white;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
+
 .card-logos {
   display: flex;
   align-items: center;
@@ -945,6 +961,11 @@
     bottom: -6px;
   }
 
+  .checkout-payment-icon {
+    height: 28px;
+    padding: 0.28rem 0.45rem;
+  }
+
   .card-logos {
     gap: 0.45rem;
   }
@@ -1000,6 +1021,11 @@
   .tagline {
     font-size: 0.38rem;
     bottom: -6px;
+  }
+
+  .checkout-payment-icon {
+    height: 26px;
+    padding: 0.25rem 0.4rem;
   }
 
   .card-logos {

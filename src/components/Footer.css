@@ -155,10 +155,11 @@
 }
 
 .payment-method-icon {
-  height: 30px;
+  height: 35px;
   width: auto;
   object-fit: contain;
   border-radius: 4px;
+  background: transparent;
 }
 
 .boc-badge-logo {
