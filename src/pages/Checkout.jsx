@@ -5,6 +5,10 @@ import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './Checkout.css';
 import PackImage from '../assets/Pack.png';
+import f1 from '../assets/f1.png';
+import f2 from '../assets/f2.png';
+import f3 from '../assets/f3.png';
+import f4 from '../assets/f4.png';
 
 const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
 
@@ -812,14 +816,10 @@ const Checkout = () => {
                       <span className="ipg-text">iPG</span>
                       <span className="tagline">Enabling you</span>
                     </div>
-                    <div className="card-logos">
-                      <div className="card-logo visa">VISA</div>
-                      <div className="card-logo mastercard">
-                        <div className="mc-circle mc-red"></div>
-                        <div className="mc-circle mc-yellow"></div>
-                      </div>
-                      <div className="card-logo amex">AMEX</div>
-                    </div>
+                    <img src={f1} alt="Payment Method" className="payment-method-icon" />
+                    <img src={f2} alt="Payment Method" className="payment-method-icon" />
+                    <img src={f3} alt="Payment Method" className="payment-method-icon" />
+                    <img src={f4} alt="Payment Method" className="payment-method-icon" />
                   </div>
                   <div className="secure-payment-text">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
