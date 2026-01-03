@@ -343,6 +343,8 @@ const Checkout = () => {
         customerAddress: formData.streetAddress,
         city: String(cityId),
         district: String(formData.districtId),
+        cityName: formData.city,
+        districtName: formData.district,
         postalCode: null,
         notes: formData.orderNotes || '',
         paymentMethod: 'COD',
@@ -790,7 +792,7 @@ const Checkout = () => {
 
                 <div className="recaptcha-container">
                   <ReCAPTCHA
-                    sitekey="6LehJzcsAAAAANZrcCSDZpHX_jCWqEMvfQB6-TCw"
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     onChange={handleRecaptchaChange}
                     theme="light"
                   />
