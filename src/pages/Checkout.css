@@ -850,12 +850,12 @@
   font-weight: 400;
 }
 
-.payment-method-icon {
-  height: 26px;
+.checkout-payment-icon {
+  height: 50px;
   width: auto;
   object-fit: contain;
   background: white;
-  padding: 0.25rem 0.4rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
 }
 
@@ -954,9 +954,9 @@
     bottom: -6px;
   }
 
-  .payment-method-icon {
-    height: 24px;
-    padding: 0.22rem 0.38rem;
+  .checkout-payment-icon {
+    height: 28px;
+    padding: 0.28rem 0.45rem;
   }
 
   .card-logos {
@@ -1016,9 +1016,9 @@
     bottom: -6px;
   }
 
-  .payment-method-icon {
-    height: 22px;
-    padding: 0.2rem 0.35rem;
+  .checkout-payment-icon {
+    height: 26px;
+    padding: 0.25rem 0.4rem;
   }
 
   .card-logos {

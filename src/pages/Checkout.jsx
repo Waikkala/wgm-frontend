@@ -816,10 +816,10 @@ const Checkout = () => {
                       <span className="ipg-text">iPG</span>
                       <span className="tagline">Enabling you</span>
                     </div>
-                    <img src={f1} alt="Payment Method" className="payment-method-icon" />
-                    <img src={f2} alt="Payment Method" className="payment-method-icon" />
-                    <img src={f3} alt="Payment Method" className="payment-method-icon" />
-                    <img src={f4} alt="Payment Method" className="payment-method-icon" />
+                    <img src={f1} alt="Payment Method" className="checkout-payment-icon" />
+                    <img src={f2} alt="Payment Method" className="checkout-payment-icon" />
+                    <img src={f3} alt="Payment Method" className="checkout-payment-icon" />
+                    <img src={f4} alt="Payment Method" className="checkout-payment-icon" />
                   </div>
                   <div className="secure-payment-text">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
