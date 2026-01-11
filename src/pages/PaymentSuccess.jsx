@@ -6,13 +6,18 @@ import './PaymentSuccess.css';
 
 const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
 
-const PaymentSuccess = () => {
+const PaymentSuccess = ({ clearCart }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState(null);
 
   useEffect(() => {
+    // Clear the cart when payment success page loads
+    if (clearCart) {
+      clearCart();
+    }
+    
     const loadOrderDetails = async () => {
       try {
         // Log all URL parameters for debugging
@@ -106,7 +111,7 @@ const PaymentSuccess = () => {
     };
 
     loadOrderDetails();
-  }, [searchParams]);
+  }, [searchParams, clearCart]);
 
   if (isLoading) {
     return (

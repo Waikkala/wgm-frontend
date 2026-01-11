@@ -17,25 +17,8 @@ import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
-  // Initialize cart from localStorage or empty array
-  const [cartItems, setCartItems] = useState(() => {
-    try {
-      const savedCart = localStorage.getItem('cartItems');
-      return savedCart ? JSON.parse(savedCart) : [];
-    } catch (error) {
-      console.error('Error loading cart from localStorage:', error);
-      return [];
-    }
-  });
-
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    try {
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    } catch (error) {
-      console.error('Error saving cart to localStorage:', error);
-    }
-  }, [cartItems]);
+  // Initialize cart as empty array (no persistence)
+  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
     setCartItems(prevItems => {
@@ -65,6 +48,10 @@ function App() {
 
   const getTotalQuantity = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
   };
 
   return (
@@ -132,7 +119,7 @@ function App() {
         />
         <Route
           path="/checkout"
-          element={<Checkout cartItems={cartItems} />}
+          element={<Checkout cartItems={cartItems} clearCart={clearCart} />}
         />
         <Route
           path="/payment"
@@ -144,7 +131,7 @@ function App() {
         />
         <Route
           path="/payment-success"
-          element={<PaymentSuccess />}
+          element={<PaymentSuccess clearCart={clearCart} />}
         />
         <Route
           path="/payment-failure"
