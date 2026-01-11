@@ -61,22 +61,24 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
       return;
     }
     
-    // Add the selected item to cart
-    const selectedWeightData = weights.find(w => w.value === selectedWeight);
-    const item = {
-      name: 'Ceylon Raga Reserve',
-      subtitle: 'Masala Brew',
-      weight: selectedWeight,
-      quantity: quantity,
-      price: selectedWeightData?.priceValue || 2100,
-      productId: 5 // Add productId for checkout
-    };
-    addToCart(item);
-    
-    // If only one item with quantity 1, go directly to checkout
-    // Otherwise, go to cart page
-    if (cartCount === 0 && quantity === 1) {
-      // Single item, single quantity - go directly to checkout
+    // Check if cart already has items
+    if (cartCount > 0) {
+      // Cart has items, just navigate to cart page
+      navigate('/cart');
+    } else {
+      // Cart is empty, add the selected item and go directly to checkout
+      const selectedWeightData = weights.find(w => w.value === selectedWeight);
+      const item = {
+        name: 'Ceylon Raga Reserve',
+        subtitle: 'Masala Brew',
+        weight: selectedWeight,
+        quantity: quantity,
+        price: selectedWeightData?.priceValue || 2100,
+        productId: 5 // Add productId for checkout
+      };
+      addToCart(item);
+      
+      // Navigate directly to checkout with the item
       const cartItems = [item];
       const subtotal = item.price * item.quantity;
       
@@ -86,9 +88,6 @@ const ProductDetail = ({ addToCart, cartCount = 0 }) => {
           subtotal: subtotal
         }
       });
-    } else {
-      // Multiple items or quantity > 1 - go to cart page
-      navigate('/cart');
     }
   };
 
