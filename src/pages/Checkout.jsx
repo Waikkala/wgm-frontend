@@ -14,10 +14,10 @@ const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
 
 // BOC Payment Gateway Configuration
 // For Create React App, environment variables are available at build time
-const BOC_MERCHANT_ID = 'TEST700154990514';
-const BOC_GATEWAY_URL = 'https://test-bankofceylon.mtf.gateway.mastercard.com';
+const BOC_MERCHANT_ID = '700154990514';
+const BOC_GATEWAY_URL = 'https://bankofceylon.gateway.mastercard.com';
 
-const Checkout = () => {
+const Checkout = ({ clearCart }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cartItems = [], subtotal: cartSubtotal = 0 } = location.state || {};
@@ -65,24 +65,24 @@ const Checkout = () => {
     script.setAttribute('data-error', 'errorCallback');
     script.setAttribute('data-cancel', 'cancelCallback');
     script.async = true;
-    
+
     script.onload = () => {
       console.log('BOC Checkout.js library loaded successfully');
     };
-    
+
     script.onerror = () => {
       console.error('Failed to load BOC Checkout.js library');
     };
-    
+
     document.body.appendChild(script);
 
     // Define global callbacks for BOC payment gateway
-    window.errorCallback = function(error) {
+    window.errorCallback = function (error) {
       console.error('BOC Payment Error:', error);
       alert('Payment failed. Please try again.');
     };
 
-    window.cancelCallback = function() {
+    window.cancelCallback = function () {
       console.log('Payment cancelled by user');
       alert('Payment was cancelled.');
     };
@@ -405,7 +405,7 @@ const Checkout = () => {
       if (response.ok && data && data.orderUid) {
         // Order created successfully
         setShowToast(true);
-        
+
         // Hide toast after 3 seconds
         setTimeout(() => {
           setShowToast(false);
@@ -451,11 +451,16 @@ const Checkout = () => {
           console.log('Payment Session ID:', paymentData_response.sessionId);
           console.log('Payment Amount:', paymentData_response.amount);
           console.log('Order ID:', paymentData_response.orderId);
-          
+
           // Store order ID in sessionStorage for success page
           sessionStorage.setItem('lastOrderId', data.orderUid);
           sessionStorage.setItem('lastOrderAmount', paymentData_response.amount);
-          
+
+          // Clear the cart immediately after successful order
+          if (clearCart) {
+            clearCart();
+          }
+
           // Use Checkout.js library to show payment page
           initiateHostedCheckout(paymentData_response.sessionId);
         } else {
@@ -479,8 +484,8 @@ const Checkout = () => {
   };
 
   // Use cart data from navigation state or calculate from cart items
-  const subtotal = cartSubtotal || (cartItems && cartItems.length > 0 
-    ? cartItems.reduce((total, item) => total + (item.price * item.quantity), 0) 
+  const subtotal = cartSubtotal || (cartItems && cartItems.length > 0
+    ? cartItems.reduce((total, item) => total + (item.price * item.quantity), 0)
     : 2100.00);
   // Note: Delivery charges and tax already included in product price
 
