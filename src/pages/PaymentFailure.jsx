@@ -21,7 +21,7 @@ const PaymentFailure = () => {
   return (
     <div className="page-container">
       <SimpleHeader />
-      <div className="payment-status-wrapper">
+      <div className="payment-status-wrapper payment-failure-wrapper">
         <div className="payment-status-card failure">
           <div className="status-icon failure-icon">✕</div>
           <h2>Payment Failed</h2>
@@ -38,14 +38,9 @@ const PaymentFailure = () => {
             </ul>
           </div>
 
-          <div className="failure-actions">
-            <button className="btn-primary" onClick={() => navigate('/checkout')}>
-              Try Again
-            </button>
-            <button className="btn-secondary" onClick={() => window.location.href = '/'}>
-              Back to Home
-            </button>
-          </div>
+          <button className="btn-home" onClick={() => window.location.href = '/'}>
+            Back to Home
+          </button>
         </div>
       </div>
       <SimpleFooter />

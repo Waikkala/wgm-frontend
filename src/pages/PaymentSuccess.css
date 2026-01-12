@@ -1,5 +1,5 @@
 .payment-status-wrapper {
-  background-image: url('/bg_trans.png');
+  background-image: url('/1.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,6 +20,20 @@
   bottom: 0;
   background: rgba(10, 40, 35, 0.7);
   z-index: 1;
+}
+
+.payment-failure-wrapper {
+  background-image: none !important;
+  background: #f5f5f5 !important;
+}
+
+.payment-failure-wrapper::before {
+  display: none;
+}
+
+.payment-status-card.failure {
+  position: relative;
+  z-index: 2;
 }
 
 .payment-success-card {
