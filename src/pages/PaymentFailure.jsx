@@ -42,7 +42,7 @@ const PaymentFailure = () => {
             <button className="btn-primary" onClick={() => navigate('/checkout')}>
               Try Again
             </button>
-            <button className="btn-secondary" onClick={() => navigate('/')}>
+            <button className="btn-secondary" onClick={() => window.location.href = '/'}>
               Back to Home
             </button>
           </div>

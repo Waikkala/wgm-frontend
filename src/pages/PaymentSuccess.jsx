@@ -160,7 +160,7 @@ const PaymentSuccess = ({ clearCart }) => {
             </div>
           )}
 
-          <button className="btn-home" onClick={() => navigate('/')}>
+          <button className="btn-home" onClick={() => window.location.href = '/'}>
             Back to Home
           </button>
         </div>

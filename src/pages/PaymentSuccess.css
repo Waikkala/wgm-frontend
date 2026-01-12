@@ -1,6 +1,6 @@
 .payment-status-wrapper {
   background-image: url('/bg_trans.png');
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 80vh;
