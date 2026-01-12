@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './PaymentSuccess.css';
@@ -7,7 +7,6 @@ import './PaymentSuccess.css';
 const API_BASE_URL = 'https://rnt8sqh49g.execute-api.us-east-1.amazonaws.com';
 
 const PaymentSuccess = ({ clearCart }) => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState(null);

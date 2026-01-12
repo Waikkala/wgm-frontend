@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 import './PaymentSuccess.css';
 
 const PaymentFailure = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   
   // Get failure reason directly from URL parameters
