@@ -1,10 +1,6 @@
 import './SimpleFooter.css';
 import logo1 from '../assets/Logo.png';
 import bocLogo from '/Bank_of_Ceylon.png';
-import f1 from '../assets/f1.png';
-import f2 from '../assets/f2.png';
-import f3 from '../assets/f3.png';
-import f4 from '../assets/f4.png';
 
 const SimpleFooter = () => {
   return (
@@ -50,12 +46,6 @@ const SimpleFooter = () => {
             <span className="boc-text">BOC</span>
             <span className="ipg-text">iPG</span>
             <span className="tagline">Enabling you</span>
-          </div>
-          <div className="payment-cards">
-            <img src={f1} alt="Payment Method" className="payment-card-icon" />
-            <img src={f2} alt="Payment Method" className="payment-card-icon" />
-            <img src={f3} alt="Payment Method" className="payment-card-icon" />
-            <img src={f4} alt="Payment Method" className="payment-card-icon" />
           </div>
         </div>
         <p className="simple-footer-copyright">

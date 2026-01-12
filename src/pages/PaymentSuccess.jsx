@@ -134,32 +134,31 @@ const PaymentSuccess = ({ clearCart }) => {
       <SimpleHeader />
       <div className="payment-status-wrapper">
         <div className="payment-success-card">
-          <div className="success-card-inner">
-            <div className="success-header">
-              <div className="brand-logo">
-                <div className="antler-icon">🦌</div>
-                <div className="brand-text">WGM</div>
-                <div className="brand-subtitle">IMPERIAL HARVEST</div>
-              </div>
-            </div>
-
-            <div className="success-content">
-              <div className="deer-illustration">
-                <div className="deer-character">🦌</div>
-              </div>
-              
-              <h1 className="success-title">PAYMENT SUCCESSFUL!</h1>
-              
-              {orderDetails && orderDetails.orderId !== 'N/A' && (
-                <div className="order-info-compact">
-                  <p>Order #{orderDetails.orderId}</p>
-                  {orderDetails.amount && (
-                    <p>Amount: LKR {orderDetails.amount?.toLocaleString('en-LK')}</p>
-                  )}
-                </div>
+          <div className="success-checkmark">
+            <svg viewBox="0 0 100 100" className="checkmark-circle">
+              <circle cx="50" cy="50" r="45" fill="#1a5c4a" stroke="#d4af37" strokeWidth="3"/>
+              <path 
+                d="M25 50 L40 65 L75 35" 
+                fill="none" 
+                stroke="#d4af37" 
+                strokeWidth="6" 
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="checkmark-path"
+              />
+            </svg>
+          </div>
+          
+          <h1 className="success-title">PAYMENT SUCCESSFUL!</h1>
+          
+          {orderDetails && orderDetails.orderId !== 'N/A' && (
+            <div className="order-info-compact">
+              <p>Order #{orderDetails.orderId}</p>
+              {orderDetails.amount && (
+                <p>Amount: LKR {orderDetails.amount?.toLocaleString('en-LK')}</p>
               )}
             </div>
-          </div>
+          )}
 
           <button className="btn-home" onClick={() => navigate('/')}>
             Back to Home
